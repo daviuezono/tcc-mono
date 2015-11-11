@@ -1,0 +1,625 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazilian]{babel} 
+\usepackage[a4paper, left=20mm, right=20mm, top=20mm, bottom=20mm]{geometry}
+\usepackage{indentfirst}
+\usepackage{xspace}
+\usepackage{graphicx}
+\usepackage[bookmarks]{hyperref}
+\usepackage[bottom]{footmisc}
+\setlength{\parskip}{\baselineskip}
+\title{DESENVOLVIMENTO E IMPLANTAÇÃO DE SISTEMA \textit{WEB} PARA GERENCIAMENTO DA BIBLIOTECA DO CURSO EXATO}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Cabeçalho baseado no padrão do Exato %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}[t|]{14mm}
+\includegraphics[width=2cm]{img/logo-unicamp.eps}
+\end{minipage}
+\hfill
+\begin{minipage}[tl]{120mm}
+\begin{center}
+{\bf \sc Projeto Final de Graduação}\\
+{\bf \sc Instituto de Computação} \\
+{\bf \sc Universidade Estadual de Campinas} \\
+\end{center}
+\end{minipage}
+\hfill
+\begin{minipage}[c]{25mm}
+\hspace{-0.5cm}
+\includegraphics[width=25mm]{img/logo-ic.png}
+\end{minipage}
+\vfill\vfill
+\begin{center}
+\Huge{\textbf{DESENVOLVIMENTO E IMPLANTAÇÃO DE SISTEMA \textit{WEB} PARA GERENCIAMENTO DA BIBLIOTECA DO CURSO EXATO}}
+\vfill\vfill
+\huge{Davi Kooji Uezono\\Gustavo Fumio Oyakawa}
+\vfill
+\Large{Supervisores: Fábio Luiz Usberti e Christiane Neme Campos}
+\vfill\vfill
+\Large{Novembro de 2015}
+\end{center}
+\vfill
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% INTRODUÇÃO E OBJETIVOS %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+\section{INTRODUÇÃO E OBJETIVOS}
+
+O Curso Exato é um projeto de extensão comunitária da Preac (Pró-Reitoria de Extensão e Assuntos Comunitários) da Unicamp, que "tem por objetivo contribuir para o desenvolvimento de alunos da rede pública de ensino. Para isso, o projeto oferece aulas nas áreas de Física, Matemática, Português e Química, visando à consolidação e ao aprofundamento dos conhecimentos adquiridos no Ensino Médio" \ \cite{cursoexato}.
+
+Motivar os jovens à leitura é um grande obstáculo enfrentado hoje pelo Curso Exato. Por esta razão, em 2014, foi iniciado um projeto de uma biblioteca de livros infanto-juvenis, a fim de incentivar o hábito da leitura. Para tanto, os membros do Curso Exato organizaram uma campanha de arrecadação de livros por meio de doações, e hoje conta com mais de 100 títulos. Neste contexto, o desafio passou a ser catalogar os livros e organizar o processo de empréstimo.
+
+Com o intuito de aproximar os alunos dos livros, e aproveitando-se do contexto atual de inclusão tecnológica, propõe-se neste projeto a criação de um sistema \textit{web} de gerenciamento de biblioteca para os alunos, professores e coordenadores do Curso Exato. A criação deste sistema para consulta ao acervo, reservas e empréstimos tem o intuito de ampliar a capacidade de funcionamento da biblioteca, tornando-a mais acessível para todos os alunos, mesmo para aqueles que não possam se deslocar até a mesma, que está localizada em um recinto distante daquele em que ocorrem as aulas.
+
+O principal objetivo deste projeto é desenvolver, na plataforma \textit{Drupal}, um sistema \textit{web} de gerenciamento de biblioteca que atenda às necessidades do Curso Exato. Tal sistema deve seguir os padrões de código da comunidade \textit{Drupal}\footnote{um CMS e \textit{framework} (coleção de \textit{software} que fornece uma estrutura básica para outro sistema) de código aberto.}, para que possa ser estendido e utilizado por terceiros. Esta plataforma foi escolhida por ser de familiaridade dos desenvolvedores e dos membros do Curso Exato, e também por ser personalizável, extensível, de fácil manutenção, e de baixo custo aos futuros administradores da biblioteca.
+
+Com este sistema, os usuários da biblioteca poderão consultar os exemplares disponíveis no acervo, ver características das obras catalogadas (como nome do autor, data de publicação e sinopse), reservar um livro para empréstimo e renovar o item emprestado. Também será possível ao usuário entrar em contato com a administração para sugerir novos títulos para aquisição ou enviar comentários sobre o novo sistema. Haverá uma página de ajuda que estará disponível ao usuário a um clique a partir de qualquer página do portal. Ainda, cada usuário da biblioteca terá um perfil pessoal na plataforma, a partir do qual será possível atribuir uma nota de uma a cinco estrelas para um livro, além de poder escrever uma resenha sobre a obra.
+
+A meta final é não apenas prover os requisitos básicos de um sistema de biblioteca virtual, mas também engajar os usuários dentro da própria plataforma, de forma a estimular a leitura por meio dela.
+
+%%%%%%%%%%%%%%%%
+%% MONOGRAFIA %%
+%%%%%%%%%%%%%%%%
+
+\pagebreak
+\section{METODOLOGIA DE TRABALHO}
+O processo de desenvolvimento do software se iniciou por meio de metodologias ágeis \cite{manifesto}, uma vez que ambos os desenvolvedores estão habituados a tal prática. Neste modelo de desenvolvimento, afirma-se que, apesar de processos, ferramentas, documentação abrangente, contratos e planos estritos serem importantes, os indivíduos (\textit{stakeholders}) e suas interações, a entrega de um software em funcionamento, a colaboração com o consumidor e a rápida resposta às mudanças são também relevantes.
+
+Como o \textit{Scrum} \cite{scrum} é a metodologia ágil mais utilizada em Engenharia de Software, ele foi escolhido para nortear os desenvolvedores. Nele, ciclos curtos de desenvolvimento (\textit{sprints}) são precedidos por um ou dois dias de reuniões para refinar a lista de tarefas e para discutir a solução técnica para o problema a ser resolvido no período. Esses ciclos são concluídos com um dia de reunião, na qual é feita uma retrospectiva para avaliar o processo de desenvolvimento recém-concluído, além de realizar uma demonstração funcional do sistema para os principais \textit{stakeholders} - neste caso, a coordenadora geral do Curso Exato e os professores orientadores.
+
+Cada \textit{sprint} teve duração aproximada de quatro semanas, demarcadas pelos dias de entrega de conteúdo escrito aos professores orientadores do projeto. A Tabela \ref{cronograma} contém os períodos e datas originalmente propostos.
+
+\begin{table}[hc]
+\centering
+\caption{Cronograma de atividades.\label{cronograma}}
+\begin{tabular}{ll}
+\hline
+03/08 a 04/09 & Primeiro ciclo de desenvolvimento \\
+04/09 & Primeira entrega parcial da monografia \\
+08/09 a 02/10 & Segundo ciclo de desenvolvimento \\
+02/10 & Segunda entrega parcial da monografia \\
+05/10 a 06/11 & Terceiro ciclo de desenvolvimento e validação do sistema com os usuários \\
+06/11 & Terceira entrega parcial da monografia \\
+06/11 a 18/12 & Melhorias finais \\
+01/12 & Entrega da monografia para os professores orientadores\\
+15/12 & Entrega da monografia para o Instituto de Computação\\
+\hline
+\end{tabular}
+\end{table}
+
+Os escopos para cada ciclo de desenvolvimento estão propostos abaixo.
+
+\begin{itemize}
+\item Primeiro ciclo: extração de requisitos e codificação da infraestrutura básica do sistema; criação de páginas de publicações do acervo, de usuários e de busca, além da principal; definições dos aspectos visuais do sistema; e desenvolvimento de ferramentas que facilitem o cadastro de publicações no acervo.
+\item Segundo ciclo: codificação das interações entre usuários e publicações; métodos para reserva, empréstimo, devolução e avaliação de publicações; controle de permissões entre diferentes tipos de usuários do sistema - anônimos (não autenticados), alunos, professores e administradores.
+\item Terceiro ciclo: funcionalidades sociais, implantação e validação do sistema.
+\end{itemize}
+
+A distribuição de tarefas entre os alunos desenvolvedores envolvidos ocorreu em reuniões de planejamento no início de cada ciclo de desenvolvimento. Tal fato se justifica pela grande quantidade de tecnologias envolvidas no projeto, o que inviabilizou a divisão precisa das tarefas de cada ciclo com grande antecedência. Por este motivo, cada aluno se comprometeu a cumprir atividades associadas a papéis exercidos por desenvolvedores de \textit{software} em times ágeis\footnote{Grupos de desenvolvedores que atuam seguindo os princípios de metodologia ágil.}, que são:
+\begin{itemize}
+\item Arquiteto: responsável pelo projeto da infraestrutura do servidor \textit{web} no qual o sistema estará hospedado.
+\item Engenheiro de requisitos: responsável pela extração dos requisitos funcionais e não funcionais do sistema, por meio do contato frequente com os \textit{stakeholders}.
+\item Desenvolvedor \textit{front-end}: responsável pelo \textit{design} da interface do sistema com o usuário (UI) e pela experiência do usuário (UX).
+\item Desenvolvedor \textit{back-end}: responsável pela programação das funcionalidades previstas do sistema, conforme especificado pelo documento de requisitos.
+\end{itemize}
+
+O aluno Davi assumiu os papéis de Arquiteto e Desenvolvedor \textit{back-end}, enquanto o aluno Gustavo assumiu os papéis de Engenheiro de requisitos e Desenvolvedor \textit{front-end}.
+
+Ao longo do primeiro ciclo de desenvolvimento, foi elaborado um documento contendo as premissas a respeito do desenvolvimento do projeto, visando proteger o escopo inicial e garantir o cumprimento do acordo por todas as partes envolvidas (desenvolvedores e voluntários do Curso Exato). Conforme a necessidade, foram adicionados novos itens a este documento. Os aspectos abordados são:
+
+\begin{itemize}
+\item O trabalho foi desenvolvido e implementado com o software \textit{Drupal}, na versão 7 do seu núcleo. Todos os requisitos técnicos do trabalho são os mesmos descritos na página de requisitos \cite{requirements} e caberá aos interessados possuir uma infraestrutura capaz de suportar a aplicação, isentando os alunos desenvolvedores da responsabilidade da implantação do sistema.
+
+\item Ficam definidas as seguintes classes de usuários aceitos pelo sistema:
+\begin{itemize}
+\item Usuário anônimo ou visitante: usuário não autenticado no sistema. Não possui, necessariamente, ligação com o Curso Exato;
+\item Usuário comum ou aluno: aluno do Curso Exato cadastrado e autenticado;
+\item Usuário bibliotecário: membro do Curso Exato com permissão de gerenciar a biblioteca (realizar empréstimos, registrar multas, etc.), cadastrado e autenticado;
+\item Usuário superadministrador ou desenvolvedor: cadastrado e autenticado, responsável pela manutenção do sistema. Possui permissões máximas no sistema.
+\end{itemize}
+Ao longo deste documento, o termo \emph{usuário autenticado} é utilizado para se referir às três últimas classes de usuário, e \emph{administrador} para se referir às duas últimas.
+
+\item A identificação única de uma publicação (ou obra) ou de um exemplar (ou cópia) é uma questão consideravelmente discutida na Biblioteconomia. No presente caso, são utilizados dois tipos de identificação para cada livro; sendo o primeiro, o \textit{número de chamada}, e o segundo, o \textit{código de tombo}. Ambas as formas de identificação estão presentes em grande parte das bibliotecas de instituições consagradas, como universidades, e possuem alguns padrões utilizados internacionalmente, como a Classificação Decimal de \textit{Dewey} \cite{dewey} e a Codificação de Cutter \cite{cutter}. Contudo, devido à opção dos membros do Curso Exato por um código menos complexo, porém suficiente para os fins pretendidos, optou-se por não utilizar um padrão internacional. 
+\begin{itemize}
+\item O principal objetivo do \textit{número de chamada} é a identificação única da publicação, e este é utilizado para fins organizacionais no espaço físico da biblioteca. Este número pode ser repetido, caso os dois livros sejam exemplares da mesma publicação. O conjunto de características que definem a unicidade de uma publicação, bem como a composição desta codificação estão especificados nos próximos tópicos;
+\item O principal objetivo do \textit{código de tombo} é a identificação única do exemplar. A partir deste código o bibliotecário é capaz de ter conhecimento da publicação à qual o exemplar pertence e o seu status (disponível, reservado, emprestado, em atraso ou extraviado), além da identificação do usuário com o qual livro se encontra (se for o caso).
+\end{itemize}
+
+%% Refactor
+\item No contexto do Curso Exato, a unicidade de uma publicação é definida a partir do conjunto de atributos a seguir: título da obra, nome do autor, editora, ano de publicação, edição e volume. Isto significa que os bibliotecários que desejarem inserir uma nova publicação com exatamente as mesmas seis características serão impedidos de fazê-lo pelo sistema. Caso a inserção especifique o número de exemplares a ser adicionado juntamente com a publicação (que sabemos estar duplicada), esta adicionará os exemplares na publicação já existente e impedirá o usuário de criar duplicatas.
+
+\item O número de chamada é formado por uma sequência de seis caracteres, dividida em três partes. A primeira parte contém duas letras, uma maiúscula e outra minúscula, indicando as duas primeiras letras do sobrenome do autor da obra. A segunda parte contém três dígitos, e a terceira, uma letra minúscula. Esta corresponde à primeira letra do título da obra. Já os três dígitos da segunda parte são determinados da seguinte forma: dada a combinação de três letras (nome do autor e nome da obra), a primeira incidência recebe o valor 001 e a reincidência da combinação é autoincrementada (002 e assim por diante). Os códigos serão gerados automaticamente para os livros novos que forem inseridos no sistema da biblioteca e um módulo criado no \textit{Drupal} irá implementar esta funcionalidade. Apesar do código gerado por este padrão só apresentar explicitamente o título da obra e do nome do autor, ele é capaz de distinguir uma obra de outra por meio dos dígitos.
+
+\item O código de tombo de cada exemplar é o número que o \textit{Drupal} utiliza para identificar cada conteúdo criado nesta plataforma.
+
+\item Em uma biblioteca moderna, cada exemplar recebe um código de barras para automatizar o empréstimo. No escopo deste projeto isto não foi necessário, pois a quantidade de exemplares em comparação a uma biblioteca tradicional é pequena.
+
+\item Como os alunos do Curso Exato não têm acesso direto ao espaço físico da biblioteca, eles dependem de um mediador (membro do Exato) responsável por retirar os livros mediante a escolha prévia dos alunos por meio do sistema on-line.  Nesse contexto, de forma a automatizar o fluxo de empréstimo dos livros, estabeleceu-se a funcionalidade de “solicitação de reserva” do livro, permitindo ao aluno cadastrado com uma conta de usuário autenticada a escolha prévia da obra ao navegar no site. Os administradores da biblioteca são notificados desta intenção de empréstimo e deverão levar os respectivos exemplares para a sala de aula. O bibliotecário é capaz de acessar uma tela administrativa no sistema com o histórico das solicitações dos alunos e com botões para efetivar o empréstimo ou cancelar o pedido.
+
+\item Considerou-se inicialmente desenvolver uma integração com o \textit{Facebook} para casos de uso simples, tais como autenticação única e recomendação de publicações a outros usuários. No entanto, a Interface de Programação de Aplicações (API) disponibilizada pelo \textit{Facebook} passa por alterações a cada dois anos, o que pode comprometer a integração com o sistema aqui desenvolvido. Os  desenvolvedores do projeto haviam planejado estudar a viabilidade dessa integração no início do terceiro ciclo, como mencionado anteriormente, contudo, conhecendo o funcionamento da rede social citada, decidiu-se em reunião com o orientador Fábio que essa integração não será criada durante os ciclos de desenvolvimento planejados até o final de 2015, ficando como uma proposta de melhoria para o futuro.
+
+\item O sistema foi projetado para ter um design adaptável com alguns elementos responsivos (elementos se reposicionam e se redimensionam conforme a mudança da largura da tela), exceto nas páginas administrativas. Os desenvolvedores garantem o suporte ao sistema para que este funcione corretamente nas últimas versões estáveis dos principais navegadores \textit{desktop} e \textit{mobile} (\textit{Mozilla Firefox}, \textit{Google Chrome}, \textit{Internet Explorer}, \textit{Safari} e \textit{Android Browser}). O navegador \textit{IE Mobile} não terá garantia de suporte por utilizar tecnologias mais antigas com os padrões mais modernos da internet atual. Eventuais problemas de desempenho ou usabilidade podem ocorrer em navegadores antigos, portanto, não é recomendado o uso destes navegadores. 
+
+\item A manutenção do sistema será realizada pelos desenvolvedores até o término de 2015, incluindo um treinamento para garantir continuamente a segurança da plataforma.
+
+\end{itemize}
+
+
+\pagebreak
+\section{EXECUÇÃO}
+\subsection{Primeiro ciclo de desenvolvimento}
+O primeiro ciclo de desenvolvimento foi iniciado com uma reunião com a responsável pela biblioteca do Curso Exato. Nesta reunião, foram coletadas as histórias de usuário, foi feita a validação dos requisitos do sistema, bem como a aprovação dos escopos gerais de cada ciclo de desenvolvimento. Após este passo, realizou-se o detalhamento das tarefas a serem feitas durante o mês e suas estimativas de tempo e complexidade, com o auxílio da ferramenta \textit{Trello}\footnote{Ferramenta de gerenciamento de projetos voltado para metodologias ágeis.} \cite{trello}. Por meio desta, os alunos puderam monitorar o andamento das tarefas e notificar um ao outro sobre seus progressos e eventuais dificuldades ao longo de todo o projeto.
+
+Optou-se por hospedar uma versão de desenvolvimento do sistema na \textit{Acquia} \cite{acquia}, plataforma para computação em nuvem especializada em \textit{Drupal}. Por meio dela, ambos os desenvolvedores puderam trabalhar paralelamente na construção do sistema e apresentar uma versão funcional deste aos principais interessados - alunos e voluntários do Curso Exato, bem como professores orientadores deste projeto - sem a necessidade de um encontro presencial.
+
+Após a configuração dos ambientes locais de desenvolvimento, cada aluno tomou para si as tarefas que cabiam majoritariamente aos papéis atribuídos a ele. Algumas destas foram realizadas por ambos devido à maior complexidade.
+
+A seguir, são descritas as atividades realizadas durante o primeiro ciclo de desenvolvimento.
+
+\subsubsection{Criação da página de uma publicação}
+Devido à importância desta entidade no sistema, a primeira tarefa assumida foi a definição de uma publicação como um tipo de conteúdo \textit{Drupal} (página com campos fixos). Foi definido que esta página deve exibir aos usuários as seguintes informações sobre uma obra:
+\begin{itemize}
+\item Título
+\item Foto da capa do livro
+\item Autor
+\item Ano de publicação
+\item Categoria (Luso-brasileira, Estrangeira, Infanto-juvenil ou Outros)
+\item Avaliação dos usuários
+\item Resumo
+\item Editora
+\item Estado (onde a obra foi publicada)
+\item Volume
+\item Coleção
+\item Edição
+\item Tradutor
+\item Número de chamada
+\end{itemize}
+
+As sete primeiras são impressas na tela; as demais ficam ocultas e são expandidas apenas se o usuário clicar na opção ‘Ver Detalhes’. Foi adicionado o botão ‘Reservar Livro’, porém ainda sem funcionalidade.
+
+Há ainda os seguintes campos editáveis pelos bibliotecários, inacessíveis aos usuários não administradores:
+\begin{itemize}
+\item Tema (Aventura, Clássico, Romance e Suspense)
+\item Recomendado (variável binária representando se uma obra deve ser exibida na seção de obras recomendadas)
+\item Lista de identificadores dos exemplos desta publicação na biblioteca
+\end{itemize}
+
+A disposição dos elementos na página pode ser observada nas Figuras \ref{colapsed} e \ref{expanded}.
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=140mm]{img/publication-colapsed.png}
+\caption{Página de uma publicação, informações adicionais ocultas.\label{colapsed}}
+\end{figure}
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=140mm]{img/publication-expanded.png}
+\caption{Página de uma publicação, informações adicionais expandidas.\label{expanded}}
+\end{figure}
+
+\subsubsection{Criação da página de um exemplar}
+Uma segunda entidade importante é o exemplar. Esta define as múltiplas cópias de uma mesma publicação existente na biblioteca, contendo os seguintes campos:
+\begin{itemize}
+\item Código de tombo
+\item Identificador da página da publicação a qual pertence
+\item Estado: Disponível, Reservado, Emprestado, Em atraso ou Extraviado 
+\item Última data de empréstimo
+\item Última data de devolução
+\item Identificador do último usuário que o tomou emprestado
+\end{itemize}
+
+No cadastro, o \textit{Drupal} cria páginas para representar cada exemplar; contudo, por serem utilizadas apenas para gerenciamento da biblioteca, decidiu-se não torná-las visíveis a usuários anônimos e alunos. Supõe-se que estes têm interesse em visualizar as páginas das publicações, e não das suas cópias.
+
+Nota-se que os últimos quatro campos, apesar de serem declarados ainda no primeiro ciclo de desenvolvimento, passaram a ser utilizados apenas no segundo, quando começaram a ser implementadas as transações de exemplares (ver seção \ref{sssec:stransaction}).
+
+
+\subsubsection{Desenvolvimento do formulário de cadastro}
+No formulário de criação de cadastro são exigidas as seguintes informações do usuário anônimo:
+\begin{itemize}
+\item Nome completo
+\item Endereço de e-mail
+\item Ano de ingresso (no Curso Exato)
+\item Endereço
+\item Telefone
+\end{itemize}
+
+Ainda, foi habilitada a funcionalidade do \textit{Drupal} de fazer com que o cadastro passe por aprovação dos administradores para que o usuário anônimo ganhe acesso ao sistema. Estes são notificados por e-mail quando um novo cadastro é criado. A Figura \ref{cadastro} mostra como esta seção é exibida ao usuário anônimo.
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=140mm]{img/newuser.png}
+\caption{Formulário de cadastro.\label{cadastro}}
+\end{figure}
+
+\subsubsection{Criação da página de um usuário}
+
+Nesta tarefa, foi elaborada a página pessoal (ou perfil) do usuário. Nela, são exibidas nome completo, foto, ano de ingresso, autor predileto, categoria preferida e tema preferido.
+
+Posteriormente, foi adicionado o campo “Livro de cabeceira”, no qual o usuário pode preencher com o título de sua obra predileta, sem que ela precise constar do acervo. Este campo foi adicionado com o intuito de incentivar o envolvimento dos alunos com a biblioteca e com a leitura, ao permitir maior interação e participação entre eles. Porém, foi necessário um tempo não planejado de discussão com os administradores da biblioteca para que se decidisse como o campo seria exibido. A Figura \ref{userpage} mostra o resultado final.
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=140mm]{img/userpage.png}
+\caption{Página de usuário.\label{userpage}}
+\end{figure}
+
+Com o intuito de tornar a biblioteca uma plataforma mais sociável e interativa para os alunos, adicionou-se uma funcionalidade de envio de mensagens privadas entre os usuários do sistema. Para tanto, foi instalado um módulo da comunidade \textit{Drupal} chamado \textit{Privatemsg}, que já cria e habilita tal mecanismo, aproveitando os recursos de usuário e autenticação que o mesmo já oferece. Para a segurança da comunidade do Curso Exato, as mensagens podem passar por um processo de auditoria quando necessário, sendo este papel conferido apenas a um usuário específico.
+
+Uma vez que este módulo permite o acesso às conversas de todos os usuários do sistema por um administrador, será pedido aos usuários que concordem com a política de privacidade do site para que as funcionalidades do \textit{Privatemsg} lhe estejam disponíveis. Portanto, a questão da privacidade ficou resolvida a partir da concordância, pelos usuários, sobre a política de privacidade adotada pelo Curso Exato.
+
+A Figura \ref{privatemsg} ilustra uma conversa entre dois usuários no módulo \textit{Privatemsg}, e a Figura \ref{pvtmsg-config} exibe a opção de configuração na conta do usuário onde possiblita a escolha pela ativação ou não de tal funcionalidade.
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=120mm]{img/privatemsg.png}
+\caption{Conversa entre dois usuários utilizando as mensagens privadas.\label{privatemsg}}
+\end{figure}
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=120mm]{img/privatemsg-config.png}
+\caption{Opção para o usuário ativar ou não a funcionalidade.\label{pvtmsg-config}}
+\end{figure}
+
+
+\subsubsection{Desenvolvimento de páginas de busca}
+
+Foram criadas páginas de busca por publicações e por usuários, utilizando a funcionalidade \textit{view} do \textit{Drupal}, que executa consultas no banco de dados e imprime o resultado na tela de forma personalizada pelo programador. A consulta pode ser fixa ou conter parâmetros (filtros). 
+
+No caso da página de busca por publicações, os filtros que aparecem inicialmente são apenas título e autor. O usuário pode clicar em um botão de “Busca Avançada” para exibir campos adicionais, como o ano de publicação, ou para alterar a ordenação por autor ou por título; ou ainda, alterar a ordem de exibição dos resultados - alfabética ou alfabética reversa. As Figuras \ref{simple} e \ref{advanced} ilustram as páginas de busca por publicações utilizando filtros simples ou avançados.
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=120mm]{img/browse-simple.png}
+\caption{Página de busca por publicações, filtros simples.\label{simple}}
+\end{figure}
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=120mm]{img/browse-advanced.png}
+\caption{Página de busca por publicações, filtros avançados.\label{advanced}}
+\end{figure}
+
+Além disso, um pequeno formulário foi adicionado à barra lateral direita da página inicial do site para simplificar a pesquisa por publicações. Nele, o usuário pode digitar o título e/ou o nome de um autor para a pesquisa no acervo e, ao clicar no botão “Buscar”, ele será redirecionado para a página de resultados da busca, conforme a Figura \ref{browse-sidebar}.
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=30mm]{img/browse-sidebar.png}
+\caption{Formulário de busca por publicações na barra lateral.\label{browse-sidebar}}
+\end{figure}
+
+Já no caso da página de busca por usuários, os filtros são o nome do usuário, o autor predileto, a categoria preferida e o livro de cabeceira. A Figura \ref{users} ilustra a página de busca por usuários.
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=120mm]{img/users.png}
+\caption{Página de busca por usuários.\label{users}}
+\end{figure}
+
+
+\subsubsection{Criação da página inicial e aplicação da identidade visual do Curso Exato}
+
+Considerou-se melhor postergar a criação da página inicial do sistema para quando houvesse uma quantidade mínima de elementos para ser exibida. A página principal foi diagramada após o encerramento das tarefas anteriores, seguindo esboço elaborado durante as reuniões iniciais de coleta de histórias de usuário.
+
+O tema \textit{Business Responsive} foi escolhido (dentre outros disponíveis gratuitamente na comunidade \textit{Drupal}) com os administradores da biblioteca para ser a base para a elaboração dos aspectos visuais do sistema. Conforme recomendação da comunidade \textit{Drupal} e havendo permissão dos criadores do tema original, foi desenvolvido um subtema baseado no \textit{Business Responsive}, no qual foram realizadas alterações para que o sistema tivesse uma identidade visual semelhante àquela do Curso Exato.
+
+Foi incluído também um carrossel - elemento de destaque da página com rotação de imagens - onde serão exibidos conteúdos relevantes aos usuários, como: obras adquiridas recentemente, livros recomendados e eventos do Curso Exato. Sua inclusão se deu pela instalação do módulo \textit{Nivo Slider} (também disponível na comunidade \textit{Drupal}).
+
+A Figura \ref{home} ilustra a página inicial para um usuário autenticado. Foi incluída uma imagem provisória para demonstração do funcionamento do carrossel.
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=140mm]{img/home-small.png}
+\caption{Página inicial.\label{home}}
+\end{figure}
+
+
+\subsubsection{Criação de grupos de obras recomendadas por tema}
+Foram definidos pelos membros do Curso Exato alguns temas para agrupar obras recomendadas na página inicial, visando estimular a leitura, principalmente àqueles usuários que não possuem tal hábito. Para tanto, o bibliotecário poderá indicar a qual tema pertence cada obra, exibindo-a na listagem na página inicial. Cada lista aceita até cinco obras por categoria, sendo elas: Aventura, Clássico, Romance e Suspense. Caso sejam selecionados mais do que cinco itens, somente as publicações mais recentes (por data de inclusão no sistema) serão exibidas.
+
+A Figura \ref{recommended} ilustra a listagem de temas na barra lateral esquerda da página inicial.
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=30mm]{img/leftsidebar-close.png}
+\caption{Obras recomendadas por tema.\label{recommended}}
+\end{figure}
+
+\subsubsection{Desenvolvimento do módulo \textit{Drupal} para geração de números de chamada}
+
+Foi desenvolvido e instalado um módulo \textit{Drupal} para a geração de números de chamada no momento da criação de uma página de publicação, com a finalidade de facilitar o trabalho dos bibliotecários.
+
+Houve uma sobrecarga de tempo considerável nesta tarefa (cerca de cinco dias), devido a uma falha no formato de código de tombo e do número de chamada adotado inicialmente na biblioteca. Não havia uma distinção clara entre o \textit{número de chamada} - concatenação de letras e números, relacionada à \textit{publicação}, para auxiliar principalmente a manutenção da biblioteca física - e o \textit{código de tombo} - identificador único, relacionado ao \textit{exemplar}, para controle de transações no sistema. A falta de clareza sobre essa diferença, aliada à falsa suposição de que o tamanho reduzido do acervo não justificaria a criação de códigos mais elaborados, levou os envolvidos a acreditar que um modelo de identificador unificado (isto é, uma combinação entre número de chamada e código de tombo) seria suficiente para gerenciar a biblioteca do Curso Exato. Nela, os exemplares de obras de mesmo título e autor recebiam um valor incremental, por ordem de cadastro na biblioteca. A Figura \ref{tombo-antigo} ilustra uma situação de cadastro de três exemplares do livro Vidas secas, de Graciliano Ramos.
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=120mm]{img/tombo-antigo.png}
+\caption{Ilustração do modelo antigo de cadastro de exemplares da mesma obra.\label{tombo-antigo}}
+\end{figure}
+
+No entanto, percebeu-se durante o desenvolvimento do módulo que esta abordagem seria problemática por não dar ao aluno a escolha de qual edição da obra reservar. Além disso ela complicaria a organização da biblioteca física, pois o bibliotecário, ao ver apenas o código na lombada do livro, teria a falsa impressão de que existia uma relação de ordem entre os exemplares ao posicionar os livros em uma estante (o que não é necessariamente verdade), tendo dificuldade para separá-los por critérios mais relevantes, como volume e edição.
+
+Decidiu-se, então, considerar outras propriedades de uma publicação para definir a sua unicidade, sendo estas a editora, o ano de publicação, a edição e o volume. O formato do número de chamada continuou sendo o mesmo (duas letras do sobrenome do autor, três dígitos e uma letra do título da obra), no entanto a sequência de dígitos é única para a combinação da parte do código composta por caracteres com as quatro propriedades mencionadas acima. O código de tombo passou a ser uma entidade independente e é representada por um número inteiro. Este número é gerado pelo \textit{Drupal} no cadastro da publicação e indica o índice da página que representa o exemplar no conjunto de todas as páginas do sistema.  Isto é, o exemplar com código de tombo i é representado pela i-ésima página criada no sistema. A Figura \ref{tombo-novo} ilustra a mesma situação de cadastro usada como exemplo.
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=60mm]{img/tombo-novo.png}
+\caption{Ilustração do modelo novo de cadastro de exemplares da mesma obra.\label{tombo-novo}}
+\end{figure}
+
+Por não ser possível prever o código de tombo com a abordagem adotada, os valores não foram adicionados na Figura \ref{tombo-novo}.
+
+
+\subsubsection{Adaptação de ferramenta para importação em lote de publicações}
+Através do menu administrativo, os administradores da biblioteca podem manualmente cadastrar uma publicação e seus exemplares no sistema. Porém, foi levantado entre os alunos desenvolvedores que este método de inserção manual seria demasiadamente custoso para massas de dados de tamanho considerável.
+
+Tomando como base o módulo \textit{Feeds}, capaz de importar \textit{feeds RSS} ou arquivos CSV em conteúdo \textit{Drupal}, idealizou-se a criação de um módulo capaz de gerar não apenas as páginas das obras, mas também as dos múltiplos exemplares de cada uma delas (se houver), de forma automatizada. Apesar de não estar incluída no escopo original do projeto, esta ideia foi levantada para facilitar a inclusão do acervo original e, porventura, de livros arrecadados em campanhas realizadas regularmente pelo Curso Exato ao longo dos últimos anos.
+
+Esta funcionalidade não foi finalizada neste ciclo, sendo continuada no próximo. Até o fim deste, o módulo era capaz de realizar a importação das obras, mas ainda não criava os exemplares.
+
+\pagebreak
+\subsection{Segundo ciclo de desenvolvimento}
+
+Ao término do ciclo de desenvolvimento anterior, durante reunião com os orientadores, questionou-se o motivo de se utilizar uma propriedade intrínseca do \textit{Drupal} como código de tombo. A atribuição de identificadores únicos de páginas geradas pela plataforma a itens não virtuais causaria complicações no cenário de migração do sistema para outra plataforma, pois o mecanismo de geração de códigos de tombo não estaria mais disponível. Discutiu-se, entretanto, que esta possibilidade era consideravelmente remota e, uma vez validado o fato junto aos responsáveis pela biblioteca do Curso Exato, decidiu-se que tal abordagem seria mantida. Desta forma, cada publicação conteria uma referência (lista de identificadores) para as páginas dos seus exemplares e, no momento em que suas páginas são processadas para exibição no navegador, o conteúdo dos exemplares poderia ser carregado rapidamente. Estas informações podem ser utilizadas para que se determine, dentre os exemplares de uma publicação, quais e quantos estão disponíveis para reserva, por exemplo.
+
+O segundo ciclo foi demarcado por grande quantidade de horas despendidas estudando a API do \textit{Drupal} para a execução de duas grandes tarefas: o design e implementação da tabela de transações dos livros da biblioteca na base de dados e a conclusão da ferramenta de importação em lotes. Ambos os desenvolvedores desconheciam ou apresentavam conhecimento apenas parcial das funções providas pela plataforma, de forma a se justificar o tempo de estudo ao longo deste ciclo. Por causa de tal empecilho, algumas tarefas que haviam sido planejadas para este não puderam ser concluídas e foram realocadas para o próximo.
+
+A seguir, são descritas as atividades realizadas durante o segundo ciclo de desenvolvimento.
+
+
+\subsubsection{Finalização da ferramenta para importação em lote de publicações}
+
+Durante a segunda semana do ciclo foi concluída a ferramenta de importação em lotes. Devido à alta ocorrência de vírgulas nos textos dos campos a serem registrados, definiu-se que o separador padrão dos arquivos CSV de entrada será o ponto e vírgula (;) e que cada linha deve conter as seguintes informações. A Tabela \ref{csv} descreve os atributos do arquivo solicitado na importação.
+
+\begin{table}[hc]
+\centering
+\caption{Atributos requeridos no arquivo CSV.\label{csv}}
+\begin{tabular}{ll}
+\hline
+\textit{title} & Título da publicação \\
+\textit{author} & Nome do autor (formato: SOBRENOME, Nome) \\
+\textit{publisher} & Editora \\
+\textit{year} & Ano de publicação \\
+\textit{edition} & Edição \\
+\textit{volume} & Volume \\
+\textit{category} & Categoria (Luso-brasileira, Estrangeira, Infanto-juvenil ou Outros) \\
+\textit{ncopy} & Número de exemplares a serem inseridos \\
+\textit{collection} & Coleção \\
+\textit{recommended} & Variável binária indicando se a publicação deve ser colocada \\
+ & em destaque na seção recomendados (1 = recomendado) \\
+\textit{state} & Estado de publicação \\
+\textit{body} & Resumo da obra \\
+\textit{theme} & Tema principal (Aventura, Clássico, Romance, Suspense) \\
+\textit{translator} & Tradutor \\
+\hline
+\end{tabular}
+\end{table}
+
+A ordem das propriedades pode variar entre arquivos, contanto que todos tenham um cabeçalho descrevendo a sequência em que os valores se dispõem em cada linha.
+
+Houve certa dificuldade no registro das referências bidirecionais entre publicações e seus exemplares devido ao modo como o \textit{Drupal} trata a criação simultânea de  conteúdos - não é possível criar e editar múltiplas páginas do mesmo tipo de conteúdo em paralelo, o que se mostrou necessário no cenário de adição de exemplares de uma publicação já cadastrada. A solução encontrada foi declarar um novo tipo de conteúdo, denominado \textit{Container}, que armazena os dados obtidos do arquivo CSV e intermedia a criação de publicações e exemplares.
+
+\subsubsection{Implementação de módulo para registro dos períodos de funcionamento da biblioteca}
+Para a fácil manutenção das datas de funcionamento da biblioteca, foi instalado no sistema o módulo \textit{Drupal Availability Calendar}. Apesar deste ser voltado para sistemas de alocação e de reservas (em hotéis, por exemplo), verificou-se que ele fornece meios visualmente intuitivos aos administradores para que estes configurem possíveis datas para retirada de empréstimos e realização de devoluções.
+
+Resumidamente, com este módulo foi possível criar uma página na qual são exibidos, em forma de calendário, o mês atual e os doze próximos, onde cada célula recebe uma cor referente ao estado previsto da biblioteca naquela data. Definiu-se três estados possíveis:
+
+\begin{itemize}
+\item Aberta: haverá aula do Curso Exato naquele dia, logo o aluno pode tomar emprestado seus exemplares reservados ou devolvê-los. A célula é exibida com um fundo verde;
+\item Fechada: não haverá aula naquela data (geralmente sexta-feira, fim de semana ou feriado letivo). A célula é exibida com um fundo avermelhado;
+\item Férias: o Curso Exato estará em recesso naquela data. A célula é exibida com um fundo azul. Além do usuário não poder retirar empréstimos ou devolver exemplares neste período, qualquer prazo de devolução que for previsto para terminar durante o período de férias será reduzido para o último dia letivo antes do início das férias.
+\end{itemize}
+
+\subsubsection{Implementação do fluxo básico de reserva, empréstimo, renovação e devolução de uma obra} \label{sssec:stransaction}
+Na reunião de planejamento deste ciclo foi elaborado um diagrama simplificado de máquina de estados, para a representação do fluxo de empréstimo de um exemplar (Figura \ref{workflow}). Os círculos se referem aos possíveis estados de uma publicação durante o fluxo e as setas indicam as ações que levam à transição entre eles.
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=140mm]{img/workflow.png}
+\caption{Diagrama de máquina de estados de um exemplar durante o fluxo de empréstimo.\label{workflow}}
+\end{figure}
+
+Especificamente, decidiu-se que os possíveis estados são:
+\begin{itemize}
+\item Disponível: o exemplar está disponível na biblioteca para reserva;
+\item Reservado: há uma solicitação de reserva por este exemplar a ser atendida;
+\item Emprestado: o exemplar está na posse de algum usuário da biblioteca e o prazo de vencimento do empréstimo ainda não expirou;
+\item Em atraso: o exemplar está na posse de algum usuário da biblioteca e deve ser devolvido, pois o prazo para devolução não foi respeitado;
+\item Extraviado: o exemplar foi perdido durante o fluxo de empréstimo.
+\end{itemize}
+
+As ações consideradas são:
+\begin{itemize}
+\item Criar exemplar: administradores do sistema podem declarar a chegada de novos exemplares à biblioteca, inserindo-os no sistema individualmente ou pela ferramenta de importação em lotes;
+\item Reservar: usuários autenticados no sistema podem solicitar a reserva de algum exemplar de publicações de seu interesse, clicando no botão ‘Reservar Livro’ na página da publicação. Esta ação só pode ser realizada por usuários que tenham menos de dois empréstimos correntes e não tenham pendências com a biblioteca (ver próxima seção sobre fluxos alternativos);
+\item Confirmar empréstimo: administradores devem confirmar quando um exemplar é emprestado ao usuário que o reservou previamente. Neste momento é calculado o prazo para devolução do exemplar (duas semanas após a data de confirmação);
+\item Cancelar reserva: o usuário que solicitou uma reserva pode, sem sofrer penalidades, cancelá-la; administradores também podem realizar esta operação a qualquer momento;
+\item Renovar: os administradores e o usuário em posse de um exemplar podem optar pela renovação do empréstimo, prolongando o prazo de devolução para uma semana após a data da renovação. Esta ação pode ser realizada no máximo duas vezes por empréstimo corrente e apenas se a data de vencimento do empréstimo estiver dentro do prazo de sete ou menos dias a partir da data da renovação;
+\item Notificar atrasos: quando um exemplar não é devolvido dentro do prazo previsto, o sistema automaticamente notifica o usuário envolvido e os administradores sobre o atraso e altera o estado do exemplar para ‘Em atraso’. Isto acarreta na aplicação de uma penalidade sobre o usuário (ver próxima seção);
+\item Confirmar devolução: após a devolução de um exemplar, administradores devem confirmar que este foi retornado à biblioteca, encerrando o empréstimo;
+\item Declarar perda: os administradores e o usuário que tomou um exemplar emprestado podem registrar o extravio deste, o que leva à interrupção do empréstimo e dispara uma notificação aos administradores de que aquela cópia do livro dificilmente retornará à biblioteca. Esta ação acarreta uma penalização mais severa sobre o usuário (também descrita na próxima seção);
+\item Recuperar exemplar: no caso de um exemplar previamente declarado como extraviado ser encontrado, administradores devem registrar seu retorno ao acervo. É importante ressaltar que esta ação não equivale à reposição de um exemplar extraviado por outra cópia da mesma publicação: para isto, a ação ‘Criar exemplar’ deve ser tomada.
+\end{itemize}
+
+Foi definido também o conceito de transação: uma entidade para registro de cada passo do fluxo de empréstimo, desde a reserva até a devolução - cobrindo também os cenários alternativos. A Tabela \ref{transactions-table} foi planejada para o armazenamento de transações
+
+
+\begin{table}[hc]
+\centering
+\caption{Colunas da tabela de transações.\label{transactions-table}}
+\begin{tabular}{ll}
+\hline
+Nome da coluna & Informação armazenada \\
+\hline
+\textit{id}                        & {Identificador único da transação} \\
+\hline
+\textit{last\_edit\_date}        & {Última data de modificação da transação} \\
+\hline
+\textit{status}                    & Estado da transação:\\
+&                                1 - Aberta (Ongoing)\\
+&                                2 - Cancelada (Canceled)\\
+&                                3 - Encerrada (Done)\\
+&                                4 - Exemplar perdido (Lost copy) \\
+\hline
+\textit{user\_id}                & {Identificador único do usuário que iniciou a transação} \\
+\hline
+\textit{pub\_id}                & {Identificador único da publicação envolvida} \\
+\hline
+\textit{copy\_id}                & {Identificador único do exemplar envolvido} \\
+\hline
+\textit{copy\_status}            & Estado da publicação\\
+&                                (como definidos no diagrama de máquina de estados, numerados de 1 a 5) \\
+\hline
+\textit{renewals}                & {Número de renovações} \\
+\hline
+\textit{reservation\_date}        & {Data da solicitação da reserva} \\
+\hline
+\textit{loan\_date}                & {Data da confirmação do empréstimo} \\
+\hline
+\textit{expected\_return\_date}    & {Data máxima para devolução do exemplar emprestado} \\
+\hline
+\textit{actual\_return\_date}        & {Data da confirmação de devolução do exemplar} \\
+\hline
+\end{tabular}
+\end{table}
+
+Definiu-se que uma transação envolvendo um exemplar é iniciada (criada no estado ‘Aberta’) no momento da sua reserva e se encerra ao atingir algum dos estados seguintes:
+\begin{itemize}
+\item ‘Cancelada’, quando a reserva é cancelada;
+\item ‘Encerrada’, quando o livro é devolvido ou recuperado após extravio.
+\begin{itemize}
+\item O extravio é declarado pela mudança de estado da transação para ‘Exemplar perdido’.
+\end{itemize}
+\end{itemize}
+
+Com estas decisões, foi desenvolvido um módulo que insere tal tabela na base de dados do sistema (seguindo os padrões da API do \textit{Drupal}) e habilitaria dois pontos de exibição das transações no sistema: um painel na área administrativa para o monitoramento de todas e um bloco na área de usuário para acompanhamento daquelas com as quais esteve envolvido. Em particular, no bloco da página de usuário este teria apenas permissão para cancelar suas reservas e renovar suas transações correntes. A Figura \ref{transactions} mostra a página administrativa que os usuários administradores terão acesso para controlar as transações da biblioteca.
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=140mm, trim={35mm 0 30mm 20mm}, clip]{img/transactions.png}
+\caption{Painel de transações.\label{transactions}}
+\end{figure}
+
+Até o encerramento deste ciclo de desenvolvimento foi possível implementar boa parte dos passos do fluxo por parte do administrador. Os comportamentos restantes são a validação das datas de algumas ações em comparação com os dias de funcionamento da biblioteca e a exibição das transações envolvendo os usuários em suas páginas pessoais.
+
+\subsubsection{Fluxo alternativo considerando atrasos ou extravio de algum exemplar}
+Após reuniões com representantes do Curso Exato, foram coletadas algumas possibilidades de penalizações a serem aplicadas sobre usuários que não respeitarem prazos de devolução de seus empréstimos ou venham a perder algum exemplar que tenham tomado emprestado:
+
+\begin{itemize}
+\item Em caso de não devolução no prazo, o usuário perde o direito de reservar publicações ou de renovar empréstimos até que algum dos seguintes fatos ocorra:
+\begin{enumerate}
+\item O usuário entrega a algum professor do Exato uma resenha do livro lido;
+\item O prazo automático de multa é encerrado. Este prazo de multa seria similar ao aplicado por outras bibliotecas da Unicamp para alunos em atraso, sendo ele proporcional à quantidade de publicações em atraso e à quantidade de dias de atraso.
+\end{enumerate}
+\item Em caso de extravio de publicação emprestada, o usuário perde acesso ao sistema até que a cópia perdida seja ressarcida, ou que uma cópia de outra publicação de valor semelhante seja doada à biblioteca.
+\end{itemize}
+
+Nesta última proposta e na primeira referente ao atraso na devolução, a condição de pendência do usuário seria registrada por duas variáveis binárias: uma para indicar multa por atraso, outra por extravio. Estas receberiam o valor $1$ caso as condições da aplicação das penalidades fossem detectadas - na confirmação da devolução no caso do atraso e na confirmação da perda no caso do extravio. Seus valores permaneceriam salvos até que algum administrador registrasse que a pendência foi resolvida. Já para a proposta de aplicação de multa temporal automaticamente, seria necessária uma ferramenta para agendamento de tarefas (como o \textit{Cron}) que atualizasse, diariamente, quais usuários possuem exemplares em atraso e, com esta informação, prolongasse seus períodos de multa. Neste cenário, a situação de multa seria representada por uma variável capaz de armazenar a data até a qual o usuário estaria penalizado.
+
+Dada a complexidade adicional da integração externa, ainda há um impasse a respeito de qual solução será adotada para a multa por atraso. De todo modo, neste ciclo de desenvolvimento foi codificada a estrutura para conter as variáveis apresentadas para armazenamento destes indicadores de penalidade.
+
+\subsubsection{Envio e moderação de comentários nas páginas das publicações}
+
+Foi habilitada a opção nativa do \textit{Drupal} que permite que usuários autenticados enviem comentários sobre as páginas de conteúdos existentes no sistema. Restringiu-se esta funcionalidade apenas a páginas de publicação.
+
+Como solicitado pelos responsáveis pela biblioteca, foi-lhes dada a permissão para aprovar comentários antes que sejam publicados. Dessa forma, havendo necessidade de moderação, um administrador poderia advertir o usuário sobre o conteúdo impróprio do comentário enviado e impedir sua exibição aos demais visitantes do sistema.
+
+\subsubsection{Revisão do controle de permissões}
+
+A partir de contas de teste criadas para cada classe de usuário no sistema, testou-se a permissão para cada uma das contas em todos os endereços administrativos presentes no site até o momento. Assim, buscou-se mitigar as possíveis brechas de segurança por comportamento indevido de usuários.
+
+O núcleo do sistema \textit{Drupal} provê uma página administrativa para a configuração dessas permissões. Dentre os testes realizados, verificou-se que os endereços administrativos disponíveis no próprio núcleo já estavam devidamente protegidos. Porém, em testes envolvendo endereços criados pelos módulos personalizados para este sistema, o resultado não foi o mesmo. Algumas ações não foram tratadas e a correção destas foi alocada para o terceiro ciclo de desenvolvimento.
+
+
+%%%
+\pagebreak
+\subsection{Terceiro ciclo de desenvolvimento}
+
+O terceiro ciclo de desenvolvimento teve seu início imediatamente após a reunião referente ao segundo ciclo com o professor Fábio, em 13 de novembro de 2015. Devido aos empecilhos encontrados no segundo ciclo, algumas atividades foram realocadas para o terceiro. Todas as atividades propostas para finalização neste ciclo foram cumpridas, exceto a tradução total do sistema.
+
+\subsubsection{Aplicação de penalidades devido ao fluxo alternativo}
+    
+Após discussão com os responsáveis pela biblioteca, optou-se pela simplificação do sistema de penalidades apresentado no ciclo anterior. Não há mais distinção entre os dois tipos de penalidade, então, basta uma única variável binária para registro da situação de um usuário. Esta tem seu valor ajustado para $1$ após qualquer operação em que se registre atraso na devolução ou perda de exemplares, e caberá aos bibliotecários realizar as cobranças correspondentes aos alunos punidos.
+    
+Certificou-se que o estado de penalidade impede o usuário de realizar novas reservas e renovações. Além disso, para que o usuário esteja ciente de sua penalização, uma mensagem de erro será exibida no sistema após a autenticação do usuário. 
+
+\subsubsection{Finalização da telas para monitoramento de transações}
+    
+Neste ciclo, deu-se continuidade ao desenvolvimento iniciado no anterior, concluindo as validações finais sobre as alterações de estado das transações. Como todas as operações definidas para atualização das transações são ativadas via URLs específicas do sistema, tomou-se a prática de garantir que os usuários não as ativem na ordem incorreta - acidentalmente ou propositalmente. Assim, mesmo que um usuário conheça a ordem dos endereços acessados para registrar um fluxo de empréstimo comum (da reserva até a devolução), ele será impedido de fazê-lo na ordem incorreta. Por exemplo, um bibliotecário pode reconhecer que os \textit{links} “Confirmar empréstimo” e “Confirmar devolução” do painel administrativo redirecionam o usuário a endereços do sistema que, ao serem acessados, completam as respectivas alterações de estado da transação. No entanto, caso ele acesse diretamente o endereço para confirmação de empréstimo, enviando como parâmetro um identificador de transação inválida - isto é, cujo exemplar não se encontre no estado “Reservado” - o sistema não completará a ação e emitirá uma mensagem de erro.
+
+Concluído este painel de monitoramento, foi elaborado um secundário para visualização apenas dos empréstimos cuja data de vencimento se encontre a sete dias ou menos a partir da data corrente. Este foi requisitado pelos administradores para facilitar o controle sobre as cobranças a serem feitas aos alunos antes do início da semana letiva do Curso Exato, antes que penalidades sejam aplicadas.
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=150mm]{img/expiring-soon.png}
+\caption{Empréstimos com data de vencimento próxima.\label{expiring-soon}}
+\end{figure}
+
+\subsubsection{Tela administrativa para controle de usuários}
+
+Foi criado um terceiro painel administrativo, similar aos anteriores, para o monitoramento dos usuários que se encontram suspensos devido a pendências não resolvidas com a biblioteca. A motivação para a criação desta tela foi facilitar o controle das cobranças que devem ser feitas aos usuários quanto a atrasos ou perdas, e tornar mais acessível a ação de desbloqueio de contas de usuário; sem ela, seria necessário acessar cada página de usuário individualmente para efetuar múltiplos desbloqueios.
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=120mm]{img/suspended-users.png}
+\caption{Usuários suspensos.\label{suspended-users}}
+\end{figure}
+
+\subsubsection{Correção de \textit{bugs} referentes ao controle de permissões}
+    
+Durante o desenvolvimento das telas anteriores foram encontrados problemas no fluxo de empréstimo quando certas ações eram realizadas por usuários autenticados. Especificamente, notou-se que usuários com empréstimos correntes não possuíam permissão para renová-los em qualquer situação - embora o link referente a esta operação estivesse disponível na página do usuário -, além de qualquer erro em operações ativadas a partir da página de usuário causar o redirecionamento para uma página indisponível a usuários não administradores.
+
+Após curta investigação, foram encontradas e corrigidas as falhas no código (\textit{bugs}) que provocaram este comportamento inesperado. Julgou-se a não consideração de alguns cenários deste fluxo de funcionamento do ponto de vista dos usuários comuns como a causa raiz do problema.
+
+\subsubsection{Preparação para implantação no servidor disponível para o Curso Exato}
+
+Discutiu-se via e-mail sobre o local ideal para a implantação do sistema, dado algumas exigências e implicações por parte do Curso Exato. Após estudar as possibilidades e avaliar os pontos favoráveis e os contrários a cada opção, decidiu-se estabelecê-lo no servidor de projetos discentes do Instituto de Computação (IC) da Unicamp, de forma a lançá-lo o mais breve possível.
+Tomada a decisão junto aos professores, os graduandos entraram em contato com a responsável pela Diretoria de Informática do IC para uma conversa inicial sobre a viabilidade de se hospedar o projeto naquele servidor. Durante esta reunião, foi acordado enviar uma breve descrição dos requisitos e das especificações técnicas sobre o que o sistema exigiria do servidor, para análise real da viabilidade desta implantação. Ainda não houve, porém, resposta após este contato.
+    De forma a não atrasar a implantação, os graduandos realizaram testes de exportação do sistema do ambiente de desenvolvimento (\textit{Acquia}) para outros locais, com o propósito de verificar se não ocorreu alguma dependência imprópria de módulos ou mesmo alguma dependência cíclica. Certificou-se que o sistema está em estado consistente e exportável como um pacote, através do módulo \textit{Features} do \textit{Drupal}. Este módulo permite o empacotamento de código, das dependências, das funções e das variáveis de ambiente em um arquivo comprimido, capaz de ser incorporado em uma nova instalação \textit{Drupal} por meio do mesmo módulo.
+
+\subsubsection{Tradução da aplicação}
+
+Na interface administrativa do \textit{Drupal}, existe uma seção que estima a quantidade e o percentual de termos traduzidos na aplicação. Aproximadamente 25\% da aplicação ainda está pendente no que se refere às traduções para a Língua Portuguesa.
+Através do módulo \textit{Locale}, disponível no núcleo do \textit{Drupal}, é possível importar um arquivo de traduções (.po). Esta será a solução adotada tanto para termos ainda sem tradução, quanto para traduções automaticamente disponibilizadas na comunidade que não aparentam ser as melhores para algumas seções. Incluem-se no conjunto de termos não traduzidos as expressões e os rótulos definidos pelos graduandos nos módulos desenvolvidos para o funcionamento da biblioteca.
+
+
+
+
+%%%
+
+
+
+
+
+
+\pagebreak
+\section{GLOSSÁRIO}
+\begin{description}
+\item[API (\textit{Application Programming Interface})] \hfill \\ Interface de programação de aplicações
+\item[CMS (\textit{Content Management System})] \hfill \\ Sistema de gerenciamento de conteúdo
+\item[\textit{Cron}] \hfill \\ Agendador de tarefas baseado no horário do servidor onde o sistema está hospedado.
+\item[CSV (\textit{Comma-separated values})] \hfill \\ Formato de arquivo contendo valores separados por vírgulas (ou delimitadores similares)
+\item[\textit{Feed} RSS] \hfill \\ Agregador de conteúdos de páginas web (\textit{Rich Site Summary})
+\item[URL (\textit{Unified Resource Locator})] \hfill \\ Endereço de recurso (i.e. arquivo, página, função, etc.) disponível em um sistema \textit{web}.
+\end{description}
+
+\pagebreak
+\begin{thebibliography}{9}
+\bibitem{cursoexato} Curso Exato.\\Disponível em: <http://www.preac.unicamp.br/cursoexato/>.\\Acesso em: 8 jul. 2015
+\bibitem{drupal} Drupal - Open Source CMS.\\Disponível em: <https://www.drupal.org>.\\Acesso em: 5 set. 2015
+\bibitem{manifesto} Manifesto for Agile Software Development.\\Disponível em: <http://www.agilemanifesto.org/>.\\Acesso em: 12 jul. 2015
+\bibitem{scrum} Core Scrum | What is Scrum | Scrum Principles - Scrum Alliance.\\ Disponível em: <https://www.scrumalliance.org/why-scrum/core-scrum-values-roles>. \\Acesso em: 20 jul. 2015
+\bibitem{requirements} System requirements.\\Disponível em: <https://www.drupal.org/requirements>.\\Acesso em: 5 set. 2015
+\bibitem{dewey} Dewey Decimal Classification.\\Disponível em: <http://www.gutenberg.org/files/12513/12513-h/12513-h.htm>.\\Acesso em: 5 set. 2015
+\bibitem{cutter} Cutter classification.\\Disponível em: <http://forbeslibrary.org/research/cutter-classification/>.\\Acesso em: 5 set. 2015
+\bibitem{trello} Trello.\\Disponível em: <https://trello.com/>.\\Acesso em: 5 set. 2015
+\bibitem{acquia} CMS, Commerce, Community | Drupal.\\Disponível em: <https://www.acquia.com/>.\\Acesso em: 5 set. 2015
+
+\end{thebibliography}
+\end{document}
