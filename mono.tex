@@ -33,7 +33,7 @@
 \end{minipage}
 \vfill\vfill
 \begin{center}
-\Huge{\textbf{DESENVOLVIMENTO E IMPLANTAÇÃO DE SISTEMA \textit{WEB} PARA GERENCIAMENTO DA BIBLIOTECA DO CURSO EXATO}}
+\Huge{\textbf{DESENVOLVIMENTO E IMPLANTAÇÃO DE SISTEMA\textit{WEB} PARA GERENCIAMENTO DA BIBLIOTECA DO CURSO EXATO}}
 \vfill\vfill
 \huge{Davi Kooji Uezono\\Gustavo Fumio Oyakawa}
 \vfill
@@ -56,7 +56,7 @@ Motivar os jovens à leitura é um grande obstáculo enfrentado hoje pelo Curso 
 
 Com o intuito de aproximar os alunos dos livros, e aproveitando-se do contexto atual de inclusão tecnológica, propõe-se neste projeto a criação de um sistema \textit{web} de gerenciamento de biblioteca para os alunos, professores e coordenadores do Curso Exato. A criação deste sistema para consulta ao acervo, reservas e empréstimos tem o intuito de ampliar a capacidade de funcionamento da biblioteca, tornando-a mais acessível para todos os alunos, mesmo para aqueles que não possam se deslocar até a mesma, que está localizada em um recinto distante daquele em que ocorrem as aulas.
 
-O principal objetivo deste projeto é desenvolver, na plataforma \textit{Drupal}, um sistema \textit{web} de gerenciamento de biblioteca que atenda às necessidades do Curso Exato. Tal sistema deve seguir os padrões de código da comunidade \textit{Drupal}\footnote{um CMS e \textit{framework} (coleção de \textit{software} que fornece uma estrutura básica para outro sistema) de código aberto.}, para que possa ser estendido e utilizado por terceiros. Esta plataforma foi escolhida por ser de familiaridade dos desenvolvedores e dos membros do Curso Exato, e também por ser personalizável, extensível, de fácil manutenção, e de baixo custo aos futuros administradores da biblioteca.
+O principal objetivo deste projeto é desenvolver, na plataforma \textit{Drupal}\footnote{um CMS e \textit{framework} (coleção de \textit{software} que fornece uma estrutura básica para o desenvolvimento de sistemas) de código aberto.}, um sistema \textit{web} de gerenciamento de biblioteca que atenda às necessidades do Curso Exato. Tal sistema deve seguir os padrões de código da comunidade \textit{Drupal}, para que possa ser estendido e utilizado por terceiros. Esta plataforma foi escolhida por ser de familiaridade dos desenvolvedores e dos membros do Curso Exato, e também por ser personalizável, extensível, de fácil manutenção, e de baixo custo aos futuros administradores da biblioteca.
 
 Com este sistema, os usuários da biblioteca poderão consultar os exemplares disponíveis no acervo, ver características das obras catalogadas (como nome do autor, data de publicação e sinopse), reservar um livro para empréstimo e renovar o item emprestado. Também será possível ao usuário entrar em contato com a administração para sugerir novos títulos para aquisição ou enviar comentários sobre o novo sistema. Haverá uma página de ajuda que estará disponível ao usuário a um clique a partir de qualquer página do portal. Ainda, cada usuário da biblioteca terá um perfil pessoal na plataforma, a partir do qual será possível atribuir uma nota de uma a cinco estrelas para um livro, além de poder escrever uma resenha sobre a obra.
 
@@ -85,7 +85,7 @@ Cada \textit{sprint} teve duração aproximada de quatro semanas, demarcadas pel
 02/10 & Segunda entrega parcial da monografia \\
 05/10 a 06/11 & Terceiro ciclo de desenvolvimento e validação do sistema com os usuários \\
 06/11 & Terceira entrega parcial da monografia \\
-06/11 a 18/12 & Melhorias finais \\
+06/11 a 18/12 & Melhorias finais e tradução\\
 01/12 & Entrega da monografia para os professores orientadores\\
 15/12 & Entrega da monografia para o Instituto de Computação\\
 \hline
@@ -186,7 +186,7 @@ Há ainda os seguintes campos editáveis pelos bibliotecários, inacessíveis ao
 \begin{itemize}
 \item Tema (Aventura, Clássico, Romance e Suspense)
 \item Recomendado (variável binária representando se uma obra deve ser exibida na seção de obras recomendadas)
-\item Lista de identificadores dos exemplos desta publicação na biblioteca
+\item Lista de identificadores dos exemplares desta publicação na biblioteca
 \end{itemize}
 
 A disposição dos elementos na página pode ser observada nas Figuras \ref{colapsed} e \ref{expanded}.
@@ -229,7 +229,7 @@ No formulário de criação de cadastro são exigidas as seguintes informações
 \item Telefone
 \end{itemize}
 
-Ainda, foi habilitada a funcionalidade do \textit{Drupal} de fazer com que o cadastro passe por aprovação dos administradores para que o usuário anônimo ganhe acesso ao sistema. Estes são notificados por e-mail quando um novo cadastro é criado. A Figura \ref{cadastro} mostra como esta seção é exibida ao usuário anônimo.
+Foi habilitada a funcionalidade do \textit{Drupal} de fazer com que o cadastro passe por aprovação dos administradores para que o usuário anônimo ganhe acesso ao sistema. Estes são notificados por e-mail quando um novo cadastro é criado. A Figura \ref{cadastro} mostra como esta seção é exibida ao usuário anônimo.
 
 \begin{figure}[pbth!]
 \centering
@@ -368,7 +368,7 @@ Esta funcionalidade não foi finalizada neste ciclo, sendo continuada no próxim
 
 Ao término do ciclo de desenvolvimento anterior, durante reunião com os orientadores, questionou-se o motivo de se utilizar uma propriedade intrínseca do \textit{Drupal} como código de tombo. A atribuição de identificadores únicos de páginas geradas pela plataforma a itens não virtuais causaria complicações no cenário de migração do sistema para outra plataforma, pois o mecanismo de geração de códigos de tombo não estaria mais disponível. Discutiu-se, entretanto, que esta possibilidade era consideravelmente remota e, uma vez validado o fato junto aos responsáveis pela biblioteca do Curso Exato, decidiu-se que tal abordagem seria mantida. Desta forma, cada publicação conteria uma referência (lista de identificadores) para as páginas dos seus exemplares e, no momento em que suas páginas são processadas para exibição no navegador, o conteúdo dos exemplares poderia ser carregado rapidamente. Estas informações podem ser utilizadas para que se determine, dentre os exemplares de uma publicação, quais e quantos estão disponíveis para reserva, por exemplo.
 
-O segundo ciclo foi demarcado por grande quantidade de horas despendidas estudando a API do \textit{Drupal} para a execução de duas grandes tarefas: o design e implementação da tabela de transações dos livros da biblioteca na base de dados e a conclusão da ferramenta de importação em lotes. Ambos os desenvolvedores desconheciam ou apresentavam conhecimento apenas parcial das funções providas pela plataforma, de forma a se justificar o tempo de estudo ao longo deste ciclo. Por causa de tal empecilho, algumas tarefas que haviam sido planejadas para este não puderam ser concluídas e foram realocadas para o próximo.
+O segundo ciclo foi demarcado por grande quantidade de horas despendidas estudando a API do \textit{Drupal} para a execução de duas grandes tarefas: o design e implementação da tabela de transações dos livros da biblioteca na base de dados e a conclusão da ferramenta de importação em lotes. Ambos os desenvolvedores desconheciam ou apresentavam conhecimento apenas parcial das funções providas pela plataforma, de forma a se justificar o tempo de estudo ao longo deste ciclo. Por causa deste imprevisto, algumas tarefas que haviam sido planejadas para este ciclo não puderam ser concluídas e foram realocadas para o próximo.
 
 A seguir, são descritas as atividades realizadas durante o segundo ciclo de desenvolvimento.
 
@@ -549,11 +549,11 @@ Após discussão com os responsáveis pela biblioteca, optou-se pela simplifica�
     
 Certificou-se que o estado de penalidade impede o usuário de realizar novas reservas e renovações. Além disso, para que o usuário esteja ciente de sua penalização, uma mensagem de erro será exibida no sistema após a autenticação do usuário. 
 
-\subsubsection{Finalização da telas para monitoramento de transações}
+\subsubsection{Finalização do painel de monitoramento de transações e desenvolvimento de mecanismo de proteção às mudanças de estado de transações}
     
-Neste ciclo, deu-se continuidade ao desenvolvimento iniciado no anterior, concluindo as validações finais sobre as alterações de estado das transações. Como todas as operações definidas para atualização das transações são ativadas via URLs específicas do sistema, tomou-se a prática de garantir que os usuários não as ativem na ordem incorreta - acidentalmente ou propositalmente. Assim, mesmo que um usuário conheça a ordem dos endereços acessados para registrar um fluxo de empréstimo comum (da reserva até a devolução), ele será impedido de fazê-lo na ordem incorreta. Por exemplo, um bibliotecário pode reconhecer que os \textit{links} “Confirmar empréstimo” e “Confirmar devolução” do painel administrativo redirecionam o usuário a endereços do sistema que, ao serem acessados, completam as respectivas alterações de estado da transação. No entanto, caso ele acesse diretamente o endereço para confirmação de empréstimo, enviando como parâmetro um identificador de transação inválida - isto é, cujo exemplar não se encontre no estado “Reservado” - o sistema não completará a ação e emitirá uma mensagem de erro.
+Neste ciclo, foram concluídas as validações referentes às alterações de estado das transações. Como todas as operações definidas para atualização das transações são ativadas via URLs específicas do sistema, tomou-se a prática de garantir que os usuários não as ativem na ordem incorreta - acidentalmente ou propositalmente. Assim, mesmo que um usuário conheça a ordem dos endereços acessados para registrar um fluxo de empréstimo comum (da reserva até a devolução), ele será impedido de fazê-lo na ordem incorreta. Por exemplo, um bibliotecário pode reconhecer que os \textit{links} “Confirmar empréstimo” e “Confirmar devolução” do painel administrativo redirecionam o usuário a endereços do sistema que, ao serem acessados, completam as respectivas alterações de estado da transação. No entanto, caso ele acesse diretamente o endereço para confirmação de empréstimo, enviando como parâmetro um identificador de transação inválida - isto é, cujo exemplar não se encontre no estado “Reservado” - o sistema não completará a ação e emitirá uma mensagem de erro.
 
-Concluído este painel de monitoramento, foi elaborado um secundário para visualização apenas dos empréstimos cuja data de vencimento se encontre a sete dias ou menos a partir da data corrente. Este foi requisitado pelos administradores para facilitar o controle sobre as cobranças a serem feitas aos alunos antes do início da semana letiva do Curso Exato, antes que penalidades sejam aplicadas.
+Concluído este painel de monitoramento, foi elaborado um painel secundário para visualização apenas dos empréstimos cuja data de vencimento se encontre a sete dias ou menos a partir da data corrente. Este foi requisitado pelos administradores para facilitar o controle sobre as cobranças a serem feitas aos alunos antes do início da semana letiva do Curso Exato, portanto antes que penalidades sejam aplicadas.
 
 \begin{figure}[pbth!]
 \centering
@@ -563,7 +563,7 @@ Concluído este painel de monitoramento, foi elaborado um secundário para visua
 
 \subsubsection{Tela administrativa para controle de usuários}
 
-Foi criado um terceiro painel administrativo, similar aos anteriores, para o monitoramento dos usuários que se encontram suspensos devido a pendências não resolvidas com a biblioteca. A motivação para a criação desta tela foi facilitar o controle das cobranças que devem ser feitas aos usuários quanto a atrasos ou perdas, e tornar mais acessível a ação de desbloqueio de contas de usuário; sem ela, seria necessário acessar cada página de usuário individualmente para efetuar múltiplos desbloqueios.
+Foi criado um terceiro painel administrativo, similar aos anteriores, para o monitoramento dos usuários que se encontram suspensos devido a pendências não resolvidas com a biblioteca. A motivação para a criação desta tela foi facilitar o controle das cobranças que devem ser feitas aos usuários quanto a atrasos ou perdas, e tornar mais acessível a ação de desbloqueio de contas de usuário; sem esta tela administrativa, seria necessário acessar cada página de usuário individualmente para efetuar múltiplos desbloqueios.
 
 \begin{figure}[pbth!]
 \centering
@@ -573,13 +573,13 @@ Foi criado um terceiro painel administrativo, similar aos anteriores, para o mon
 
 \subsubsection{Correção de \textit{bugs} referentes ao controle de permissões}
     
-Durante o desenvolvimento das telas anteriores foram encontrados problemas no fluxo de empréstimo quando certas ações eram realizadas por usuários autenticados. Especificamente, notou-se que usuários com empréstimos correntes não possuíam permissão para renová-los em qualquer situação - embora o link referente a esta operação estivesse disponível na página do usuário -, além de qualquer erro em operações ativadas a partir da página de usuário causar o redirecionamento para uma página indisponível a usuários não administradores.
+Durante o desenvolvimento das telas anteriores foram encontrados problemas no fluxo de empréstimo quando certas ações eram realizadas por usuários autenticados. Especificamente, notou-se que usuários com empréstimos correntes não possuíam permissão para renová-los em qualquer situação - embora o link referente a esta operação estivesse disponível na página do usuário - e que, em caso de erro em operações ativadas a partir da página de usuário comum, o usuário era redirecionado ao painel administrativo - causando um erro de acesso negado a todos os não administradores.
 
-Após curta investigação, foram encontradas e corrigidas as falhas no código (\textit{bugs}) que provocaram este comportamento inesperado. Julgou-se a não consideração de alguns cenários deste fluxo de funcionamento do ponto de vista dos usuários comuns como a causa raiz do problema.
+Após investigação, foram encontradas e corrigidas as falhas no código (\textit{bugs}) que provocaram este comportamento inesperado. A causa do problema consistiu na existência de cenários não previstos inicialmente, quanto ao fluxos de empréstimo e renovação, do ponto de vista dos usuários comuns.
 
 \subsubsection{Preparação para implantação no servidor disponível para o Curso Exato}
 
-Discutiu-se via e-mail sobre o local ideal para a implantação do sistema, dado algumas exigências e implicações por parte do Curso Exato. Após estudar as possibilidades e avaliar os pontos favoráveis e os contrários a cada opção, decidiu-se estabelecê-lo no servidor de projetos discentes do Instituto de Computação (IC) da Unicamp, de forma a lançá-lo o mais breve possível.
+Discutiu-se via e-mail sobre o local de implantação do sistema, dado algumas exigências e implicações por parte do Curso Exato. Após estudar as possibilidades e avaliar os pontos favoráveis e os contrários a cada opção, decidiu-se estabelecê-lo no servidor de projetos discentes do Instituto de Computação (IC) da Unicamp, de forma a lançá-lo o mais breve possível.
 Tomada a decisão junto aos professores, os graduandos entraram em contato com a responsável pela Diretoria de Informática do IC para uma conversa inicial sobre a viabilidade de se hospedar o projeto naquele servidor. Durante esta reunião, foi acordado enviar uma breve descrição dos requisitos e das especificações técnicas sobre o que o sistema exigiria do servidor, para análise real da viabilidade desta implantação. Ainda não houve, porém, resposta após este contato.
     De forma a não atrasar a implantação, os graduandos realizaram testes de exportação do sistema do ambiente de desenvolvimento (\textit{Acquia}) para outros locais, com o propósito de verificar se não ocorreu alguma dependência imprópria de módulos ou mesmo alguma dependência cíclica. Certificou-se que o sistema está em estado consistente e exportável como um pacote, através do módulo \textit{Features} do \textit{Drupal}. Este módulo permite o empacotamento de código, das dependências, das funções e das variáveis de ambiente em um arquivo comprimido, capaz de ser incorporado em uma nova instalação \textit{Drupal} por meio do mesmo módulo.
 
