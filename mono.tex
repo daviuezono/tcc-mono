@@ -28,6 +28,7 @@
 \end{minipage}
 \hfill
 \begin{minipage}[c]{25mm}
+\thispagestyle{empty}
 \hspace{-0.5cm}
 \includegraphics[width=25mm]{img/logo-ic.png}
 \end{minipage}
@@ -48,6 +49,7 @@
 %% INTRODUÇÃO E OBJETIVOS %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
+\setcounter{page}{1}
 \section{INTRODUÇÃO E OBJETIVOS}
 
 O Curso Exato é um projeto de extensão comunitária da Preac (Pró-Reitoria de Extensão e Assuntos Comunitários) da Unicamp, que "tem por objetivo contribuir para o desenvolvimento de alunos da rede pública de ensino. Para isso, o projeto oferece aulas nas áreas de Física, Matemática, Português e Química, visando à consolidação e ao aprofundamento dos conhecimentos adquiridos no Ensino Médio" \ \cite{cursoexato}.
@@ -68,9 +70,9 @@ A meta final é não apenas prover os requisitos básicos de um sistema de bibli
 
 \pagebreak
 \section{METODOLOGIA DE TRABALHO}
-O processo de desenvolvimento do software se iniciou por meio de metodologias ágeis \cite{manifesto}, uma vez que ambos os desenvolvedores estão habituados a tal prática. Neste modelo de desenvolvimento, afirma-se que, apesar de processos, ferramentas, documentação abrangente, contratos e planos estritos serem importantes, os indivíduos (\textit{stakeholders}) e suas interações, a entrega de um software em funcionamento, a colaboração com o consumidor e a rápida resposta às mudanças são também relevantes.
+O processo de desenvolvimento do \textit{software} se iniciou por meio de metodologias ágeis \cite{manifesto}, uma vez que ambos os desenvolvedores estão habituados a tal prática. Neste modelo de desenvolvimento, afirma-se que, apesar de processos, ferramentas, documentação abrangente, contratos e planos estritos serem importantes, os indivíduos (\textit{stakeholders}) e suas interações, a entrega de um \textit{software} em funcionamento, a colaboração com o consumidor e a rápida resposta às mudanças são também relevantes.
 
-Como o \textit{Scrum} \cite{scrum} é a metodologia ágil mais utilizada em Engenharia de Software, ele foi escolhido para nortear os desenvolvedores. Nele, ciclos curtos de desenvolvimento (\textit{sprints}) são precedidos por um ou dois dias de reuniões para refinar a lista de tarefas e para discutir a solução técnica para o problema a ser resolvido no período. Esses ciclos são concluídos com um dia de reunião, na qual é feita uma retrospectiva para avaliar o processo de desenvolvimento recém-concluído, além de realizar uma demonstração funcional do sistema para os principais \textit{stakeholders} - neste caso, a coordenadora geral do Curso Exato e os professores orientadores.
+Como o \textit{Scrum} \cite{scrum} é uma das metodologias ágeis mais utilizadas em Engenharia de \textit{Software}, ele foi escolhido para nortear os desenvolvedores. Nele, ciclos curtos de desenvolvimento (\textit{sprints}) são precedidos por um ou dois dias de reuniões para refinar a lista de tarefas e para discutir a solução técnica para o problema a ser resolvido no período. Esses ciclos são concluídos com um dia de reunião, na qual é feita uma retrospectiva para avaliar o processo de desenvolvimento recém-concluído, além de realizar uma demonstração funcional do sistema para os principais \textit{stakeholders} - neste caso, a coordenadora geral do Curso Exato e os professores orientadores.
 
 Cada \textit{sprint} teve duração aproximada de quatro semanas, demarcadas pelos dias de entrega de conteúdo escrito aos professores orientadores do projeto. A Tabela \ref{cronograma} contém os períodos e datas originalmente propostos.
 
@@ -110,49 +112,48 @@ A distribuição de tarefas entre os alunos desenvolvedores envolvidos ocorreu e
 
 O aluno Davi assumiu os papéis de Arquiteto e Desenvolvedor \textit{back-end}, enquanto o aluno Gustavo assumiu os papéis de Engenheiro de requisitos e Desenvolvedor \textit{front-end}.
 
-Ao longo do primeiro ciclo de desenvolvimento, foi elaborado um documento contendo as premissas a respeito do desenvolvimento do projeto, visando proteger o escopo inicial e garantir o cumprimento do acordo por todas as partes envolvidas (desenvolvedores e voluntários do Curso Exato). Conforme a necessidade, foram adicionados novos itens a este documento. Os aspectos abordados são:
+Ao longo do primeiro ciclo de desenvolvimento, foi elaborado um documento contendo as premissas a respeito do desenvolvimento do projeto, visando proteger o escopo inicial e garantir o cumprimento do acordo por todas as partes envolvidas (desenvolvedores e voluntários do Curso Exato). Conforme a necessidade, foram sendo adicionados novos itens a este documento. Estes estão descritos nas seções seguintes.
 
-\begin{itemize}
-\item O trabalho foi desenvolvido e implementado com o software \textit{Drupal}, na versão 7 do seu núcleo. Todos os requisitos técnicos do trabalho são os mesmos descritos na página de requisitos \cite{requirements} e caberá aos interessados possuir uma infraestrutura capaz de suportar a aplicação, isentando os alunos desenvolvedores da responsabilidade da implantação do sistema.
+\subsection{Aspectos técnicos}
 
-\item Ficam definidas as seguintes classes de usuários aceitos pelo sistema:
+O projeto foi desenvolvido e implementado com o \textit{software} \textit{Drupal}, na versão 7 do seu núcleo. Todos os recursos de sistema requeridos pelo trabalho são os mesmos descritos na página de requisitos do \textit{Drupal} \cite{requirements} e caberá aos interessados possuir uma infraestrutura capaz de suportar a aplicação, isentando os alunos desenvolvedores da responsabilidade da implantação do sistema. A manutenção do sistema será realizada pelos desenvolvedores até o término de 2015, incluindo um treinamento para garantir continuamente a segurança da plataforma.
+
+Por motivos de usabilidade e segurança, foi imposto um sistema de permissões tal que diferentes classes de usuários tenham acesso apenas às funcionalidades que lhes são relevantes. Ficam definidas as seguintes classes de usuários aceitos pelo sistema:
 \begin{itemize}
 \item Usuário anônimo ou visitante: usuário não autenticado no sistema. Não possui, necessariamente, ligação com o Curso Exato;
 \item Usuário comum ou aluno: aluno do Curso Exato cadastrado e autenticado;
 \item Usuário bibliotecário: membro do Curso Exato com permissão de gerenciar a biblioteca (realizar empréstimos, registrar multas, etc.), cadastrado e autenticado;
 \item Usuário superadministrador ou desenvolvedor: cadastrado e autenticado, responsável pela manutenção do sistema. Possui permissões máximas no sistema.
 \end{itemize}
-Ao longo deste documento, o termo \emph{usuário autenticado} é utilizado para se referir às três últimas classes de usuário, e \emph{administrador} para se referir às duas últimas.
+Ao longo deste texto, o termo \emph{usuário autenticado} é utilizado para se referir às três últimas classes de usuário, e \emph{administrador} para se referir às duas últimas.
 
-\item A identificação única de uma publicação (ou obra) ou de um exemplar (ou cópia) é uma questão consideravelmente discutida na Biblioteconomia. No presente caso, são utilizados dois tipos de identificação para cada livro; sendo o primeiro, o \textit{número de chamada}, e o segundo, o \textit{código de tombo}. Ambas as formas de identificação estão presentes em grande parte das bibliotecas de instituições consagradas, como universidades, e possuem alguns padrões utilizados internacionalmente, como a Classificação Decimal de \textit{Dewey} \cite{dewey} e a Codificação de Cutter \cite{cutter}. Contudo, devido à opção dos membros do Curso Exato por um código menos complexo, porém suficiente para os fins pretendidos, optou-se por não utilizar um padrão internacional. 
-\begin{itemize}
-\item O principal objetivo do \textit{número de chamada} é a identificação única da publicação, e este é utilizado para fins organizacionais no espaço físico da biblioteca. Este número pode ser repetido, caso os dois livros sejam exemplares da mesma publicação. O conjunto de características que definem a unicidade de uma publicação, bem como a composição desta codificação estão especificados nos próximos tópicos;
-\item O principal objetivo do \textit{código de tombo} é a identificação única do exemplar. A partir deste código o bibliotecário é capaz de ter conhecimento da publicação à qual o exemplar pertence e o seu status (disponível, reservado, emprestado, em atraso ou extraviado), além da identificação do usuário com o qual livro se encontra (se for o caso).
-\end{itemize}
+Considerou-se inicialmente desenvolver uma integração com o \textit{Facebook} para casos de uso simples, tais como autenticação única e recomendação de publicações a outros usuários. No entanto, a Interface de Programação de Aplicações (API) disponibilizada pelo \textit{Facebook} passa por alterações a cada dois anos, o que pode comprometer a integração com o sistema aqui desenvolvido. Os  desenvolvedores do projeto haviam planejado estudar a viabilidade dessa integração no início do terceiro ciclo, como mencionado anteriormente, contudo, conhecendo o funcionamento da rede social citada, decidiu-se em reunião com o orientador Fábio que essa integração não seria criada durante os ciclos de desenvolvimento planejados até o final de 2015, ficando como uma proposta de melhoria para o futuro.
+
+O sistema foi projetado para ter um \textit{design} adaptável com alguns elementos responsivos (elementos se reposicionam e se redimensionam conforme a mudança da largura da tela), exceto nas páginas administrativas. Os desenvolvedores garantem o suporte ao sistema para que este funcione corretamente nas últimas versões estáveis dos principais navegadores \textit{desktop} e \textit{mobile} (\textit{Mozilla Firefox}, \textit{Google Chrome}, \textit{Internet Explorer}, \textit{Safari} e \textit{Android Browser}). O navegador \textit{IE Mobile} não terá garantia de suporte por utilizar tecnologias mais antigas com os padrões mais modernos da internet atual. Eventuais problemas de desempenho ou usabilidade podem ocorrer em navegadores antigos, portanto, não é recomendado o uso destes navegadores. 
+
+\subsection{Aspectos relacionados à Biblioteconomia}
+
+A identificação única de livros é uma questão consideravelmente discutida na Biblioteconomia. No presente caso, são utilizados dois tipos de identificação para cada livro: o \textit{número de chamada}, para a classificação de um livro enquanto \textit{publicação} ou \textit{obra} (entidade abstrata referente às informações contidas no livro), e o \textit{código de tombo}, para a classificação enquanto \textit{exemplar} ou \textit{cópia} de uma publicação (entidade física referente a cada impressão do livro). Ambas as formas de identificação estão presentes em grande parte das bibliotecas de instituições consagradas, como universidades, e para o número de chamada especificamente existem padrões utilizados internacionalmente, como a Classificação Decimal de \textit{Dewey} \cite{dewey} e a Codificação de Cutter \cite{cutter}. Contudo, devido à opção dos membros do Curso Exato por um código menos complexo, porém suficiente para os fins pretendidos, optou-se por não utilizar um padrão internacional. 
+
+A principal função do número de chamada é a identificação única da publicação, e este é utilizado para fins organizacionais do acervo da biblioteca. Este número pode ser repetido, caso os dois livros sejam exemplares da mesma publicação. O conjunto de características que definem a unicidade de uma publicação, bem como a composição desta codificação estão especificados nos próximos tópicos. O código de tombo, por sua vez, é utilizado para a identificação única do exemplar. A partir dele o bibliotecário é capaz de ter conhecimento da publicação à qual o exemplar pertence e o seu \textit{status} (disponível, reservado, emprestado, em atraso ou extraviado), além da identificação do usuário com o qual livro se encontra (se for o caso).
 
 %% Refactor
-\item No contexto do Curso Exato, a unicidade de uma publicação é definida a partir do conjunto de atributos a seguir: título da obra, nome do autor, editora, ano de publicação, edição e volume. Isto significa que os bibliotecários que desejarem inserir uma nova publicação com exatamente as mesmas seis características serão impedidos de fazê-lo pelo sistema. Caso a inserção especifique o número de exemplares a ser adicionado juntamente com a publicação (que sabemos estar duplicada), esta adicionará os exemplares na publicação já existente e impedirá o usuário de criar duplicatas.
+No contexto do Curso Exato, a unicidade de uma publicação é definida a partir do conjunto de atributos a seguir: título da obra, nome do autor, editora, ano de publicação, edição e volume. Isto significa que, no ato de cadastro, o sistema valida se existe alguma obra registrada no acervo cujos seis atributos-chave sejam os mesmos da publicação sendo cadastrada. Caso nenhuma seja encontrada, o sistema considera que a publicação é nova no acervo, atribui a ela um novo número de chamada e registra-a.
 
-\item O número de chamada é formado por uma sequência de seis caracteres, dividida em três partes. A primeira parte contém duas letras, uma maiúscula e outra minúscula, indicando as duas primeiras letras do sobrenome do autor da obra. A segunda parte contém três dígitos, e a terceira, uma letra minúscula. Esta corresponde à primeira letra do título da obra. Já os três dígitos da segunda parte são determinados da seguinte forma: dada a combinação de três letras (nome do autor e nome da obra), a primeira incidência recebe o valor 001 e a reincidência da combinação é autoincrementada (002 e assim por diante). Os códigos serão gerados automaticamente para os livros novos que forem inseridos no sistema da biblioteca e um módulo criado no \textit{Drupal} irá implementar esta funcionalidade. Apesar do código gerado por este padrão só apresentar explicitamente o título da obra e do nome do autor, ele é capaz de distinguir uma obra de outra por meio dos dígitos.
+O número de chamada é formado por uma sequência de seis caracteres, dividida em três partes. A primeira parte contém duas letras, uma maiúscula e outra minúscula, indicando as duas primeiras letras do sobrenome do autor da obra. A segunda parte contém três dígitos, e a terceira, uma letra minúscula. Esta corresponde à primeira letra do título da obra. Já os três dígitos da segunda parte são determinados da seguinte forma: dada a combinação de três letras (nome do autor e nome da obra), a primeira incidência recebe o valor 001 e a reincidência da combinação é autoincrementada (002 e assim por diante).
 
-\item O código de tombo de cada exemplar é o número que o \textit{Drupal} utiliza para identificar cada conteúdo criado nesta plataforma.
+Em contrapartida, exemplares podem ser registrados no acervo sem que seus identificadores (códigos de tombo) contenham referências diretas às obras as quais pertencem. Espera-se que no momento do cadastro do exemplar já se conheça o número de chamada da publicação a qual ele se refere - portanto existindo uma página para ela -, para que seja possível realizar uma referência cruzada entre os dois. Mais especificamente: cada página de publicação contém uma lista de códigos de tombo dos seus exemplares disponíveis no acervo, e as páginas de exemplar contém referências para as páginas das publicações correspondentes. O código de tombo de cada exemplar é o número que o \textit{Drupal} utiliza para identificar cada conteúdo criado nesta plataforma.
 
-\item Em uma biblioteca moderna, cada exemplar recebe um código de barras para automatizar o empréstimo. No escopo deste projeto isto não foi necessário, pois a quantidade de exemplares em comparação a uma biblioteca tradicional é pequena.
+Ambos os identificadores são gerados automaticamente para os livros novos que forem inseridos no sistema da biblioteca e um módulo criado no \textit{Drupal} implementa esta funcionalidade. Apesar do número de chamada gerado neste padrão só apresentar explicitamente o título da obra e do nome do autor, ele é capaz de distinguir uma obra de outra por meio dos dígitos.
 
-\item Como os alunos do Curso Exato não têm acesso direto ao espaço físico da biblioteca, eles dependem de um mediador (membro do Exato) responsável por retirar os livros mediante a escolha prévia dos alunos por meio do sistema on-line.  Nesse contexto, de forma a automatizar o fluxo de empréstimo dos livros, estabeleceu-se a funcionalidade de “solicitação de reserva” do livro, permitindo ao aluno cadastrado com uma conta de usuário autenticada a escolha prévia da obra ao navegar no site. Os administradores da biblioteca são notificados desta intenção de empréstimo e deverão levar os respectivos exemplares para a sala de aula. O bibliotecário é capaz de acessar uma tela administrativa no sistema com o histórico das solicitações dos alunos e com botões para efetivar o empréstimo ou cancelar o pedido.
+Em uma biblioteca moderna, cada exemplar recebe um código de barras para automatizar o empréstimo. No escopo deste projeto isto não foi necessário, pois a quantidade de exemplares em comparação a uma biblioteca tradicional é pequena.
 
-\item Considerou-se inicialmente desenvolver uma integração com o \textit{Facebook} para casos de uso simples, tais como autenticação única e recomendação de publicações a outros usuários. No entanto, a Interface de Programação de Aplicações (API) disponibilizada pelo \textit{Facebook} passa por alterações a cada dois anos, o que pode comprometer a integração com o sistema aqui desenvolvido. Os  desenvolvedores do projeto haviam planejado estudar a viabilidade dessa integração no início do terceiro ciclo, como mencionado anteriormente, contudo, conhecendo o funcionamento da rede social citada, decidiu-se em reunião com o orientador Fábio que essa integração não será criada durante os ciclos de desenvolvimento planejados até o final de 2015, ficando como uma proposta de melhoria para o futuro.
-
-\item O sistema foi projetado para ter um design adaptável com alguns elementos responsivos (elementos se reposicionam e se redimensionam conforme a mudança da largura da tela), exceto nas páginas administrativas. Os desenvolvedores garantem o suporte ao sistema para que este funcione corretamente nas últimas versões estáveis dos principais navegadores \textit{desktop} e \textit{mobile} (\textit{Mozilla Firefox}, \textit{Google Chrome}, \textit{Internet Explorer}, \textit{Safari} e \textit{Android Browser}). O navegador \textit{IE Mobile} não terá garantia de suporte por utilizar tecnologias mais antigas com os padrões mais modernos da internet atual. Eventuais problemas de desempenho ou usabilidade podem ocorrer em navegadores antigos, portanto, não é recomendado o uso destes navegadores. 
-
-\item A manutenção do sistema será realizada pelos desenvolvedores até o término de 2015, incluindo um treinamento para garantir continuamente a segurança da plataforma.
-
-\end{itemize}
-
+Como os alunos do Curso Exato não têm acesso direto ao espaço físico da biblioteca, eles dependem de um mediador (membro do Exato) responsável por retirar os livros mediante a escolha prévia dos alunos por meio do sistema on-line.  Nesse contexto, de forma a automatizar o fluxo de empréstimo dos livros, estabeleceu-se a funcionalidade de “solicitação de reserva” do livro, permitindo ao aluno cadastrado com uma conta de usuário autenticada a escolha prévia da obra ao navegar no site. Os administradores da biblioteca são notificados desta intenção de empréstimo e deverão levar os respectivos exemplares para a sala de aula. O bibliotecário é capaz de acessar uma tela administrativa no sistema com o histórico das solicitações dos alunos e com botões para efetivar o empréstimo ou cancelar o pedido.
 
 \pagebreak
 \section{EXECUÇÃO}
 \subsection{Primeiro ciclo de desenvolvimento}
+
 O primeiro ciclo de desenvolvimento foi iniciado com uma reunião com a responsável pela biblioteca do Curso Exato. Nesta reunião, foram coletadas as histórias de usuário, foi feita a validação dos requisitos do sistema, bem como a aprovação dos escopos gerais de cada ciclo de desenvolvimento. Após este passo, realizou-se o detalhamento das tarefas a serem feitas durante o mês e suas estimativas de tempo e complexidade, com o auxílio da ferramenta \textit{Trello}\footnote{Ferramenta de gerenciamento de projetos voltado para metodologias ágeis.} \cite{trello}. Por meio desta, os alunos puderam monitorar o andamento das tarefas e notificar um ao outro sobre seus progressos e eventuais dificuldades ao longo de todo o projeto.
 
 Optou-se por hospedar uma versão de desenvolvimento do sistema na \textit{Acquia} \cite{acquia}, plataforma para computação em nuvem especializada em \textit{Drupal}. Por meio dela, ambos os desenvolvedores puderam trabalhar paralelamente na construção do sistema e apresentar uma versão funcional deste aos principais interessados - alunos e voluntários do Curso Exato, bem como professores orientadores deste projeto - sem a necessidade de um encontro presencial.
@@ -162,32 +163,10 @@ Após a configuração dos ambientes locais de desenvolvimento, cada aluno tomou
 A seguir, são descritas as atividades realizadas durante o primeiro ciclo de desenvolvimento.
 
 \subsubsection{Criação da página de uma publicação}
-Devido à importância desta entidade no sistema, a primeira tarefa assumida foi a definição de uma publicação como um tipo de conteúdo \textit{Drupal} (página com campos fixos). Foi definido que esta página deve exibir aos usuários as seguintes informações sobre uma obra:
-\begin{itemize}
-\item Título
-\item Foto da capa do livro
-\item Autor
-\item Ano de publicação
-\item Categoria (Luso-brasileira, Estrangeira, Infanto-juvenil ou Outros)
-\item Avaliação dos usuários
-\item Resumo
-\item Editora
-\item Estado (onde a obra foi publicada)
-\item Volume
-\item Coleção
-\item Edição
-\item Tradutor
-\item Número de chamada
-\end{itemize}
 
-As sete primeiras são impressas na tela; as demais ficam ocultas e são expandidas apenas se o usuário clicar na opção ‘Ver Detalhes’. Foi adicionado o botão ‘Reservar Livro’, porém ainda sem funcionalidade.
+Devido à importância desta entidade no sistema, a primeira tarefa assumida foi a definição de uma publicação como um tipo de conteúdo \textit{Drupal} (página com campos fixos). Foi definido que esta página deve exibir aos usuários as seguintes informações sobre uma obra: título, foto da capa do livro, autor, ano de publicação, categoria (Luso-brasileira, Estrangeira, Infanto-juvenil ou Outros), avaliação dos usuários, resumo, editora, estado (onde a obra foi publicada), volume, coleção, edição, tradutor e número de chamada. As sete primeiras são impressas na tela assim que está é carregada; as demais ficam ocultas e são expandidas apenas se o usuário clicar na opção ‘Ver Detalhes’. Foi adicionado o botão ‘Reservar Livro’, porém ainda sem funcionalidade.
 
-Há ainda os seguintes campos editáveis pelos bibliotecários, inacessíveis aos usuários não administradores:
-\begin{itemize}
-\item Tema (Aventura, Clássico, Romance e Suspense)
-\item Recomendado (variável binária representando se uma obra deve ser exibida na seção de obras recomendadas)
-\item Lista de identificadores dos exemplares desta publicação na biblioteca
-\end{itemize}
+Há ainda os seguintes campos editáveis pelos bibliotecários, inacessíveis aos usuários não administradores: tema (Aventura, Clássico, Romance e Suspense), indicador de recomendação (variável binária representando se uma obra deve ser exibida na seção de obras recomendadas) e a lista de identificadores dos exemplares da publicação na biblioteca
 
 A disposição dos elementos na página pode ser observada nas Figuras \ref{colapsed} e \ref{expanded}.
 
@@ -204,30 +183,16 @@ A disposição dos elementos na página pode ser observada nas Figuras \ref{cola
 \end{figure}
 
 \subsubsection{Criação da página de um exemplar}
-Uma segunda entidade importante é o exemplar. Esta define as múltiplas cópias de uma mesma publicação existente na biblioteca, contendo os seguintes campos:
-\begin{itemize}
-\item Código de tombo
-\item Identificador da página da publicação a qual pertence
-\item Estado: Disponível, Reservado, Emprestado, Em atraso ou Extraviado 
-\item Última data de empréstimo
-\item Última data de devolução
-\item Identificador do último usuário que o tomou emprestado
-\end{itemize}
+
+Uma segunda entidade importante é o exemplar. Esta define as múltiplas cópias de uma mesma publicação existente na biblioteca, contendo os seguintes campos: código de tombo, identificador da página da publicação a qual pertence, estado (Disponível, Reservado, Emprestado, Em atraso ou Extraviado), última data de empréstimo e última data de devolução.
 
 No cadastro, o \textit{Drupal} cria páginas para representar cada exemplar; contudo, por serem utilizadas apenas para gerenciamento da biblioteca, decidiu-se não torná-las visíveis a usuários anônimos e alunos. Supõe-se que estes têm interesse em visualizar as páginas das publicações, e não das suas cópias.
 
 Nota-se que os últimos quatro campos, apesar de serem declarados ainda no primeiro ciclo de desenvolvimento, passaram a ser utilizados apenas no segundo, quando começaram a ser implementadas as transações de exemplares (ver seção \ref{sssec:stransaction}).
 
-
 \subsubsection{Desenvolvimento do formulário de cadastro}
-No formulário de criação de cadastro são exigidas as seguintes informações do usuário anônimo:
-\begin{itemize}
-\item Nome completo
-\item Endereço de e-mail
-\item Ano de ingresso (no Curso Exato)
-\item Endereço
-\item Telefone
-\end{itemize}
+
+No formulário de criação de cadastro são exigidas as seguintes informações do usuário anônimo: nome completo, endereço de e-mail, ano de ingresso (no Curso Exato), endereço e telefone.
 
 Foi habilitada a funcionalidade do \textit{Drupal} de fazer com que o cadastro passe por aprovação dos administradores para que o usuário anônimo ganhe acesso ao sistema. Estes são notificados por e-mail quando um novo cadastro é criado. A Figura \ref{cadastro} mostra como esta seção é exibida ao usuário anônimo.
 
