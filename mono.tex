@@ -300,7 +300,7 @@ A Figura \ref{recommended} ilustra a listagem de temas na barra lateral esquerda
 \caption{Obras recomendadas por tema.\label{recommended}}
 \end{figure}
 
-\subsubsection{Desenvolvimento do módulo \textit{Drupal} para geração de números de chamada}
+\subsubsection{Desenvolvimento do módulo \textit{Drupal} para geração de números de chamada}\label{sssec:chamada}
 
 Foi desenvolvido e instalado um módulo \textit{Drupal} para a geração de números de chamada no momento da criação de uma página de publicação. Sua finalidade é facilitar o trabalho dos bibliotecários.
 
@@ -312,9 +312,9 @@ Houve uma sobrecarga de tempo considerável nesta tarefa devido a uma falha no f
 \caption{Ilustração do modelo antigo de cadastro de exemplares da mesma obra.\label{tombo-antigo}}
 \end{figure}
 
-No entanto, percebeu-se durante o desenvolvimento do módulo que esta abordagem seria problemática por não dar ao aluno a escolha de qual edição da obra reservar. Além disso, a abordagem anterior pode complicar a organização das obras na estante. No exemplo da Figura \ref{tombo-antigo}, o bibliotecário teria a falsa impressão de que existe uma relação de ordem entre os exemplares, devido à indexação final do código. Entretanto, é mais útil manter o acervo agrupado por edições ou volume da obra, e não ordenado por este código.
+No entanto, percebeu-se durante o desenvolvimento do módulo que esta abordagem seria problemática por não dar ao aluno a escolha de qual edição da obra reservar. Além disso ela complicaria a organização da biblioteca física, pois o bibliotecário, ao ver apenas o código na lombada do livro, teria a falsa impressão de que existia uma relação de ordem entre os exemplares ao posicionar os livros em uma estante (o que não é necessariamente verdade), tendo dificuldade para separá-los por critérios mais relevantes, como volume e edição.
 
-A fim de se corrigir os problemas encontrados, duas ações foram tomadas. A primeira ação foi redefinir os critérios de unicidade de uma publicação. A partir de um conjunto mais amplo de características de uma obra, um \textit{número de chamada} é criado para cada publicação, e cada exemplar pertencente a uma publicação recebe um \textit{código de tombo} diferente. A nova regra de unicidade de uma obra agora inclui, a editora, o ano de publicação, e edição e o volume, além de título e nome do autor, que já eram considerados. A segunda ação foi separar por completo o \textit{número de chamada} e o \textit{código de tombo}, e não mais apresentá-lo na forma concatenada na lombada do livro. O formato do número de chamada continuou sendo o mesmo (duas letras do sobrenome do autor, três dígitos e uma letra do título da obra). O código de tombo continua sendo representado por número inteiro, mas é gerado de forma diferente. Na plataforma \textit{Drupal}, cada página de conteúdo criada recebe um identificador. No caso específico da página em questão representar um exemplar, esse identificador é também utilizado como código de tombo. Uma vez que o \textit{Drupal} provê um identificador de página único e autoincrementado, tem-se a garantia de não haver conflito entre códigos de tombo. A Figura \ref{tombo-novo} e a Tabela \ref{tabela-tombo-novo} ilustram a mesma situação de cadastro utilizada no exemplo anterior.
+Decidiu-se, então, considerar outras propriedades de uma publicação para definir a sua unicidade, sendo estas a editora, o ano de publicação, a edição e o volume. O formato do número de chamada continuou sendo o mesmo (duas letras do sobrenome do autor, três dígitos e uma letra do título da obra), no entanto a sequência de dígitos é única para a combinação da parte do código composta por caracteres com as quatro propriedades mencionadas acima. O código de tombo passou a ser uma entidade independente e é representada por um número inteiro. Este número é gerado pelo \textit{Drupal} no cadastro da publicação e indica o índice da página que representa o exemplar no conjunto de todas as páginas do sistema.  Isto é, o exemplar com código de tombo i é representado pela i-ésima página criada no sistema. A Figura \ref{tombo-novo} ilustra a mesma situação de cadastro usada como exemplo.
 
 \begin{figure}[pbth!]
 \centering
@@ -322,19 +322,7 @@ A fim de se corrigir os problemas encontrados, duas ações foram tomadas. A pri
 \caption{Ilustração do modelo novo de cadastro de exemplares da mesma obra.\label{tombo-novo}}
 \end{figure}
 
-\begin{table}[hc]
-\centering
-\caption{Conteúdos gerados na plataforma \textit{Drupal} seguindo a Figura \ref{tombo-novo}.\label{tabela-tombo-novo}}
-\begin{tabular}{llll}
-\hline
-\# página & Título                                & Tipo       & Data de criação  \\ \hline
-5         & Exemplar 2 de Vidas secas (1ª edição) & Exemplar   & 2015/10/31 12:58 \\ \hline
-4         & Exemplar 1 de Vidas secas (2ª edição) & Exemplar   & 2015/10/30 10:16 \\ \hline
-3         & Vidas secas (2ª edição)               & Publicação & 2015/10/30 10:16 \\ \hline
-2         & Exemplar 1 de Vidas secas (1ª edição) & Exemplar   & 2015/10/28 18:38 \\ \hline
-1         & Vidas secas (1ª edição)               & Publicação & 2015/10/28 18:38 \\ \hline
-\end{tabular}
-\end{table}
+Por não ser possível prever o código de tombo com a abordagem adotada, os valores não foram adicionados na Figura \ref{tombo-novo}.
 
 
 \subsubsection{Adaptação de ferramenta para importação em lote de publicações}
@@ -357,7 +345,7 @@ A seguir, são descritas as atividades realizadas durante o segundo ciclo de des
 
 \subsubsection{Finalização da ferramenta para importação em lote de publicações}
 
-Durante a segunda semana do ciclo foi concluída a ferramenta de importação em lotes. Devido à alta ocorrência de vírgulas nos textos dos campos a serem registrados, definiu-se que o separador padrão dos arquivos CSV de entrada será o ponto e vírgula (;) e que cada linha deve conter as seguintes informações. A Tabela \ref{csv} descreve os atributos do arquivo solicitado na importação.
+Durante a segunda semana do ciclo foi concluída a ferramenta de importação em lotes. Devido à alta ocorrência de vírgulas nos textos dos campos a serem registrados, definiu-se que o separador padrão dos arquivos CSV de entrada será o ponto e vírgula (;) e que cada linha deve conter as informações contidas na Tabela \ref{csv}.
 
 \begin{table}[hc]
 \centering
@@ -383,17 +371,17 @@ Durante a segunda semana do ciclo foi concluída a ferramenta de importação em
 \end{tabular}
 \end{table}
 
-A ordem das propriedades pode variar entre arquivos, contanto que todos tenham um cabeçalho descrevendo a sequência em que os valores se dispõem em cada linha.
-
-Houve certa dificuldade no registro das referências bidirecionais entre publicações e seus exemplares devido ao modo como o \textit{Drupal} trata a criação simultânea de  conteúdos - não é possível criar e editar múltiplas páginas do mesmo tipo de conteúdo em paralelo, o que se mostrou necessário no cenário de adição de exemplares de uma publicação já cadastrada. A solução encontrada foi declarar um novo tipo de conteúdo, denominado \textit{Container}, que armazena os dados obtidos do arquivo CSV e intermedia a criação de publicações e exemplares.
+Houve certa dificuldade no registro das referências cruzadas entre publicações e seus exemplares devido ao modo como o \textit{Drupal} trata a criação paralela de páginas de conteúdo. O importador de arquivos CSV do módulo \textit{Feeds} cria uma requisição para a criação de uma nova página de conteúdo a cada linha lida do arquivo. Em nossa abordagem inicial, esta página a ser criada era uma de \textit{publicação} e, assim que esta era registrada no sistema, novas requisições para a criação das páginas dos \textit{exemplares} relacionados eram lançadas. Tais páginas eram então criadas, recebendo um identificador único e uma referência à página da publicação a qual pertencem, e finalmente a página da publicação era atualizada com os identificadores de seus exemplares recém-cadastrados; daí a referência cruzada entre eles. No caso em que a linha do arquivo CSV se referisse a uma publicação já registrada no sistema (segundo os critérios de unicidade discutidos na seção \ref{sssec:chamada}, foi proposto que a requisição inicial para a criação da página de publicação fosse ignorada, e que apenas os exemplares pudessem ser criados. Contudo, descobriu-se que não é possível cancelar a requisição inicial sem comprometer a sequência de criações e atualizações de páginas. A solução encontrada foi declarar um novo tipo de conteúdo, que armazena os dados obtidos do arquivo CSV e intermedia a criação de publicações e exemplares - este foi nomeado \textit{Container}. Assim que um conteúdo do tipo \textit{Container} é registrado, o sistema verifica se a publicação cujos dados ele armazena já existe na base de dados. Caso ela seja encontrada, seus exemplares são cadastrados e sua página é atualizada com as referências deles; caso contrário, segue-se o fluxo de criação proposto anteriormente.
 
 \subsubsection{Implementação de módulo para registro dos períodos de funcionamento da biblioteca}
 Para a fácil manutenção das datas de funcionamento da biblioteca, foi instalado no sistema o módulo \textit{Drupal Availability Calendar}. Apesar deste ser voltado para sistemas de alocação e de reservas (em hotéis, por exemplo), verificou-se que ele fornece meios visualmente intuitivos aos administradores para que estes configurem possíveis datas para retirada de empréstimos e realização de devoluções. Com este módulo foi possível criar uma página na qual são exibidos, em forma de calendário, o mês atual e os doze próximos, onde cada célula recebe uma cor referente ao estado previsto da biblioteca naquela data. Definiu-se três estados possíveis: \textit{aberta}, \textit{fechada} e \textit{férias}.
 
-O estado \textit{aberta} indica um dia em que a biblioteca do Curso Exato estará em funcionamento, logo, o aluno pode tomar emprestado seus exemplares reservados ou devolvê-los. A célula é exibida com um fundo verde. \textit{Fechada} indica que  não haverá atividade da biblioteca naquela data (geralmente sextas-feiras, finais de semana, feriados letivos ou quaisquer dias onde não será possível a um voluntário se responsabilizar pela atividade). A célula é exibida com um fundo avermelhado. Por fim, \textit{férias} indica recesso naquela data. A célula é exibida com um fundo azul. Além do usuário não poder retirar empréstimos ou devolver exemplares neste período, qualquer prazo de devolução que for previsto para terminar durante o período de férias será reduzido para o último dia com o estado \textit{aberta}.
+O estado \textit{aberta} indica um dia em que a biblioteca do Curso Exato estará em funcionamento, logo, o aluno pode tomar emprestado seus exemplares reservados ou devolvê-los. A célula é exibida com um fundo verde. \textit{Fechada} indica que não haverá atividade da biblioteca naquela data (geralmente sextas-feiras, finais de semana, feriados letivos ou quaisquer dias onde não será possível a um voluntário se responsabilizar pela atividade). A célula é exibida com um fundo avermelhado. Por fim, \textit{férias} indica recesso naquela data. A célula é exibida com um fundo azul. Além do usuário não poder retirar empréstimos ou devolver exemplares neste período, qualquer prazo de devolução que for previsto para terminar durante o período de férias será reduzido para o último dia com o estado \textit{aberta}.
+
+É importante notar que os prazos de funcionamento da biblioteca não necessariamente seguem o calendário letivo do Curso Exato. Na verdade, é recomendado que os administradores configurem os últimos dias letivos antes dos recessos do projeto de extensão como \textit{fechada}, para que se evitem problemas com devoluções em atraso.
 
 \subsubsection{Implementação do fluxo básico de reserva, empréstimo, renovação e devolução de uma obra} \label{sssec:stransaction}
-Na reunião de planejamento deste ciclo foi elaborado um diagrama simplificado de máquina de estados, para a representação do fluxo de empréstimo de um exemplar (Figura \ref{workflow}). Os círculos se referem aos possíveis estados de uma publicação durante o fluxo, que são \textit{disponível}, \textit{reservado}, \textit{emprestado}, \textit{em atraso} e \textit{extraviado}, e as setas indicam as ações que levam à transição entre eles, sendo \textit{criar exemplar}, \textit{reservar}, \textit{confirmar empréstimo}, \textit{cancelar reserva}, \textit{renovar}, \textit{notificar atraso}, \textit{confirmar devolução}, \textit{declarar perda} e \textit{recuperar exemplar}.
+Na reunião de planejamento deste ciclo foi elaborado um diagrama simplificado de máquina de estados, para a representação do fluxo de empréstimo de um exemplar, e está apresentado na Figura \ref{workflow}. Os círculos referem-se aos possíveis estados de uma publicação durante o fluxo, que são \textit{disponível}, \textit{reservado}, \textit{emprestado}, \textit{em atraso} e \textit{extraviado}, e as setas indicam as ações que levam à transição entre eles, sendo \textit{criar exemplar}, \textit{reservar}, \textit{confirmar empréstimo}, \textit{cancelar reserva}, \textit{renovar}, \textit{notificar atraso}, \textit{confirmar devolução}, \textit{declarar perda} e \textit{recuperar exemplar}.
 
 \begin{figure}[pbth!]
 \centering
@@ -403,15 +391,15 @@ Na reunião de planejamento deste ciclo foi elaborado um diagrama simplificado d
 
 Um exemplar é dito \textit{disponível} se encontra-se disponível na biblioteca para reserva; \textit{reservado} quando há uma solicitação de reserva por este exemplar a ser atendida; \textit{emprestado} se o exemplar está em posse de algum usuário da biblioteca e o prazo de vencimento do empréstimo ainda não expirou; \textit{em atraso}, se o exemplar está em posse de algum usuário da biblioteca e deve ser devolvido, pois o prazo para devolução não foi respeitado; e \textit{extraviado} se o exemplar foi perdido durante o fluxo de empréstimo.
 
-Administradores do sistema podem (a) \textit{criar exemplares} declarando a chegada de novos exemplares à biblioteca, inserindo-os no sistema individualmente ou pela ferramenta de importação em lotes. Usuários autenticados no sistema podem (b) \textit{reservar} algum exemplar de publicações de seu interesse, clicando no botão ‘Reservar Livro’ na página da publicação. Esta ação só pode ser realizada por usuários que tenham menos de dois empréstimos correntes e não tenham pendências com a biblioteca (ver próxima seção sobre fluxos alternativos).
+Administradores do sistema podem (a) \textit{criar exemplares} declarando a chegada de novos exemplares à biblioteca, inserindo-os no sistema individualmente ou pela ferramenta de importação em lotes. Usuários autenticados no sistema podem (b) \textit{reservar} algum exemplar de publicações de seu interesse, clicando no botão ‘Reservar Livro’ na página da publicação. Esta ação só pode ser realizada por usuários que tenham dois empréstimos correntes ou menos, e não tenham pendências com a biblioteca (ver Seção \ref{sssec:overdue_or_lost} para mais detalhes sobre fluxos alternativos).
 
 Administradores devem (c) \textit{confirmar o empréstimo} quando um exemplar é emprestado ao usuário que o reservou previamente. Neste momento é calculado o prazo para devolução do exemplar (duas semanas após a data de confirmação). O usuário que solicitou uma reserva pode, sem sofrer penalidades, (d) \textit{cancelá-la}; administradores também podem realizar esta operação a qualquer momento.
 
-Os administradores e o usuário em posse de um exemplar podem optar pela (e) \textit{renovação do empréstimo}, prolongando o prazo de devolução para uma semana após a data da renovação. Esta ação pode ser realizada no máximo duas vezes por empréstimo corrente e apenas se a data de vencimento do empréstimo estiver dentro do prazo de sete ou menos dias a partir da data da renovação. Quando um exemplar não é devolvido dentro do prazo previsto, o sistema automaticamente (f) \textit{notifica} o usuário envolvido e os administradores sobre o atraso e altera o estado do exemplar para ‘Em atraso’. Isto acarreta na aplicação de uma penalidade sobre o usuário (ver seção \ref{sssec:overdue_or_lost}).
+Os administradores e o usuário em posse de um exemplar podem optar pela (e) \textit{renovação do empréstimo}, prolongando o prazo de devolução para uma semana após a data da renovação. Esta ação pode ser realizada no máximo duas vezes por empréstimo corrente e apenas se a data de vencimento do empréstimo estiver dentro do prazo de sete ou menos dias a partir da data da renovação. Quando um exemplar não é devolvido dentro do prazo previsto, o sistema automaticamente (f) \textit{notifica} o usuário envolvido e os administradores sobre o atraso e altera o estado do exemplar para \textit{em atraso}. Isto acarreta a aplicação de uma penalidade ao usuário (ver Seção \ref{sssec:overdue_or_lost}).
 
-Após a devolução de um exemplar, administradores devem \textit{confirmar o retorno} deste à biblioteca, encerrando o empréstimo. Se o estado que origina esta ação for 'emprestado', a devolução foi (g) no prazo e não haverá nenhuma implicação ao usuário; se for 'em atraso', o usuário será penalizado (h) com multa (vide seção \ref{sssec:overdue_or_lost}). Os administradores e o usuário que tomou um exemplar emprestado podem (i/j) \textit{registrar o extravio} deste, o que leva à interrupção do empréstimo e dispara uma notificação aos administradores de que aquela cópia do livro dificilmente retornará à biblioteca. Esta ação acarreta uma penalização mais severa sobre o usuário (também descrita na seção \ref{sssec:overdue_or_lost}). No caso de um exemplar previamente declarado como extraviado ser (k) \textit{encontrado}, administradores devem registrar seu retorno ao acervo. É importante ressaltar que esta ação não equivale à reposição de um exemplar extraviado por outra cópia da mesma publicação: para isto, a ação ‘Criar exemplar’ deve ser tomada.
+Após a devolução de um exemplar, administradores devem \textit{confirmar o retorno} deste à biblioteca, encerrando o empréstimo. Se o estado que origina esta ação for \textit{emprestado}, a devolução foi (g) no prazo e não haverá nenhuma implicação ao usuário; se for \textit{em atraso}, o usuário será penalizado (h) com multa (vide Seção \ref{sssec:overdue_or_lost}). Os administradores e o usuário que tomou um exemplar emprestado podem (i) \textit{registrar o extravio} deste, o que leva à interrupção do empréstimo e dispara uma notificação aos administradores de que aquela cópia do livro dificilmente retornará à biblioteca. Esta ação acarreta uma penalização mais severa ao usuário (também descrita na Seção \ref{sssec:overdue_or_lost}). No caso de um exemplar previamente declarado como extraviado ser (j) \textit{recuperado}, administradores devem registrar seu retorno ao acervo. É importante ressaltar que esta ação não equivale à reposição de um exemplar extraviado por outra cópia da mesma publicação: para isto, a ação ‘Criar exemplar’ deve ser tomada.
 
-Foi definido também o conceito de transação: uma entidade para registro de cada passo do fluxo de empréstimo, desde a reserva até a devolução - cobrindo também os cenários alternativos. A tabela do banco de dados foi planejada para o armazenamento de transações, como na Tabela \ref{transactions-table}.
+Foi definido também o conceito de transação: uma entidade para registro de cada passo do fluxo de empréstimo, desde a reserva até a devolução - cobrindo também os cenários alternativos. Definiu-se que uma transação envolvendo um exemplar é iniciada (criada no estado \textit{aberta}) no momento da sua reserva e se encerra ao atingir o estado \textit{cancelada} (quando a reserva é cancelada) ou \textit{encerrada} (quando o livro é devolvido ou recuperado após o extravio). O extravio é declarado pela mudança de estado da transação para \textit{exemplar perdido}. A tabela do banco de dados foi planejada para o armazenamento de transações, como na Tabela \ref{transactions-table}.
 
 
 \begin{table}[hc]
@@ -453,9 +441,7 @@ Nome da coluna & Informação armazenada \\
 \end{tabular}
 \end{table}
 
-Definiu-se que uma transação envolvendo um exemplar é iniciada (criada no estado ‘aberta’) no momento da sua reserva e se encerra ao atingir o estado 'cancelado' (quando a reserva é cancelada) ou 'encerrada' (quando o livro é devolvido ou recuperado após o extravio). O extravio é declarado pela mudança de estado da transação para ‘exemplar perdido’.
-
-Com estas decisões, foi desenvolvido um módulo que insere tal tabela na base de dados do sistema (seguindo os padrões da API do \textit{Drupal}) e habilitaria dois pontos de exibição das transações no sistema: um painel na área administrativa para o monitoramento de todas e um bloco na área de usuário para acompanhamento daquelas com as quais esteve envolvido. Em particular, no bloco da página de usuário este teria apenas permissão para cancelar suas reservas e renovar suas transações correntes. A Figura \ref{transactions} mostra a página administrativa que os usuários administradores terão acesso para controlar as transações da biblioteca.
+Com estas decisões, foi desenvolvido um módulo que insere tal tabela na base de dados do sistema (seguindo os padrões da API do \textit{Drupal}) e habilita dois pontos de exibição das transações no sistema: um painel na área administrativa para o monitoramento de todas e um bloco na área de usuário para acompanhamento daquelas com as quais esteve envolvido. Em particular, no bloco da página de usuário, este teria apenas permissão para cancelar suas reservas e renovar suas transações correntes. A Figura \ref{transactions} mostra a página administrativa que os usuários administradores terão acesso para controlar as transações da biblioteca.
 
 \begin{figure}[pbth!]
 \centering
@@ -463,16 +449,24 @@ Com estas decisões, foi desenvolvido um módulo que insere tal tabela na base d
 \caption{Painel de transações.\label{transactions}}
 \end{figure}
 
-Até o encerramento deste ciclo de desenvolvimento foi possível implementar boa parte dos passos do fluxo por parte do administrador. Os comportamentos restantes são a validação das datas de algumas ações em comparação com os dias de funcionamento da biblioteca e a exibição das transações envolvendo os usuários em suas páginas pessoais.
+Até o encerramento deste ciclo de desenvolvimento foi implementada boa parte dos passos do fluxo por parte do administrador. Os comportamentos restantes são a validação das datas de algumas ações em comparação com os dias de funcionamento da biblioteca e a exibição das transações envolvendo os usuários em suas páginas pessoais.
 
 \subsubsection{Fluxo alternativo considerando atrasos ou extravio de algum exemplar}\label{sssec:overdue_or_lost}
-Após reuniões com representantes do Curso Exato, foram coletadas algumas possibilidades de penalizações a serem aplicadas sobre usuários que não respeitarem prazos de devolução de seus empréstimos ou venham a perder algum exemplar que tenham tomado emprestado.
+Após reuniões com representantes do Curso Exato, foram coletadas algumas possibilidades de penalizações a serem aplicadas aos usuários que não respeitarem prazos de devolução de seus empréstimos ou venham a perder algum exemplar que tenham tomado emprestado.
 
-Em caso de não devolução no prazo, o usuário perde o direito de reservar publicações ou de renovar empréstimos até que o usuário entregue a algum professor do Exato uma resenha do livro lido ou o prazo automático de multa é encerrado. Este prazo de multa seria similar ao aplicado por outras bibliotecas da Unicamp para alunos em atraso, sendo ele proporcional à quantidade de publicações em atraso e à quantidade de dias de atraso.
+\begin{enumerate}
+\item Em caso de não devolução no prazo, o usuário perde o direito de reservar publicações ou de renovar empréstimos até que:
+\begin{enumerate}
+\item \label{itm:option1} o usuário entregue a algum professor do Exato uma resenha do livro lido ou
+\item \label{itm:option2} o prazo automático de multa é encerrado.
+\end{enumerate}
+Este prazo de multa seria similar ao aplicado por outras bibliotecas da Unicamp para alunos em atraso, sendo ele proporcional à quantidade de publicações em atraso e à quantidade de dias de atraso.
 
-Em caso de extravio de publicação emprestada, o usuário perde acesso ao sistema até que a cópia perdida seja ressarcida, ou que uma cópia de outra publicação de valor semelhante seja doada à biblioteca.
+\item \label{itm:option3} Em caso de extravio de publicação emprestada, o usuário perde acesso ao sistema até que a cópia perdida seja ressarcida, ou que uma cópia de outra publicação de valor semelhante seja doada à biblioteca.
+\end{enumerate}
 
-Nesta última proposta e na primeira referente ao atraso na devolução, a condição de pendência do usuário seria registrada por duas variáveis binárias: uma para indicar multa por atraso, outra por extravio. Estas receberiam o valor $1$ caso as condições da aplicação das penalidades fossem detectadas - na confirmação da devolução no caso do atraso e na confirmação da perda no caso do extravio. Seus valores permaneceriam salvos até que algum administrador registrasse que a pendência foi resolvida. Já para a proposta de aplicação de multa temporal automaticamente, seria necessária uma ferramenta para agendamento de tarefas (como o \textit{Cron}) que atualizasse, diariamente, quais usuários possuem exemplares em atraso e, com esta informação, prolongasse seus períodos de multa. Neste cenário, a situação de multa seria representada por uma variável capaz de armazenar a data até a qual o usuário estaria penalizado.
+
+Nas propostas \ref{itm:option1} e \ref{itm:option3}, a condição de pendência do usuário seria registrada por duas variáveis binárias: uma para indicar multa por atraso, outra por extravio. Estas receberiam o valor $1$ caso as condições da aplicação das penalidades fossem detectadas - na confirmação da devolução no caso do atraso e na confirmação da perda no caso do extravio. Seus valores permaneceriam salvos até que algum administrador registrasse que a pendência foi resolvida. Já para a proposta de aplicação de multa temporal automaticamente, seria necessária uma ferramenta para agendamento de tarefas (como o \textit{Cron}) que atualizasse, diariamente, quais usuários possuem exemplares em atraso e, com esta informação, prolongasse seus períodos de multa. Neste cenário, a situação de multa seria representada por uma variável capaz de armazenar a data até a qual o usuário estaria penalizado.
 
 Dada a complexidade adicional da integração externa, ainda há um impasse a respeito de qual solução será adotada para a multa por atraso. De todo modo, neste ciclo de desenvolvimento foi codificada a estrutura para conter as variáveis apresentadas para armazenamento destes indicadores de penalidade.
 
