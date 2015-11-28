@@ -312,9 +312,9 @@ Houve uma sobrecarga de tempo considerável nesta tarefa devido a uma falha no f
 \caption{Ilustração do modelo antigo de cadastro de exemplares da mesma obra.\label{tombo-antigo}}
 \end{figure}
 
-No entanto, percebeu-se durante o desenvolvimento do módulo que esta abordagem seria problemática por não dar ao aluno a escolha de qual edição da obra reservar. Além disso ela complicaria a organização da biblioteca física, pois o bibliotecário, ao ver apenas o código na lombada do livro, teria a falsa impressão de que existia uma relação de ordem entre os exemplares ao posicionar os livros em uma estante (o que não é necessariamente verdade), tendo dificuldade para separá-los por critérios mais relevantes, como volume e edição.
+No entanto, percebeu-se durante o desenvolvimento do módulo que esta abordagem seria problemática por não dar ao aluno a escolha de qual edição da obra reservar. Além disso, a abordagem anterior pode complicar a organização das obras na estante. No exemplo da Figura \ref{tombo-antigo}, o bibliotecário teria a falsa impressão de que existe uma relação de ordem entre os exemplares, devido à indexação final do código. Entretanto, é mais útil manter o acervo agrupado por edições ou volume da obra, e não ordenado por este código.
 
-Decidiu-se, então, considerar outras propriedades de uma publicação para definir a sua unicidade, sendo estas a editora, o ano de publicação, a edição e o volume. O formato do número de chamada continuou sendo o mesmo (duas letras do sobrenome do autor, três dígitos e uma letra do título da obra), no entanto a sequência de dígitos é única para a combinação da parte do código composta por caracteres com as quatro propriedades mencionadas acima. O código de tombo passou a ser uma entidade independente e é representada por um número inteiro. Este número é gerado pelo \textit{Drupal} no cadastro da publicação e indica o índice da página que representa o exemplar no conjunto de todas as páginas do sistema.  Isto é, o exemplar com código de tombo i é representado pela i-ésima página criada no sistema. A Figura \ref{tombo-novo} ilustra a mesma situação de cadastro usada como exemplo.
+A fim de se corrigir os problemas encontrados, duas ações foram tomadas. A primeira ação foi redefinir os critérios de unicidade de uma publicação. A partir de um conjunto mais amplo de características de uma obra, um \textit{número de chamada} é criado para cada publicação, e cada exemplar pertencente a uma publicação recebe um \textit{código de tombo} diferente. A nova regra de unicidade de uma obra agora inclui, a editora, o ano de publicação, e edição e o volume, além de título e nome do autor, que já eram considerados. A segunda ação foi separar por completo o \textit{número de chamada} e o \textit{código de tombo}, e não mais apresentá-lo na forma concatenada na lombada do livro. O formato do número de chamada continuou sendo o mesmo (duas letras do sobrenome do autor, três dígitos e uma letra do título da obra). O código de tombo continua sendo representado por número inteiro, mas é gerado de forma diferente. Na plataforma \textit{Drupal}, cada página de conteúdo criada recebe um identificador. No caso específico da página em questão representar um exemplar, esse identificador é também utilizado como código de tombo. Uma vez que o \textit{Drupal} provê um identificador de página único e autoincrementado, tem-se a garantia de não haver conflito entre códigos de tombo. A Figura \ref{tombo-novo} e a Tabela \ref{tabela-tombo-novo} ilustram a mesma situação de cadastro utilizada no exemplo anterior.
 
 \begin{figure}[pbth!]
 \centering
@@ -322,7 +322,19 @@ Decidiu-se, então, considerar outras propriedades de uma publicação para defi
 \caption{Ilustração do modelo novo de cadastro de exemplares da mesma obra.\label{tombo-novo}}
 \end{figure}
 
-Por não ser possível prever o código de tombo com a abordagem adotada, os valores não foram adicionados na Figura \ref{tombo-novo}.
+\begin{table}[hc]
+\centering
+\caption{Conteúdos gerados na plataforma \textit{Drupal} seguindo a Figura \ref{tombo-novo}.\label{tabela-tombo-novo}}
+\begin{tabular}{llll}
+\hline
+\# página & Título                                & Tipo       & Data de criação  \\ \hline
+5         & Exemplar 2 de Vidas secas (1ª edição) & Exemplar   & 2015/10/31 12:58 \\ \hline
+4         & Exemplar 1 de Vidas secas (2ª edição) & Exemplar   & 2015/10/30 10:16 \\ \hline
+3         & Vidas secas (2ª edição)               & Publicação & 2015/10/30 10:16 \\ \hline
+2         & Exemplar 1 de Vidas secas (1ª edição) & Exemplar   & 2015/10/28 18:38 \\ \hline
+1         & Vidas secas (1ª edição)               & Publicação & 2015/10/28 18:38 \\ \hline
+\end{tabular}
+\end{table}
 
 
 \subsubsection{Adaptação de ferramenta para importação em lote de publicações}
@@ -345,7 +357,7 @@ A seguir, são descritas as atividades realizadas durante o segundo ciclo de des
 
 \subsubsection{Finalização da ferramenta para importação em lote de publicações}
 
-Durante a segunda semana do ciclo foi concluída a ferramenta de importação em lotes. Devido à alta ocorrência de vírgulas nos textos dos campos a serem registrados, definiu-se que o separador padrão dos arquivos CSV de entrada será o ponto e vírgula (;) e que cada linha deve conter as informações contidas na Tabela \ref{csv}.
+Durante a segunda semana do ciclo foi concluída a ferramenta de importação em lotes. Devido à alta ocorrência de vírgulas nos textos dos campos a serem registrados, definiu-se que o separador padrão dos arquivos CSV de entrada será o ponto e vírgula (;) e que cada linha deve conter as seguintes informações. A Tabela \ref{csv} descreve os atributos do arquivo solicitado na importação.
 
 \begin{table}[hc]
 \centering
@@ -533,6 +545,20 @@ Tomada a decisão junto aos professores, os graduandos entraram em contato com a
 
 Na interface administrativa do \textit{Drupal}, existe uma seção que estima a quantidade e o percentual de termos traduzidos na aplicação. Aproximadamente 25\% da aplicação ainda está pendente no que se refere às traduções para a Língua Portuguesa.
 Através do módulo \textit{Locale}, disponível no núcleo do \textit{Drupal}, é possível importar um arquivo de traduções (.po). Esta será a solução adotada tanto para termos ainda sem tradução, quanto para traduções automaticamente disponibilizadas na comunidade que não aparentam ser as melhores para algumas seções. Incluem-se no conjunto de termos não traduzidos as expressões e os rótulos definidos pelos graduandos nos módulos desenvolvidos para o funcionamento da biblioteca.
+
+
+\pagebreak
+\section{RESULTADOS}
+Descreva o sistema completo e o que foi conseguido. O que não foi possível fazer, etc.
+
+
+
+\pagebreak
+\section{CONCLUSÃO}
+Descrevam as conclusões, os desafios. Sugiram outras abordagens, contrastem. Etc. Também descrevam a experiência para vcs.
+
+
+
 
 
 
