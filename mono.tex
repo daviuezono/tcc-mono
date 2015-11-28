@@ -43,7 +43,7 @@
 \vfill
 \Large{Supervisores: Fábio Luiz Usberti e Christiane Neme Campos}
 \vfill\vfill
-\Large{Novembro de 2015}
+\Large{Dezembro de 2015}
 \end{center}
 \vfill
 
@@ -118,7 +118,7 @@ O aluno Davi assumiu os papéis de Arquiteto e Desenvolvedor \textit{back-end}, 
 
 Ao longo do primeiro ciclo de desenvolvimento, foi elaborado um documento contendo as premissas a respeito do desenvolvimento do projeto, visando proteger o escopo inicial e garantir o cumprimento do acordo por todas as partes envolvidas (desenvolvedores e voluntários do Curso Exato). Conforme a necessidade, foram sendo adicionados novos itens a este documento. Estes estão descritos nas seções seguintes.
 
-\subsection{Aspectos técnicos}
+\subsection{Aspectos técnicos}\label{ssec:tech}
 
 O projeto foi desenvolvido e implementado com o \textit{software} \textit{Drupal}, na versão 7 do seu núcleo. Todos os recursos de sistema requeridos pelo trabalho são os mesmos descritos na página de requisitos do \textit{Drupal} \cite{requirements} e caberá aos interessados possuir uma infraestrutura capaz de suportar a aplicação, isentando os alunos desenvolvedores da responsabilidade da implantação do sistema. A manutenção do sistema será realizada pelos desenvolvedores até o término de 2015, incluindo um treinamento para garantir continuamente a segurança da plataforma.
 
@@ -346,7 +346,6 @@ Esta funcionalidade foi iniciada neste ciclo e finalizada no segundo. No primeir
 
 \pagebreak
 \subsection{Segundo ciclo de desenvolvimento}
-%% "Entrou muito de sola. Elaborem mais." --> O que é entrar de sola?
 Este ciclo, assim como o primeiro, iniciou-se após reunião com os supervisores do projeto. Nesta, questionou-se o motivo de se utilizar uma propriedade intrínseca do \textit{Drupal} como código de tombo. A atribuição de identificadores únicos de páginas geradas pela plataforma a itens não virtuais causaria complicações no cenário de migração do sistema para outra plataforma, pois o mecanismo de geração de códigos de tombo não estaria mais disponível. Discutiu-se, entretanto, que esta possibilidade era consideravelmente remota e, uma vez validado o fato junto aos responsáveis pela biblioteca do Curso Exato, decidiu-se que tal abordagem seria mantida. Desta forma, cada publicação conteria uma referência (lista de identificadores) para as páginas dos seus exemplares e, no momento em que suas páginas são processadas para exibição no navegador, o conteúdo dos exemplares poderia ser carregado rapidamente. Estas informações podem ser utilizadas para que se determine, dentre os exemplares de uma publicação, quais e quantos estão disponíveis para reserva, por exemplo.
 
 %% Talvez substituir "alunos desenvolvedores" por "nós", com aprovação da Chris para isso.
@@ -477,7 +476,6 @@ Este prazo de multa seria similar ao aplicado por outras bibliotecas da Unicamp 
 \item \label{itm:option3} Em caso de extravio de publicação emprestada, o usuário perde acesso ao sistema até que a cópia perdida seja ressarcida, ou que uma cópia de outra publicação de valor semelhante seja doada à biblioteca.
 \end{enumerate}
 
-
 Nas propostas \ref{itm:option1} e \ref{itm:option3}, a condição de pendência do usuário seria registrada por duas variáveis binárias: uma para indicar multa por atraso, outra por extravio. Estas receberiam o valor $1$ caso as condições da aplicação das penalidades fossem detectadas - na confirmação da devolução no caso do atraso e na confirmação da perda no caso do extravio. Seus valores permaneceriam salvos até que algum administrador registrasse que a pendência foi resolvida. Já para a proposta de aplicação de multa temporal automaticamente, seria necessária uma ferramenta para agendamento de tarefas (como o \textit{Cron}) que atualizasse, diariamente, quais usuários possuem exemplares em atraso e, com esta informação, prolongasse seus períodos de multa. Neste cenário, a situação de multa seria representada por uma variável capaz de armazenar a data até a qual o usuário estaria penalizado.
 
 Dada a complexidade adicional da integração externa, ainda há um impasse a respeito de qual solução será adotada para a multa por atraso. De todo modo, neste ciclo de desenvolvimento foi codificada a estrutura para conter as variáveis apresentadas para armazenamento destes indicadores de penalidade.
@@ -486,32 +484,31 @@ Dada a complexidade adicional da integração externa, ainda há um impasse a re
 
 Foi habilitada a opção nativa do \textit{Drupal} que permite que usuários autenticados enviem comentários sobre as páginas de conteúdos existentes no sistema. Restringiu-se esta funcionalidade apenas a páginas de publicação.
 
-Como solicitado pelos responsáveis pela biblioteca, foi-lhes dada a permissão para aprovar comentários antes que sejam publicados. Dessa forma, havendo necessidade de moderação, um administrador poderia advertir o usuário sobre o conteúdo impróprio do comentário enviado e impedir sua exibição aos demais visitantes do sistema.
+Como solicitado pela coordenadora geral do Curso Exato, foi dada aos administradores a permissão para aprovar comentários antes que sejam publicados. Dessa forma, havendo necessidade de moderação, um administrador poderia advertir o usuário sobre o conteúdo impróprio do comentário enviado e impedir sua exibição aos demais visitantes do sistema.
 
 \subsubsection{Revisão do controle de permissões}
 
-A partir de contas de teste criadas para cada classe de usuário no sistema, testou-se a permissão para cada uma das contas em todos os endereços administrativos presentes no site até o momento. Assim, buscou-se mitigar as possíveis brechas de segurança por comportamento indevido de usuários.
+Com o objetivo de garantir a integridade do sistema, buscou-se mitigar as possíveis brechas de segurança por comportamento indevido de usuários. Foram criadas contas de usuário para fins de teste - uma para cada classe de usuário definida na Seção \ref{ssec:tech} - e, acessando o sistema por meio destas, foi avaliado se usuários não autenticados possuíam permissão para acessar funcionalidades relacionadas a transações, e se usuários não administradores possuíam permissão para visualizar páginas de gerenciamento do sistema.
 
-O núcleo do sistema \textit{Drupal} provê uma página administrativa para a configuração dessas permissões. Dentre os testes realizados, verificou-se que os endereços administrativos disponíveis no próprio núcleo já estavam devidamente protegidos. Porém, em testes envolvendo endereços criados pelos módulos personalizados para este sistema, o resultado não foi o mesmo. Algumas ações não foram tratadas e a correção destas foi alocada para o terceiro ciclo de desenvolvimento.
-
+O núcleo do sistema \textit{Drupal} provê uma página administrativa para a configuração dessas permissões. Dentre os testes realizados, verificou-se que os endereços administrativos disponíveis no próprio núcleo já estavam devidamente protegidos. Porém, em testes envolvendo endereços criados pelos módulos personalizados para este sistema, o resultado não foi o mesmo. Algumas ações não foram tratadas e a correção destas omissões foi alocada para o terceiro ciclo de desenvolvimento.
 
 %%%
 \pagebreak
 \subsection{Terceiro ciclo de desenvolvimento}
 
-O terceiro ciclo de desenvolvimento teve seu início imediatamente após a reunião referente ao segundo ciclo com o professor Fábio, em 13 de novembro de 2015. Devido aos empecilhos encontrados no segundo ciclo, algumas atividades foram realocadas para o terceiro. Todas as atividades propostas para finalização neste ciclo foram cumpridas, exceto a tradução total do sistema.
+O terceiro ciclo de desenvolvimento teve seu início imediatamente após a reunião referente aos avanços do segundo ciclo com o supervisor Fábio. Como foi dito anteriormente, a este ciclo foram adicionadas algumas atividades extras, que não puderam ser concluídas no ciclo anterior. Todas as atividades propostas para finalização neste ciclo foram cumpridas, exceto a tradução total do sistema do inglês para o português brasileiro.
 
 \subsubsection{Aplicação de penalidades devido ao fluxo alternativo}
     
 Após discussão com os responsáveis pela biblioteca, optou-se pela simplificação do sistema de penalidades apresentado no ciclo anterior. Não há mais distinção entre os dois tipos de penalidade, então, basta uma única variável binária para registro da situação de um usuário. Esta tem seu valor ajustado para $1$ após qualquer operação em que se registre atraso na devolução ou perda de exemplares, e caberá aos bibliotecários realizar as cobranças correspondentes aos alunos punidos.
     
-Certificou-se que o estado de penalidade impede o usuário de realizar novas reservas e renovações. Além disso, para que o usuário esteja ciente de sua penalização, uma mensagem de erro será exibida no sistema após a autenticação do usuário. 
+Certificou-se de que o estado de penalidade impede o usuário de realizar novas reservas e renovações. Além disso, para que o usuário esteja ciente de sua penalização, uma mensagem de erro será exibida no sistema após a autenticação do usuário. 
 
 \subsubsection{Finalização do painel de monitoramento de transações e desenvolvimento de mecanismo de proteção às mudanças de estado de transações}
     
-Neste ciclo, foram concluídas as validações referentes às alterações de estado das transações. Como todas as operações definidas para atualização das transações são ativadas via URLs específicas do sistema, tomou-se a prática de garantir que os usuários não as ativem na ordem incorreta - acidentalmente ou propositalmente. Assim, mesmo que um usuário conheça a ordem dos endereços acessados para registrar um fluxo de empréstimo comum (da reserva até a devolução), ele será impedido de fazê-lo na ordem incorreta. Por exemplo, um bibliotecário pode reconhecer que os \textit{links} “Confirmar empréstimo” e “Confirmar devolução” do painel administrativo redirecionam o usuário a endereços do sistema que, ao serem acessados, completam as respectivas alterações de estado da transação. No entanto, caso ele acesse diretamente o endereço para confirmação de empréstimo, enviando como parâmetro um identificador de transação inválida - isto é, cujo exemplar não se encontre no estado “Reservado” - o sistema não completará a ação e emitirá uma mensagem de erro.
+Neste ciclo, foram concluídas as validações referentes às alterações de estado das transações. Um problema levantado foi que, como as operações definidas para atualização das transações são ativadas via URLs específicas do sistema, um usuário que conhecesse a ordem dos endereços acessados para registrar os passos do fluxo de empréstimo comum (da reserva até a devolução) poderia querer fazê-lo na ordem incorreta. Como solução, buscou-se garantir que os usuários não as ativem na ordem incorreta - acidentalmente ou propositalmente. Exemplificando: um bibliotecário pode reconhecer que os \textit{links} \textit{Confirmar empréstimo} e \textit{Confirmar devolução} do painel administrativo redirecionam o usuário a endereços do sistema que, ao serem acessados, completam as respectivas alterações de estado da transação. No entanto, caso ele acesse diretamente o endereço para confirmação de empréstimo, enviando como parâmetro um identificador de transação inválida - isto é, cujo exemplar não se encontre no estado \textit{Reservado} - o sistema não completará a ação e emitirá uma mensagem de erro.
 
-Concluído este painel de monitoramento, foi elaborado um painel secundário para visualização apenas dos empréstimos cuja data de vencimento se encontre a sete dias ou menos a partir da data corrente. Este foi requisitado pelos administradores para facilitar o controle sobre as cobranças a serem feitas aos alunos antes do início da semana letiva do Curso Exato, portanto antes que penalidades sejam aplicadas.
+Concluído este painel de monitoramento, foi elaborado um painel secundário para visualização apenas dos empréstimos cuja data de vencimento se encontre a sete dias ou menos a partir da data corrente. Este foi requisitado pelos administradores para facilitar o controle sobre as cobranças a serem feitas aos alunos. Assim, todos já estariam cientes de quais usuários possuem empréstimos a expirar logo no início da semana letiva do Curso Exato, podendo tomar providências antes que penalidades sejam aplicadas.
 
 \begin{figure}[pbth!]
 \centering
@@ -539,7 +536,7 @@ Após investigação, foram encontradas e corrigidas as falhas no código (\text
 
 Discutiu-se via e-mail sobre o local de implantação do sistema, dado algumas exigências e implicações por parte do Curso Exato. Após estudar as possibilidades e avaliar os pontos favoráveis e os contrários a cada opção, decidiu-se estabelecê-lo no servidor de projetos discentes do Instituto de Computação (IC) da Unicamp, de forma a lançá-lo o mais breve possível.
 Tomada a decisão junto aos professores, os graduandos entraram em contato com a responsável pela Diretoria de Informática do IC para uma conversa inicial sobre a viabilidade de se hospedar o projeto naquele servidor. Durante esta reunião, foi acordado enviar uma breve descrição dos requisitos e das especificações técnicas sobre o que o sistema exigiria do servidor, para análise real da viabilidade desta implantação. Ainda não houve, porém, resposta após este contato.
-    De forma a não atrasar a implantação, os graduandos realizaram testes de exportação do sistema do ambiente de desenvolvimento (\textit{Acquia}) para outros locais, com o propósito de verificar se não ocorreu alguma dependência imprópria de módulos ou mesmo alguma dependência cíclica. Certificou-se que o sistema está em estado consistente e exportável como um pacote, através do módulo \textit{Features} do \textit{Drupal}. Este módulo permite o empacotamento de código, das dependências, das funções e das variáveis de ambiente em um arquivo comprimido, capaz de ser incorporado em uma nova instalação \textit{Drupal} por meio do mesmo módulo.
+    De forma a não atrasar a implantação, os graduandos realizaram testes de exportação do sistema do ambiente de desenvolvimento (\textit{Acquia}) para outros locais, com o propósito de verificar se não ocorreu alguma dependência imprópria de módulos ou mesmo alguma dependência cíclica. Certificou-se de que o sistema está em estado consistente e exportável como um pacote, através do módulo \textit{Features} do \textit{Drupal}. Este módulo permite o empacotamento de código, das dependências, das funções e das variáveis de ambiente em um arquivo comprimido, capaz de ser incorporado em uma nova instalação \textit{Drupal} por meio do mesmo módulo.
 
 \subsubsection{Tradução da aplicação}
 
