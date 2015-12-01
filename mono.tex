@@ -9,6 +9,7 @@
 \usepackage[bookmarks]{hyperref}
 \usepackage[perpage]{footmisc}
 \usepackage{caption}
+\usepackage{subcaption}
 \captionsetup[figure]{labelsep=period}
 \captionsetup[table]{labelsep=period}
 \setlength{\parskip}{\baselineskip}
@@ -174,17 +175,24 @@ Há ainda os seguintes campos editáveis pelos bibliotecários, inacessíveis ao
 
 A disposição dos elementos na página pode ser observada nas Figuras \ref{colapsed} e \ref{expanded}.
 
-\begin{figure}[pbth!]
-\centering
-\includegraphics[width=140mm]{img/publication-colapsed.png}
-\caption{Página de uma publicação, informações adicionais ocultas.\label{colapsed}}
+\begin{figure}
+%\centering
+\begin{subfigure}{.5\textwidth}
+  %\centering
+  \includegraphics[width=90mm]{img/publication-colapsed.png}
+  \caption{Informações adicionais ocultas.}
+  \label{colapsed}
+\end{subfigure}%
+\begin{subfigure}{.4\textwidth}
+  %\centering
+  \includegraphics[width=90mm]{img/publication-expanded.png}
+  \caption{Informações adicionais expandidas}
+  \label{expanded}
+\end{subfigure}
+\caption{Página de uma publicação}
+\label{fig:publication}
 \end{figure}
 
-\begin{figure}[pbth!]
-\centering
-\includegraphics[width=140mm]{img/publication-expanded.png}
-\caption{Página de uma publicação, informações adicionais expandidas.\label{expanded}}
-\end{figure}
 
 \subsubsection{Criação da página de um exemplar}
 
@@ -243,16 +251,22 @@ Foram criadas páginas de busca por publicações e por usuários, utilizando a 
 
 No caso da página de busca por publicações, os filtros que aparecem inicialmente são apenas título e autor. O usuário pode clicar em um botão de “Busca Avançada” para exibir campos adicionais, como o ano de publicação, ou para alterar a ordenação por autor ou por título; ou ainda, alterar a ordem de exibição dos resultados - alfabética ou alfabética reversa. As Figuras \ref{simple} e \ref{advanced} ilustram as páginas de busca por publicações utilizando filtros simples ou avançados.
 
-\begin{figure}[pbth!]
-\centering
-\includegraphics[width=120mm]{img/browse-simple.png}
-\caption{Página de busca por publicações, filtros simples.\label{simple}}
-\end{figure}
-
-\begin{figure}[pbth!]
-\centering
-\includegraphics[width=120mm]{img/browse-advanced.png}
-\caption{Página de busca por publicações, filtros avançados.\label{advanced}}
+\begin{figure}
+%\centering
+\begin{subfigure}{.5\textwidth}
+  %\centering
+  \includegraphics[width=90mm]{img/browse-simple.png}
+  \caption{Filtros simples.}
+  \label{simple}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  %\centering
+  \includegraphics[width=90mm]{img/browse-advanced.png}
+  \caption{Filtros avançados.}
+  \label{advanced}
+\end{subfigure}
+\caption{Página de busca por publicações}
+\label{fig:publication-search}
 \end{figure}
 
 Além disso, um pequeno formulário foi adicionado à barra lateral direita da página inicial do site para simplificar a pesquisa por publicações. Nele, o usuário pode digitar o título e/ou o nome de um autor para a pesquisa no acervo e, ao clicar no botão “Buscar”, ele será redirecionado para a página de resultados da busca, conforme a Figura \ref{browse-sidebar}.
@@ -546,9 +560,14 @@ Os alunos desenvolvedores se comprometeram a traduzir todas as expressões criad
 
 \pagebreak
 \section{RESULTADOS}
-Descreva o sistema completo e o que foi conseguido. O que não foi possível fazer, etc.
+% Descreva o sistema completo e o que foi conseguido. O que não foi possível fazer, etc.
+Utilizando a plataforma \textit{Drupal}, criou-se um sistema \textit{web} de gerenciamento de biblioteca com funcionalidades personalizadas para o contexto do Curso Exato. A aplicação não proveu apenas requisitos essenciais de uma biblioteca, mas também incluiu aspectos sociais, tais como conversas individuais ou em grupo entre usuários, perfil pessoal, avaliação e resenha de uma publicação. Aprofundando os requisitos necessários para o sistema, os alunos desenvolvedores se depararam com um desafio. Houve certa discordância entre alguns membros do Curso Exato sobre políticas de auditoria de mensagens privadas e sobre a aplicação de penalidades em caso de atraso ou extravio de exemplares. Ainda assim, tais indecisões acarretaram apenas certo atraso até o alinhamento dos pontos questionados, mas não problemas de código durante o desenvolvimento, uma vez que tais questionamentos não fazem parte do fluxo do usuário. Pode-se afirmar, portanto, que o principal objetivo proposto neste trabalho foi concluído. 
+
+Ao longo de todo o período de desenvolvimento foi levantado diversas melhorias que não foram implementadas devido ao tempo limitado, e por não estarem no escopo inicial. Uma das que teriam maior relevência seria a inclusão da funcionalidade de reserva de um exemplar enquanto este já se encontra emprestado por outro usuário, tal como ocorre nas bibliotecas da Unicamp. Pode-se destacar também processos de deleção lógica de publicações ou exemplares do sistema, além de reaproveitamento de números de chamada. Reescrever o código para torná-lo mais modular também é uma tarefa necessária a longo prazo, para melhor manutenção e extensão do sistema.
 
 
+% Reação dos alunos pós apresentação da quarta-feira.
+Realizou-se uma apresentação do sistema a todos os futuros usuários, tanto alunos quanto professores voluntários do Curso Exato na ocasião do encerramento das atividades do projeto de extensão para este ano. Durante o evento foi possível notar que os alunos se mostraram ..... e os professores .....
 
 \pagebreak
 \section{CONCLUSÃO}
