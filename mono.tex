@@ -559,35 +559,21 @@ Na interface administrativa do \textit{Drupal}, existe uma seção que estima a 
 Os alunos desenvolvedores se comprometeram a traduzir todas as expressões criadas para uso nos módulos desenvolvidos por eles. Para termos de outros módulos sem tradução fornecida pela comunidade \textit{Drupal}, houve um esforço pela inclusão de traduções para aqueles de maior ocorrência nas páginas do sistema; no entanto, por haver muitos e não haver um jeito direto de encontrar o contexto em que se localizam no sistema, não foi feita a tradução dos termos que não são exibidos diretamente aos usuários finais. Ressalta-se que a decisão por traduzir termos provenientes de módulos da comunidade em um arquivo .po, ao invés da submissão das traduções ao diretório público, foi motivada pelo longo tempo tomado até que haja uma aprovação das traduções enviadas por um moderador da comunidade \textit{Drupal}.
 
 \pagebreak
-\section{RESULTADOS}
-% Descreva o sistema completo e o que foi conseguido. O que não foi possível fazer, etc.
+\section{RESULTADOS} \label{sssec:improvements}
 Utilizando a plataforma \textit{Drupal}, criou-se um sistema \textit{web} de gerenciamento de biblioteca com funcionalidades personalizadas para o contexto do Curso Exato. A aplicação não proveu apenas requisitos essenciais de uma biblioteca, mas também incluiu aspectos sociais, tais como conversas individuais ou em grupo entre usuários, perfil pessoal, avaliação e resenha de uma publicação. Aprofundando os requisitos necessários para o sistema, os alunos desenvolvedores se depararam com um desafio. Houve certa discordância entre alguns membros do Curso Exato sobre políticas de auditoria de mensagens privadas e sobre a aplicação de penalidades em caso de atraso ou extravio de exemplares. Ainda assim, tais indecisões acarretaram apenas certo atraso até o alinhamento dos pontos questionados, mas não problemas de código durante o desenvolvimento, uma vez que tais questionamentos não fazem parte do fluxo do usuário. Pode-se afirmar, portanto, que o principal objetivo proposto neste trabalho foi concluído. 
 
 Ao longo de todo o período de desenvolvimento foi levantado diversas melhorias que não foram implementadas devido ao tempo limitado, e por não estarem no escopo inicial. Uma das que teriam maior relevência seria a inclusão da funcionalidade de reserva de um exemplar enquanto este já se encontra emprestado por outro usuário, tal como ocorre nas bibliotecas da Unicamp. Pode-se destacar também processos de deleção lógica de publicações ou exemplares do sistema, além de reaproveitamento de números de chamada. Reescrever o código para torná-lo mais modular também é uma tarefa necessária a longo prazo, para melhor manutenção e extensão do sistema.
-
 
 % Reação dos alunos pós apresentação da quarta-feira.
 Realizou-se uma apresentação do sistema a todos os futuros usuários, tanto alunos quanto professores voluntários do Curso Exato na ocasião do encerramento das atividades do projeto de extensão para este ano. Durante o evento foi possível notar que os alunos se mostraram ..... e os professores .....
 
 \pagebreak
 \section{CONCLUSÃO}
-Descrevam as conclusões, os desafios. Sugiram outras abordagens, contrastem. Etc. Também descrevam a experiência para vcs.
+Por meio deste projeto os alunos desenvolvedores puderam vivenciar o processo de desenvolvimento ágil em um time bastante reduzido. Isto permitiu que avaliassem vantagens e desvantagens de se adotar o \textit{scrum} em contextos semelhantes. Considera-se que os aspectos positivos de maior importância foram as entregas periódicas de versões funcionais do sistema e da realização de reuniões frequentes com os responsáveis pela biblioteca e os supervisores do projeto - ações tomadas para manter o envolvimento dos indivíduos interessados no resultado final e assegurar a aceitação destes sobre o que estava sendo produzido. No entanto, questionou-se a adaptabilidade deste método para times reduzidos. A divisão de papéis não foi seguida durante todos o período de desenvolvimento devido a maior dificuldade de algumas tarefas, que exigiram o esforço de ambos os desenvolvedores. Além disso, as reuniões retrospectivas não foram realizadas com a frequência esperada porque não foram registrados muitos pontos de melhoria no processo de desenvolvimento a serem discutidas; dada a convivência praticamente diária entre os desenvolvedores, quaisquer sugestões de melhoramento eram discutidas e acatadas assim que eram idealizadas.
 
+Destas observações, argumenta-se que metodologias ágeis diferentes poderiam ter sido mais apropriadas para este projeto. Avalia-se que a adoção do \textit{kanban} ou do \textit{eXtreme Programming} poderia resultar em uma maior produtividade no processo de desenvolvimento. Ambos oferecem facilidades para a autogestão, são menos restritivas quanto aos papéis dos indivíduos no time desenvolvedor e dão menos ênfase na obrigatoriedade das reuniões - embora ainda valorizando os princípios do desenvolvimento ágil. Ainda assim, os alunos desenvolvedores se encontram satisfeitos com os resultados obtidos, e com a possibilidade dos alunos do Curso Exato terem acesso ao acervo da biblioteca do projeto \textit{online}.
 
-
-
-
-
-
-%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Dizer aqui que a gente tentou fazer uma implantação mesmo que não fosse parte do nosso escopo, o porque da gente ter "desistido" da implantação final, das burocracias do Exato com a Preac/Gabinete do Reitor, etc., e dizer que a nosso implantação foi no IC como um ambiente que poderia ser apenas de validação, mas se num curto espaço de tempo não fosse possível ter um ambiente realmente de produção para acesso pelos alunos, esse seria um "ambiente de produção".
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
+Considera-se que esta foi uma experiência gratificante por proporcionar situações reais enfrentadas por times de desenvolvimento, incluindo prazos reduzidos para entrega de funcionalidades e conflitos de interesses e níveis de entendimento entre os indivíduos envolvidos. Aprendeu-se muito sobre conceitos da Biblioteconomia e da gestão de projetos, além de haver um aprofundamento dos conhecimentos sobre a plataforma \textit{Drupal}, segurança da informação e usabilidade de interfaces humano-computador.
 
 \pagebreak
 \section{GLOSSÁRIO}
@@ -614,6 +600,8 @@ Descrevam as conclusões, os desafios. Sugiram outras abordagens, contrastem. Et
 \bibitem{trello} Trello.\\Disponível em: <https://trello.com/>.\\Acesso em: 5 set. 2015
 \bibitem{acquia} CMS, Commerce, Community | Drupal.\\Disponível em: <https://www.acquia.com/>.\\Acesso em: 5 set. 2015
 \bibitem{localize} Portuguese, Brazil overview | Translations\\Disponível em: <https://localize.drupal.org/translate/languages/pt-br/>.\\Acesso em: 27 nov. 2015
+\bibitem{kanban} A Brief Introduction to Kanban | The Agile Coach\\Disponível em: <https://www.atlassian.com/agile/kanban>.\\Acesso em: 30 nov. 2015
+\bibitem{xp} TANIGUCHI, K.; CORREA, F.E. Metodologias ágeis e a motivação de pessoas em projetos de desenvolvimento de software: Aplicando práticas de SCRUM e XP para promover a motivação de equipes de projetos de desenvolvimento de software. Revista de Ciências Exatas e Tecnologia. São Paulo, v. IV, n. 4, 2009.
 
 \end{thebibliography}
 \end{document}
