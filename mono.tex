@@ -6,8 +6,8 @@
 \usepackage{indentfirst}
 \usepackage{xspace}
 \usepackage{graphicx}
-\usepackage[bookmarks]{hyperref}
-\usepackage[perpage]{footmisc}
+\usepackage[hyperfootnotes=false,bookmarks]{hyperref}
+\usepackage[perpage,bottom]{footmisc}
 \usepackage{caption}
 \usepackage{subcaption}
 \captionsetup[figure]{labelsep=period}
@@ -560,12 +560,11 @@ Os alunos desenvolvedores se comprometeram a traduzir todas as expressões criad
 
 \pagebreak
 \section{RESULTADOS} \label{sssec:improvements}
-Utilizando a plataforma \textit{Drupal}, criou-se um sistema \textit{web} de gerenciamento de biblioteca com funcionalidades personalizadas para o contexto do Curso Exato. A aplicação não proveu apenas requisitos essenciais de uma biblioteca, mas também incluiu aspectos sociais, tais como conversas individuais ou em grupo entre usuários, perfil pessoal, avaliação e resenha de uma publicação. Aprofundando os requisitos necessários para o sistema, os alunos desenvolvedores se depararam com um desafio. Houve certa discordância entre alguns membros do Curso Exato sobre políticas de auditoria de mensagens privadas e sobre a aplicação de penalidades em caso de atraso ou extravio de exemplares. Ainda assim, tais indecisões acarretaram apenas certo atraso até o alinhamento dos pontos questionados, mas não problemas de código durante o desenvolvimento, uma vez que tais questionamentos não fazem parte do fluxo do usuário. Pode-se afirmar, portanto, que o principal objetivo proposto neste trabalho foi concluído. 
+Utilizando a plataforma \textit{Drupal}, criou-se um sistema \textit{web} de gerenciamento de biblioteca com funcionalidades personalizadas para o contexto do Curso Exato. A aplicação não provê apenas requisitos essenciais de uma biblioteca, mas também inclui aspectos sociais, tais como: conversas individuais ou em grupo entre usuários, perfil pessoal, avaliação e resenha de uma publicação. Aprofundando os requisitos necessários para o sistema, os alunos desenvolvedores se depararam com um desafio. Houve certa discordância entre alguns membros do Curso Exato sobre políticas de auditoria de mensagens privadas e sobre a aplicação de penalidades em caso de atraso ou extravio de exemplares. Ainda assim, tais indecisões acarretaram apenas certo atraso até o alinhamento dos pontos questionados, mas não problemas de código durante o desenvolvimento, uma vez que tais questionamentos não fazem parte do fluxo do usuário. Pode-se afirmar, portanto, que o principal objetivo proposto neste trabalho foi concluído. 
 
-Ao longo de todo o período de desenvolvimento foi levantado diversas melhorias que não foram implementadas devido ao tempo limitado, e por não estarem no escopo inicial. Uma das que teriam maior relevência seria a inclusão da funcionalidade de reserva de um exemplar enquanto este já se encontra emprestado por outro usuário, tal como ocorre nas bibliotecas da Unicamp. Pode-se destacar também processos de deleção lógica de publicações ou exemplares do sistema, além de reaproveitamento de números de chamada. Reescrever o código para torná-lo mais modular também é uma tarefa necessária a longo prazo, para melhor manutenção e extensão do sistema.
+Realizou-se uma apresentação do sistema a todos os futuros usuários, tanto alunos quanto professores voluntários do Curso Exato na ocasião do encerramento das atividades do projeto de extensão para este ano. Durante o evento foi possível notar que os presentes se mostraram satisfeitos, com uma reação particularmente positiva quanto às funcionalidades sociais. Considera-se a decisão pela inclusão destas uma escolha apropriada dos responsáveis pela biblioteca, apesar dos conflitos de opiniões que elas causaram.
 
-% Reação dos alunos pós apresentação da quarta-feira.
-Realizou-se uma apresentação do sistema a todos os futuros usuários, tanto alunos quanto professores voluntários do Curso Exato na ocasião do encerramento das atividades do projeto de extensão para este ano. Durante o evento foi possível notar que os alunos se mostraram ..... e os professores .....
+Ao longo de todo o período de desenvolvimento foram levantadas diversas funcionalidades e melhorias que não foram implementadas devido ao tempo limitado, e por não estarem no escopo inicial do projeto. Uma das que teriam maior relevência seria a alteração do fluxo de empréstimo para permitir a reserva de um exemplar enquanto este se encontra emprestado por outro usuário, tal como é possível nas bibliotecas da Unicamp. Pode-se destacar também processos de deleção lógica\footnote{Armazenamento de uma variável binária para indicar se houve uma requisição de remoção de um conteúdo; isto é, a aplicação não considera o conteúdo existente mas este continua armazenado no banco de dados.} de publicações ou exemplares do sistema, além de reaproveitamento de números de chamada. Reescrever o código para torná-lo mais modular também é uma tarefa necessária a longo prazo, para melhor manutenibilidade do sistema.
 
 \pagebreak
 \section{CONCLUSÃO}
