@@ -10,6 +10,7 @@
 \usepackage[perpage,bottom]{footmisc}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage[nottoc,numbib]{tocbibind}
 \captionsetup[figure]{labelsep=period}
 \captionsetup[table]{labelsep=period}
 \setlength{\parskip}{\baselineskip}
@@ -55,6 +56,7 @@ Esta monografia descreve um projeto final de graduação para o curso de Engenha
 \end{abstract}
 \pagebreak
 \tableofcontents{}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% INTRODUÇÃO E OBJETIVOS %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -62,13 +64,13 @@ Esta monografia descreve um projeto final de graduação para o curso de Engenha
 \clearpage
 \pagenumbering{arabic}
 \setcounter{page}{1}
-\section{INTRODUÇÃO E OBJETIVOS}
+\section{Introdução e objetivos}
 
 O Curso Exato é um projeto de extensão comunitária da Preac (Pró-Reitoria de Extensão e Assuntos Comunitários) da Unicamp, que "tem por objetivo contribuir para o desenvolvimento de alunos da rede pública de ensino. Para isso, o projeto oferece aulas nas áreas de Física, Matemática, Português e Química, visando à consolidação e ao aprofundamento dos conhecimentos adquiridos no Ensino Médio" \ \cite{cursoexato}.
 
 Motivar os jovens à leitura é um grande obstáculo enfrentado hoje pelo Curso Exato. Por esta razão, em 2014, foi iniciado um projeto de uma biblioteca de livros infanto-juvenis, a fim de incentivar o hábito da leitura. Para tanto, os membros do Curso Exato organizaram uma campanha de arrecadação de livros por meio de doações, e hoje conta com mais de 100 títulos. Neste contexto, o desafio passou a ser catalogar os livros e organizar o processo de empréstimo.
 
-Com o intuito de aproximar os alunos dos livros, e aproveitando-se do contexto atual de inclusão tecnológica, propõe-se neste projeto a criação de um sistema \textit{web} de gerenciamento de biblioteca para os alunos, professores e coordenadores do Curso Exato. A criação deste sistema para consulta ao acervo, reservas e empréstimos tem o intuito de ampliar a capacidade de funcionamento da biblioteca, tornando-a mais acessível para todos os alunos, mesmo para aqueles que não possam se deslocar até a mesma, que está localizada em um recinto distante daquele em que ocorrem as aulas.
+Com o intuito de aproximar os alunos dos livros, e aproveitando-se do contexto atual de inclusão tecnológica, propõe-se neste projeto a criação de um sistema \textit{web} de gerenciamento de biblioteca para os alunos, professores voluntários e coordenadores do Curso Exato. A criação deste sistema para consulta ao acervo, reservas e empréstimos tem o intuito de ampliar a capacidade de funcionamento da biblioteca, tornando-a mais acessível para todos os alunos, mesmo para aqueles que não possam se deslocar até a mesma, que está localizada em um recinto distante daquele em que ocorrem as aulas.
 
 O principal objetivo deste projeto é desenvolver, na plataforma \textit{Drupal}\footnote{um CMS e \textit{framework} (coleção de \textit{software} que fornece uma estrutura básica para o desenvolvimento de sistemas) de código aberto.}, um sistema \textit{web} de gerenciamento de biblioteca que atenda às necessidades do Curso Exato. Tal sistema deve seguir os padrões de código da comunidade \textit{Drupal}, para que possa ser estendido e utilizado por terceiros. Esta plataforma foi escolhida por ser de familiaridade dos desenvolvedores e dos membros do Curso Exato, e também por ser personalizável, extensível, de fácil manutenção, e de baixo custo aos futuros administradores da biblioteca.
 
@@ -76,16 +78,26 @@ Com este sistema, os usuários da biblioteca poderão consultar os exemplares di
 
 A meta final é não apenas prover os requisitos básicos de um sistema de biblioteca virtual, mas também engajar os usuários dentro da própria plataforma, de forma a estimular a leitura por meio dela.
 
-%% TODO estabelecer estrutura da monografia e definições (alunos devs, supervisores etc.) a partir daqui
+As próximas seções deste texto estão estruturadas em: \textit{Metodologia de trabalho}, onde são detalhados os procedimentos seguidos pelos desenvolvedores, o escopo do projeto e suas premissas iniciais; \textit{Ciclos de desenvolvimento}, onde são descritas as atividades realizadas e desafios encontrados durante três períodos produtivos; \textit{Resultados}, onde há uma discussão sobre o que foi produzido, o que não foi possível fazer e a aceitação do sistema pelos usuários finais; e \textit{Conclusão}, onde 
+há um levantamento por parte dos alunos desenvolvedores sobre os aspectos positivos e pontos a melhorar da experiência de criação do projeto.
+
+Ao longo do texto adota-se a seguinte notação para se referir aos principais atores envolvidos no projeto:
+\begin{itemize}
+\item \textit{Aluno desenvolvedor} ou \textit{graduando}: Davi ou Gustavo, os alunos de graduação responsáveis pelo desenvolvimento do sistema;
+\item \textit{Supervisor}: Professor Fábio Usberti ou Professora Christiane Campos, do Instituto de Computação (IC) da Unicamp, responsáveis por orientar os alunos desenvolvedores na elaboração deste texto e na realização do projeto como um todo;
+\item \textit{Responsável pela biblioteca}: membro do Curso Exato que supervisiona o funcionamento da biblioteca;
+\item \textit{Professor voluntário}: membro do Curso Exato que leciona em nome do projeto de extensão;
+\item \textit{Aluno (do Curso Exato)}: público-alvo do projeto de extensão.
+\end{itemize}
 
 %%%%%%%%%%%%%%%%
 %% MONOGRAFIA %%
 %%%%%%%%%%%%%%%%
 
-\section{METODOLOGIA DE TRABALHO}
+\section{Metodologia de trabalho}
 O processo de desenvolvimento do \textit{software} se iniciou por meio de metodologias ágeis \cite{manifesto}, uma vez que ambos os desenvolvedores estão habituados a tal prática. Neste modelo de desenvolvimento, afirma-se que, apesar de processos, ferramentas, documentação abrangente, contratos e planos estritos serem importantes, os indivíduos (\textit{stakeholders}) e suas interações, a entrega de um \textit{software} em funcionamento, a colaboração com o consumidor e a rápida resposta às mudanças são também relevantes.
 
-Como o \textit{Scrum} \cite{scrum} é uma das metodologias ágeis mais utilizadas em Engenharia de \textit{Software}, ele foi escolhido para nortear os desenvolvedores. Nele, ciclos curtos de desenvolvimento (\textit{sprints}) são precedidos por um ou dois dias de reuniões para refinar a lista de tarefas e para discutir a solução técnica para o problema a ser resolvido no período. Esses ciclos são concluídos com um dia de reunião, na qual é feita uma retrospectiva para avaliar o processo de desenvolvimento recém-concluído, além de realizar uma demonstração funcional do sistema para os principais \textit{stakeholders} - neste caso, a coordenadora geral do Curso Exato e os professores orientadores.
+Como o \textit{Scrum} \cite{scrum} é uma das metodologias ágeis mais utilizadas em Engenharia de \textit{Software}, ele foi escolhido para nortear os desenvolvedores. Nele, ciclos curtos de desenvolvimento (\textit{sprints}) são precedidos por um ou dois dias de reuniões para refinar a lista de tarefas e para discutir a solução técnica para o problema a ser resolvido no período. Esses ciclos são concluídos com um dia de reunião, na qual é feita uma retrospectiva para avaliar o processo de desenvolvimento recém-concluído, além de realizar uma demonstração funcional do sistema para os principais \textit{stakeholders} - neste caso, a coordenadora geral do Curso Exato e os supervisores.
 
 Cada \textit{sprint} teve duração aproximada de quatro semanas, demarcadas pelos dias de entrega de conteúdo escrito aos supervisores do projeto. A Tabela \ref{cronograma} contém os períodos e datas originalmente propostos.
 
@@ -101,7 +113,7 @@ Cada \textit{sprint} teve duração aproximada de quatro semanas, demarcadas pel
 05/10 a 06/11 & Terceiro ciclo de desenvolvimento e validação do sistema com os usuários \\
 06/11 & Terceira entrega parcial da monografia \\
 06/11 a 18/12 & Melhorias finais e tradução\\
-01/12 & Entrega da monografia para os professores orientadores\\
+01/12 & Entrega da monografia para os professores supervisores\\
 15/12 & Entrega da monografia para o Instituto de Computação\\
 \hline
 \end{tabular}
@@ -111,11 +123,11 @@ Os escopos para cada ciclo de desenvolvimento estão descritos abaixo.
 
 \begin{itemize}
 \item Primeiro ciclo: extração de requisitos e codificação da infraestrutura básica do sistema; criação de páginas de publicações do acervo, de usuários e de busca, além da principal; definições dos aspectos visuais do sistema; e desenvolvimento de ferramentas que facilitem o cadastro de publicações no acervo.
-\item Segundo ciclo: codificação das interações entre usuários e publicações; métodos para reserva, empréstimo, devolução e avaliação de publicações; controle de permissões entre diferentes tipos de usuários do sistema - anônimos (não autenticados), alunos, professores e administradores.
+\item Segundo ciclo: codificação das interações entre usuários e publicações; métodos para reserva, empréstimo, devolução e avaliação de publicações; controle de permissões entre diferentes tipos de usuários do sistema - anônimos (não autenticados), alunos, professores voluntários e administradores.
 \item Terceiro ciclo: funcionalidades sociais, implantação e validação do sistema.
 \end{itemize}
 
-A distribuição de tarefas entre os alunos desenvolvedores ocorreu em reuniões de planejamento, no início de cada ciclo de desenvolvimento. Tal fato se justifica pela grande quantidade de tecnologias envolvidas no projeto, o que inviabilizou uma divisão precisa das tarefas de cada ciclo com grande antecedência. Por este motivo, cada aluno se comprometeu a cumprir atividades associadas a papéis exercidos por desenvolvedores de \textit{software} em times ágeis\footnote{Grupos de desenvolvedores que atuam seguindo os princípios de metodologia ágil.}, que são:
+A distribuição de tarefas entre os alunos desenvolvedores ocorreu em reuniões de planejamento, no início de cada ciclo de desenvolvimento. Tal fato se justifica pela grande quantidade de tecnologias envolvidas no projeto, o que inviabilizou uma divisão precisa das tarefas de cada ciclo com grande antecedência. Por este motivo, cada aluno desenvolvedor se comprometeu a realizar atividades associadas a papéis exercidos por desenvolvedores de \textit{software} em times ágeis\footnote{Grupos de desenvolvedores que atuam seguindo os princípios de metodologia ágil.}, que são:
 \begin{itemize}
 \item Arquiteto: responsável pelo projeto da infraestrutura do servidor \textit{web} no qual o sistema estará hospedado.
 \item Engenheiro de requisitos: responsável pela extração dos requisitos funcionais e não funcionais do sistema, por meio do contato frequente com os \textit{stakeholders}.
@@ -163,15 +175,12 @@ Em uma biblioteca moderna, cada exemplar recebe um código de barras para automa
 
 Como os alunos do Curso Exato não têm acesso direto ao espaço físico da biblioteca, eles dependem de um mediador (membro do Exato) responsável por retirar os livros mediante a escolha prévia dos alunos por meio do sistema on-line.  Nesse contexto, de forma a automatizar o fluxo de empréstimo dos livros, estabeleceu-se a funcionalidade de “solicitação de reserva” do livro, permitindo ao aluno cadastrado com uma conta de usuário autenticada a escolha prévia da obra ao navegar no site. Os administradores da biblioteca são notificados desta intenção de empréstimo e deverão levar os respectivos exemplares para a sala de aula. O bibliotecário é capaz de acessar uma tela administrativa no sistema com o histórico das solicitações dos alunos e com botões para efetivar o empréstimo ou cancelar o pedido.
 
-\pagebreak
-\section{CICLOS DE DESENVOLVIMENTO}
+\section{Ciclos de desenvolvimento}
 \subsection{Primeiro ciclo de desenvolvimento}
 
-O primeiro ciclo de desenvolvimento foi iniciado com uma reunião com a responsável pela biblioteca do Curso Exato. Nesta reunião, foram coletadas as histórias de usuário, foi feita a validação dos requisitos do sistema, bem como a aprovação dos escopos gerais de cada ciclo de desenvolvimento. Após este passo, realizou-se o detalhamento das tarefas a serem feitas durante o mês e suas estimativas de tempo e complexidade, com o auxílio da ferramenta \textit{Trello}\footnote{Ferramenta de gerenciamento de projetos voltado para metodologias ágeis.} \cite{trello}. Por meio desta, os alunos puderam monitorar o andamento das tarefas e notificar um ao outro sobre seus progressos e eventuais dificuldades ao longo de todo o projeto.
+O primeiro ciclo de desenvolvimento foi iniciado com uma reunião com a principal responsável pela biblioteca do Curso Exato. Nesta reunião, foram coletadas as histórias de usuário, foi feita a validação dos requisitos do sistema, bem como a aprovação dos escopos gerais de cada ciclo de desenvolvimento. Após este passo, realizou-se o detalhamento das tarefas a serem feitas durante o mês e suas estimativas de tempo e complexidade, com o auxílio da ferramenta \textit{Trello}\footnote{Ferramenta de gerenciamento de projetos voltado para metodologias ágeis.} \cite{trello}. Por meio desta, os alunos desenvolvedores puderam monitorar o andamento das tarefas e notificar um ao outro sobre seus progressos e eventuais dificuldades ao longo de todo o projeto.
 
-Optou-se por hospedar uma versão de desenvolvimento do sistema na \textit{Acquia} \cite{acquia}, plataforma para computação em nuvem especializada em \textit{Drupal}. Por meio dela, ambos os desenvolvedores puderam trabalhar paralelamente na construção do sistema e apresentar uma versão funcional deste aos principais interessados - alunos e voluntários do Curso Exato, bem como professores orientadores deste projeto - sem a necessidade de um encontro presencial.
-
-Após a configuração dos ambientes locais de desenvolvimento, cada aluno tomou para si as tarefas que cabiam majoritariamente aos papéis atribuídos a ele. Algumas destas foram realizadas por ambos devido à maior complexidade.
+Optou-se por hospedar uma versão de desenvolvimento do sistema na \textit{Acquia} \cite{acquia}, plataforma para computação em nuvem especializada em \textit{Drupal}. Por meio dela, ambos os desenvolvedores puderam trabalhar paralelamente na construção do sistema e apresentar uma versão funcional deste aos principais interessados - alunos e voluntários do Curso Exato, bem como supervisores deste projeto - sem a necessidade de um encontro presencial.
 
 A seguir, são descritas as atividades realizadas durante o primeiro ciclo de desenvolvimento.
 
@@ -366,7 +375,6 @@ Apesar de não estar incluída no escopo original do projeto, esta ideia foi lev
 
 Esta funcionalidade foi iniciada neste ciclo e finalizada no segundo. No primeiro ciclo, o módulo já era capaz de ler o arquivo CSV e importar as obras, mas ainda não criava os exemplares.
 
-\pagebreak
 \subsection{Segundo ciclo de desenvolvimento}
 Este ciclo, assim como o primeiro, iniciou-se após reunião com os supervisores do projeto. Nesta, questionou-se o motivo de se utilizar uma propriedade intrínseca do \textit{Drupal} como código de tombo. A atribuição de identificadores únicos de páginas geradas pela plataforma a itens não virtuais causaria complicações no cenário de migração do sistema para outra plataforma, pois o mecanismo de geração de códigos de tombo não estaria mais disponível. Discutiu-se, entretanto, que esta possibilidade era consideravelmente remota e, uma vez validado o fato junto aos responsáveis pela biblioteca do Curso Exato, decidiu-se que tal abordagem seria mantida. Desta forma, cada publicação conteria uma referência (lista de identificadores) para as páginas dos seus exemplares e, no momento em que suas páginas são processadas para exibição no navegador, o conteúdo dos exemplares poderia ser carregado rapidamente. Estas informações podem ser utilizadas para que se determine, dentre os exemplares de uma publicação, quais e quantos estão disponíveis para reserva, por exemplo.
 
@@ -490,10 +498,10 @@ Após reuniões com representantes do Curso Exato, foram coletadas algumas possi
 \begin{enumerate}
 \item Em caso de não devolução no prazo, o usuário perde o direito de reservar publicações ou de renovar empréstimos até que:
 \begin{enumerate}
-\item \label{itm:option1} o usuário entregue a algum professor do Exato uma resenha do livro lido ou
+\item \label{itm:option1} o usuário entregue a algum professor voluntário do Exato uma resenha do livro lido ou
 \item \label{itm:option2} o prazo automático de multa é encerrado.
 \end{enumerate}
-Este prazo de multa seria similar ao aplicado por outras bibliotecas da Unicamp para alunos em atraso, sendo ele proporcional à quantidade de publicações em atraso e à quantidade de dias de atraso.
+Este prazo de multa seria similar ao aplicado por outras bibliotecas da Unicamp para alunos com exemplares em atraso, sendo ele proporcional à quantidade de publicações em atraso e à quantidade de dias de atraso.
 
 \item \label{itm:option3} Em caso de extravio de publicação emprestada, o usuário perde acesso ao sistema até que a cópia perdida seja ressarcida, ou que uma cópia de outra publicação de valor semelhante seja doada à biblioteca.
 \end{enumerate}
@@ -515,7 +523,6 @@ Com o objetivo de garantir a integridade do sistema, buscou-se mitigar as possí
 O núcleo do sistema \textit{Drupal} provê uma página administrativa para a configuração dessas permissões. Dentre os testes realizados, verificou-se que os endereços administrativos disponíveis no próprio núcleo já estavam devidamente protegidos. Porém, em testes envolvendo endereços criados pelos módulos personalizados para este sistema, o resultado não foi o mesmo. Algumas ações não foram tratadas e a correção destas omissões foi alocada para o terceiro ciclo de desenvolvimento.
 
 %%%
-\pagebreak
 \subsection{Terceiro ciclo de desenvolvimento}
 
 O terceiro ciclo de desenvolvimento teve seu início imediatamente após a reunião referente aos avanços do segundo ciclo com o supervisor Fábio. Como foi dito anteriormente, a este ciclo foram adicionadas algumas atividades extras, que não puderam ser concluídas no ciclo anterior. Todas as atividades propostas para finalização neste ciclo foram cumpridas, exceto a tradução total do sistema do inglês para o português brasileiro.
@@ -556,7 +563,7 @@ Após investigação, foram encontradas e corrigidas as falhas no código (\text
 
 \subsubsection{Preparação para implantação no servidor disponível para o Curso Exato}
 
-O primeiro ponto levantado foi o local para a implantação do sistema, dadas algumas exigências e implicações por parte do Curso Exato. Após estudar as possibilidades e avaliar os pontos favoráveis e os contrários a cada opção, decidiu-se estabelecer o sistema no servidor de projetos discentes do Instituto de Computação (IC) da Unicamp, de forma a lançá-lo o mais breve possível. Tomada a decisão junto aos professores, os graduandos entraram em contato com a responsável pela Diretoria de Informática do IC para uma conversa inicial sobre a viabilidade de se hospedar o projeto naquele servidor. Durante esta reunião, foi acordado enviar uma breve descrição dos requisitos e das especificações técnicas sobre o que o sistema exigiria do servidor, para análise real da viabilidade desta implantação, e aguardar um posicionamento da Comissão Diretora de Informática do instituto.
+O primeiro ponto levantado foi o local para a implantação do sistema, dadas algumas exigências e implicações por parte do Curso Exato. Após estudar as possibilidades e avaliar os pontos favoráveis e os contrários a cada opção, decidiu-se estabelecer o sistema no servidor de projetos discentes do Instituto de Computação (IC) da Unicamp, de forma a lançá-lo o mais breve possível. Tomada a decisão junto aos supervisores, os graduandos entraram em contato com a responsável pela Diretoria de Informática do IC para uma conversa inicial sobre a viabilidade de se hospedar o projeto naquele servidor. Durante esta reunião, foi acordado enviar uma breve descrição dos requisitos e das especificações técnicas sobre o que o sistema exigiria do servidor, para análise real da viabilidade desta implantação, e aguardar um posicionamento da Comissão Diretora de Informática do instituto.
 
 De forma a não atrasar a implantação, os graduandos realizaram testes de exportação do sistema do ambiente de desenvolvimento (\textit{Acquia}) para outros locais, com o propósito de verificar a ocorrência de alguma dependência imprópria de módulos ou mesmo alguma dependência cíclica. Certificou-se que o sistema está em estado consistente e exportável como um pacote, por meio do módulo \textit{Features} do \textit{Drupal}. Este módulo permite o empacotamento de código, dependências, funções e variáveis de ambiente de uma instalação \textit{Drupal} em um arquivo comprimido, e a incorporação destes dados em uma outra instalação.
 
@@ -566,16 +573,14 @@ Na interface administrativa do \textit{Drupal}, existe uma seção que estima a 
 
 Os alunos desenvolvedores se comprometeram a traduzir todas as expressões criadas para uso nos módulos desenvolvidos por eles. Para termos de outros módulos sem tradução fornecida pela comunidade \textit{Drupal}, houve um esforço pela inclusão de traduções para aqueles de maior ocorrência nas páginas do sistema; no entanto, por haver muitos e não haver um jeito direto de encontrar o contexto em que se localizam no sistema, não foi feita a tradução dos termos que não são exibidos diretamente aos usuários finais. Ressalta-se que a decisão por traduzir termos provenientes de módulos da comunidade em um arquivo .po, ao invés da submissão das traduções ao diretório público, foi motivada pelo longo tempo tomado até que haja uma aprovação das traduções enviadas por um moderador da comunidade \textit{Drupal}.
 
-\pagebreak
-\section{RESULTADOS} \label{sssec:improvements}
+\section{Resultados} \label{sssec:improvements}
 Utilizando a plataforma \textit{Drupal}, criou-se um sistema \textit{web} de gerenciamento de biblioteca com funcionalidades personalizadas para o contexto do Curso Exato. A aplicação não provê apenas requisitos essenciais de uma biblioteca, mas também inclui aspectos sociais, tais como: conversas individuais ou em grupo entre usuários, perfil pessoal, avaliação e resenha de uma publicação. Aprofundando os requisitos necessários para o sistema, os alunos desenvolvedores se depararam com um desafio. Houve certa discordância entre alguns membros do Curso Exato sobre políticas de auditoria de mensagens privadas e sobre a aplicação de penalidades em caso de atraso ou extravio de exemplares. Ainda assim, tais indecisões acarretaram apenas certo atraso até o alinhamento dos pontos questionados, mas não problemas de código durante o desenvolvimento, uma vez que tais questionamentos não fazem parte do fluxo do usuário. Pode-se afirmar, portanto, que o principal objetivo proposto neste trabalho foi concluído. 
 
 Realizou-se uma apresentação do sistema a todos os futuros usuários, tanto alunos quanto professores voluntários do Curso Exato na ocasião do encerramento das atividades do projeto de extensão para este ano. Durante o evento foi possível notar que os presentes se mostraram satisfeitos, com uma reação particularmente positiva quanto às funcionalidades sociais. Considera-se a decisão pela inclusão destas uma escolha apropriada dos responsáveis pela biblioteca, apesar dos conflitos de opiniões que elas causaram.
 
 Ao longo de todo o período de desenvolvimento foram levantadas diversas funcionalidades e melhorias que não foram implementadas devido ao tempo limitado, e por não estarem no escopo inicial do projeto. Uma das que teriam maior relevência seria a alteração do fluxo de empréstimo para permitir a reserva de um exemplar enquanto este se encontra emprestado por outro usuário, tal como é possível nas bibliotecas da Unicamp. Pode-se destacar também processos de deleção lógica\footnote{Armazenamento de uma variável binária para indicar se houve uma requisição de remoção de um conteúdo; isto é, a aplicação não considera o conteúdo existente mas este continua armazenado no banco de dados.} de publicações ou exemplares do sistema, além de reaproveitamento de números de chamada. Reescrever o código para torná-lo mais modular também é uma tarefa necessária a longo prazo, para melhor manutenibilidade do sistema.
 
-\pagebreak
-\section{CONCLUSÃO}
+\section{Conclusão}
 Por meio deste projeto os alunos desenvolvedores puderam vivenciar o processo de desenvolvimento ágil em um time bastante reduzido. Isto permitiu que avaliassem vantagens e desvantagens de se adotar o \textit{Scrum} em contextos semelhantes. Considera-se que os aspectos positivos de maior importância foram as entregas periódicas de versões funcionais do sistema e da realização de reuniões frequentes com os responsáveis pela biblioteca e os supervisores do projeto - ações tomadas para manter o envolvimento dos indivíduos interessados no resultado final e assegurar a aceitação destes sobre o que estava sendo produzido. No entanto, questionou-se a adaptabilidade deste método para times reduzidos. A divisão de papéis não foi seguida durante todo o período de desenvolvimento devido a maior dificuldade de algumas tarefas, que exigiram o esforço de ambos os desenvolvedores. Além disso, as reuniões retrospectivas não foram realizadas com a frequência esperada porque não foram registrados muitos pontos de melhoria no processo de desenvolvimento a serem discutidas; dada a convivência praticamente diária entre os desenvolvedores, quaisquer sugestões de melhoramento foram discutidas e acatadas assim que idealizadas.
 
 Destas observações, argumenta-se que metodologias ágeis diferentes poderiam ter sido mais apropriadas para este projeto. Avalia-se que a adoção do \textit{Kanban} \cite{kanban} ou do \textit{XP} (\textit{eXtreme Programming}) \cite{xp} poderia resultar em uma maior produtividade no processo de desenvolvimento. Ambos oferecem facilidades para a autogestão, são menos restritivas quanto aos papéis dos indivíduos no time desenvolvedor e dão menos ênfase na obrigatoriedade das reuniões - embora ainda valorizando os princípios do desenvolvimento ágil. Ainda assim, os alunos desenvolvedores se encontram satisfeitos com os resultados obtidos, e com a possibilidade dos alunos do Curso Exato terem acesso ao acervo da biblioteca do projeto \textit{online}.
@@ -583,7 +588,7 @@ Destas observações, argumenta-se que metodologias ágeis diferentes poderiam t
 Considera-se que esta foi uma experiência gratificante por proporcionar situações reais enfrentadas por times de desenvolvimento, incluindo prazos reduzidos para entrega de funcionalidades e conflitos de interesses e níveis de entendimento entre os indivíduos envolvidos. Aprendeu-se muito sobre conceitos da Biblioteconomia e da gestão de projetos, além de haver um aprofundamento dos conhecimentos sobre a plataforma \textit{Drupal}, segurança da informação e usabilidade de interfaces humano-computador.
 
 \pagebreak
-\section{GLOSSÁRIO}
+\section{Glossário}
 \begin{description}
 \item[API (\textit{Application Programming Interface})] \hfill \\ Interface de programação de aplicações
 \item[CMS (\textit{Content Management System})] \hfill \\ Sistema de gerenciamento de conteúdo
