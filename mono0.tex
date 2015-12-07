@@ -10,7 +10,7 @@
 \usepackage[perpage,bottom]{footmisc}
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage[nottoc]{tocbibind}
+\usepackage[nottoc,numbib]{tocbibind}
 \captionsetup[figure]{position=above,labelsep=period}
 \captionsetup[table]{position=above,labelsep=period}
 %\setlength{\parskip}{\baselineskip}
@@ -21,7 +21,7 @@
 %%% Cabeçalho baseado no padrão do Exato %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{minipage}[t|]{14mm}
-\includegraphics[width=2cm]{img/logo-unicamp-eps-converted-to.pdf}
+\includegraphics[width=2cm]{img/logo-unicamp.eps}
 \end{minipage}
 \hfill
 \begin{minipage}[tl]{120mm}
@@ -109,7 +109,7 @@ Como o \textit{Scrum} \cite{scrum} é uma das metodologias ágeis mais utilizada
 
 Cada \textit{sprint} teve duração aproximada de quatro semanas, demarcadas pelos dias de entrega de conteúdo escrito aos supervisores do projeto. A Tabela \ref{cronograma} contém os períodos e as datas originalmente propostos.
 
-\begin{table}[h]
+\begin{table}[hc]
 \centering
 \caption{Cronograma de atividades.\label{cronograma}}
 \begin{tabular}{ll}
@@ -360,7 +360,7 @@ A fim de se corrigir os problemas encontrados, duas ações foram executadas. A 
 \includegraphics[width=60mm]{img/tombo-novo.png}
 \end{figure}
 
-\begin{table}[h]
+\begin{table}[hc]
 \centering
 \caption{Conteúdos gerados na plataforma \textit{Drupal} seguindo a Figura \ref{tombo-novo}.\label{tabela-tombo-novo}}
 \begin{tabular}{llll}
@@ -383,19 +383,19 @@ Apesar de não estar incluída no escopo original do projeto, esta ideia foi col
 Esta funcionalidade foi iniciada neste ciclo e finalizada no segundo. No primeiro ciclo, o módulo já era capaz de ler o arquivo CSV e importar as obras, mas ainda não criava os exemplares.
 
 \subsection{Segundo ciclo de desenvolvimento}
-Este ciclo, assim como o primeiro, iniciou-se após reunião com os supervisores do projeto. Nesta, questionou-se o motivo de se utilizar uma propriedade do \textit{Drupal} como código de tombo. A atribuição de identificadores únicos de páginas geradas pela plataforma a itens não virtuais causaria complicações no cenário de migração do sistema para outra plataforma, pois o mecanismo de geração de códigos de tombo não estaria mais disponível. Discutiu-se, entretanto, que esta possibilidade era consideravelmente remota e, uma vez validado o fato junto aos responsáveis pela biblioteca do Curso Exato, decidiu-se que tal abordagem seria mantida. Desta forma, cada publicação conteria uma referência (lista de identificadores) para as páginas dos seus exemplares e, no momento em que suas páginas são processadas para exibição no navegador, o conteúdo dos exemplares poderia ser carregado rapidamente. Estas informações podem ser utilizadas para que se determine, dentre os exemplares de uma publicação, quais e quantos estão disponíveis para reserva, por exemplo.
+Este ciclo, assim como o primeiro, iniciou-se após reunião com os supervisores do projeto. Nesta, questionou-se o motivo de se utilizar uma propriedade intrínseca do \textit{Drupal} como código de tombo. A atribuição de identificadores únicos de páginas geradas pela plataforma a itens não virtuais causaria complicações no cenário de migração do sistema para outra plataforma, pois o mecanismo de geração de códigos de tombo não estaria mais disponível. Discutiu-se, entretanto, que esta possibilidade era consideravelmente remota e, uma vez validado o fato junto aos responsáveis pela biblioteca do Curso Exato, decidiu-se que tal abordagem seria mantida. Desta forma, cada publicação conteria uma referência (lista de identificadores) para as páginas dos seus exemplares e, no momento em que suas páginas são processadas para exibição no navegador, o conteúdo dos exemplares poderia ser carregado rapidamente. Estas informações podem ser utilizadas para que se determine, dentre os exemplares de uma publicação, quais e quantos estão disponíveis para reserva, por exemplo.
 
 %% Talvez substituir "alunos desenvolvedores" por "nós", com aprovação da Chris para isso.
-Algumas funções providas pela plataforma e necessárias para a implementação de novas funcionalidades para este ciclo eram desconhecidas dos alunos desenvolvedores. Desta forma, houve necessidade de um estudo específico ao longo deste período, especialmente para a elaboração do mecanismo de registro de transações dos livros da biblioteca e para a conclusão da ferramenta de importação em lotes. Devido a isso, algumas tarefas, inicialmente previstas para este ciclo, foram concluídas no seguinte.
+Algumas funções providas pela plataforma e necessárias para a implementação de novas funcionalidades para este ciclo eram desconhecidas dos alunos desenvolvedores. Desta forma, houve necessidade de um longo tempo de estudo ao longo deste período, especialmente para a elaboração do mecanismo de registro de transações dos livros da biblioteca e para a conclusão da ferramenta de importação em lotes. Devido a isso, algumas tarefas, inicialmente previstas para este ciclo, foram concluídas no seguinte.
 
 A seguir, são descritas as atividades realizadas durante o segundo ciclo de desenvolvimento.
 
 
 \subsubsection{Finalização da ferramenta para importação em lote de publicações}
 
-Durante a segunda semana do ciclo foi concluída a ferramenta de importação em lotes. Devido à alta ocorrência de vírgulas nos textos dos campos a serem registrados, definiu-se que o separador padrão dos arquivos CSV de entrada será o ponto e vírgula (;) e que cada linha deve conter as informações descritas na Tabela \ref{csv}, que descreve os atributos do arquivo solicitado na importação.
+Durante a segunda semana do ciclo foi concluída a ferramenta de importação em lotes. Devido à alta ocorrência de vírgulas nos textos dos campos a serem registrados, definiu-se que o separador padrão dos arquivos CSV de entrada será o ponto e vírgula (;) e que cada linha deve conter as seguintes informações. A Tabela \ref{csv} descreve os atributos do arquivo solicitado na importação.
 
-\begin{table}[h]
+\begin{table}[hc]
 \centering
 \caption{Atributos requeridos no arquivo CSV.\label{csv}}
 \begin{tabular}{ll}
@@ -419,38 +419,38 @@ Durante a segunda semana do ciclo foi concluída a ferramenta de importação em
 \end{tabular}
 \end{table}
 
-Houve certa dificuldade no registro das referências cruzadas entre publicações e seus exemplares devido ao modo como o \textit{Drupal} trata a criação paralela de páginas de conteúdo. O importador de arquivos CSV do módulo \textit{Feeds} cria uma requisição para a criação de uma nova página de conteúdo a cada linha lida do arquivo. Em nossa abordagem inicial, esta página a ser criada era de \textit{publicação} e, assim que esta era registrada no sistema, novas requisições para a criação das páginas dos \textit{exemplares} relacionados eram lançadas. Tais páginas eram, então, criadas, recebendo um identificador único e uma referência à página da publicação a qual pertencem e, finalmente, a página da publicação era atualizada com os identificadores de seus exemplares recém-cadastrados, resultando na referência cruzada entre eles. No caso em que a linha do arquivo CSV se referisse a uma publicação já registrada no sistema (segundo os critérios de unicidade discutidos na seção \ref{sssec:chamada}, foi proposto que a requisição inicial para a criação da página de publicação fosse ignorada, e que apenas os exemplares pudessem ser criados. Contudo, descobriu-se não ser possível cancelar a requisição inicial sem comprometer a sequência de criações e atualizações de páginas. A solução encontrada foi declarar um novo tipo de conteúdo, que armazena os dados obtidos do arquivo CSV e intermedia a criação de publicações e exemplares - este foi nomeado \textit{Container}. Assim que um conteúdo do tipo \textit{Container} é registrado, o sistema verifica se a publicação cujos dados ele armazena já existe na base de dados. Caso ela seja encontrada, seus exemplares são cadastrados e sua página é atualizada com as referências deles; caso contrário, segue-se o fluxo de criação proposto anteriormente.
+Houve certa dificuldade no registro das referências cruzadas entre publicações e seus exemplares devido ao modo como o \textit{Drupal} trata a criação paralela de páginas de conteúdo. O importador de arquivos CSV do módulo \textit{Feeds} cria uma requisição para a criação de uma nova página de conteúdo a cada linha lida do arquivo. Em nossa abordagem inicial, esta página a ser criada era uma de \textit{publicação} e, assim que esta era registrada no sistema, novas requisições para a criação das páginas dos \textit{exemplares} relacionados eram lançadas. Tais páginas eram então criadas, recebendo um identificador único e uma referência à página da publicação a qual pertencem, e finalmente a página da publicação era atualizada com os identificadores de seus exemplares recém-cadastrados; daí a referência cruzada entre eles. No caso em que a linha do arquivo CSV se referisse a uma publicação já registrada no sistema (segundo os critérios de unicidade discutidos na seção \ref{sssec:chamada}, foi proposto que a requisição inicial para a criação da página de publicação fosse ignorada, e que apenas os exemplares pudessem ser criados. Contudo, descobriu-se que não é possível cancelar a requisição inicial sem comprometer a sequência de criações e atualizações de páginas. A solução encontrada foi declarar um novo tipo de conteúdo, que armazena os dados obtidos do arquivo CSV e intermedia a criação de publicações e exemplares - este foi nomeado \textit{Container}. Assim que um conteúdo do tipo \textit{Container} é registrado, o sistema verifica se a publicação cujos dados ele armazena já existe na base de dados. Caso ela seja encontrada, seus exemplares são cadastrados e sua página é atualizada com as referências deles; caso contrário, segue-se o fluxo de criação proposto anteriormente.
 
 \subsubsection{Implementação de módulo para registro dos períodos de funcionamento da biblioteca}
-Para a fácil manutenção das datas de funcionamento da biblioteca, foi instalado no sistema o módulo \textit{Availability Calendar}. Apesar deste ser voltado para sistemas de alocação e de reservas (em hotéis, por exemplo), verificou-se que ele fornece visuais aos administradores para que estes configurem possíveis datas para retirada de empréstimos e realização de devoluções. Com este módulo foi possível criar uma página na qual são exibidos, em forma de calendário, o mês atual e os doze próximos, atribuindo uma cor para cada célula, referente ao estado previsto da biblioteca naquela data. Definiu-se três estados possíveis: \textit{aberta}, \textit{fechada} e \textit{férias}.
+Para a fácil manutenção das datas de funcionamento da biblioteca, foi instalado no sistema o módulo \textit{Drupal Availability Calendar}. Apesar deste ser voltado para sistemas de alocação e de reservas (em hotéis, por exemplo), verificou-se que ele fornece meios visualmente intuitivos aos administradores para que estes configurem possíveis datas para retirada de empréstimos e realização de devoluções. Com este módulo foi possível criar uma página na qual são exibidos, em forma de calendário, o mês atual e os doze próximos, onde cada célula recebe uma cor referente ao estado previsto da biblioteca naquela data. Definiu-se três estados possíveis: \textit{aberta}, \textit{fechada} e \textit{férias}.
 
-O estado \textit{aberta} indica um dia em que a biblioteca do Curso Exato estará em funcionamento, logo, o aluno pode tomar emprestado seus exemplares reservados ou devolvê-los. A célula é exibida com um fundo verde. \textit{Fechada} indica que não haverá atividade da biblioteca naquela data (geralmente sextas-feiras, finais de semana, feriados letivos ou quaisquer dias nos quais não será possível a um voluntário se responsabilizar pela atividade). A célula é exibida com um fundo avermelhado. Por fim, \textit{férias} indica recesso. A célula é exibida com um fundo azul. Além do usuário não poder retirar empréstimos ou devolver exemplares neste período, qualquer prazo de devolução que for previsto para terminar durante o período de férias será reduzido para o último dia com o estado \textit{aberta}.
+O estado \textit{aberta} indica um dia em que a biblioteca do Curso Exato estará em funcionamento, logo, o aluno pode tomar emprestado seus exemplares reservados ou devolvê-los. A célula é exibida com um fundo verde. \textit{Fechada} indica que não haverá atividade da biblioteca naquela data (geralmente sextas-feiras, finais de semana, feriados letivos ou quaisquer dias onde não será possível a um voluntário se responsabilizar pela atividade). A célula é exibida com um fundo avermelhado. Por fim, \textit{férias} indica recesso naquela data. A célula é exibida com um fundo azul. Além do usuário não poder retirar empréstimos ou devolver exemplares neste período, qualquer prazo de devolução que for previsto para terminar durante o período de férias será reduzido para o último dia com o estado \textit{aberta}.
 
 É importante notar que os prazos de funcionamento da biblioteca não necessariamente seguem o calendário letivo do Curso Exato. Na verdade, é recomendado que os administradores configurem os últimos dias letivos antes dos recessos do projeto de extensão como \textit{fechada}, para que se evitem problemas com devoluções em atraso.
 
 \subsubsection{Implementação do fluxo básico de reserva, empréstimo, renovação e devolução de uma obra} \label{sssec:stransaction}
-Na reunião de planejamento deste ciclo foi elaborado um diagrama simplificado de máquina de estados, para a representação do fluxo de empréstimo de um exemplar, apresentado na Figura \ref{workflow}. Os círculos referem-se aos possíveis estados de uma publicação durante o fluxo, \textit{disponível}, \textit{reservado}, \textit{emprestado}, \textit{em atraso} e \textit{extraviado}; as setas indicam as ações que levam à transição entre eles, sendo elas: \textit{criar exemplar}, \textit{reservar}, \textit{confirmar empréstimo}, \textit{cancelar reserva}, \textit{renovar}, \textit{notificar atraso}, \textit{confirmar devolução}, \textit{declarar perda} e \textit{recuperar exemplar}.
+Na reunião de planejamento deste ciclo foi elaborado um diagrama simplificado de máquina de estados, para a representação do fluxo de empréstimo de um exemplar, e está apresentado na Figura \ref{workflow}. Os círculos referem-se aos possíveis estados de uma publicação durante o fluxo, que são \textit{disponível}, \textit{reservado}, \textit{emprestado}, \textit{em atraso} e \textit{extraviado}, e as setas indicam as ações que levam à transição entre eles, sendo \textit{criar exemplar}, \textit{reservar}, \textit{confirmar empréstimo}, \textit{cancelar reserva}, \textit{renovar}, \textit{notificar atraso}, \textit{confirmar devolução}, \textit{declarar perda} e \textit{recuperar exemplar}.
 
 \begin{figure}[pbth!]
 \centering
-\caption{Diagrama de máquina de estados de um exemplar durante o fluxo de empréstimo.\label{workflow}}
 \includegraphics[width=140mm]{img/workflow.png}
+\caption{Diagrama de máquina de estados de um exemplar durante o fluxo de empréstimo.\label{workflow}}
 \end{figure}
 
-Um exemplar é dito \textit{disponível} quando encontra-se disponível na biblioteca para reserva; \textit{reservado}, quando há uma solicitação de reserva por este exemplar a ser atendida; \textit{emprestado}, se o exemplar está em posse de algum usuário da biblioteca e o prazo de vencimento do empréstimo ainda não expirou; \textit{em atraso}, se o exemplar está em posse de algum usuário da biblioteca e deve ser devolvido, pois o prazo para devolução não foi respeitado; e \textit{extraviado}, se o exemplar foi perdido durante o fluxo de empréstimo.
+Um exemplar é dito \textit{disponível} se encontra-se disponível na biblioteca para reserva; \textit{reservado} quando há uma solicitação de reserva por este exemplar a ser atendida; \textit{emprestado} se o exemplar está em posse de algum usuário da biblioteca e o prazo de vencimento do empréstimo ainda não expirou; \textit{em atraso}, se o exemplar está em posse de algum usuário da biblioteca e deve ser devolvido, pois o prazo para devolução não foi respeitado; e \textit{extraviado} se o exemplar foi perdido durante o fluxo de empréstimo.
 
-Com relação às ações permitidas para cada classe de usuários, os administradores do sistema podem (a) \textit{criar exemplares} declarando a chegada de novos exemplares à biblioteca, inserindo-os no sistema individualmente ou pela ferramenta de importação em lotes; e os usuários autenticados no sistema podem (b) \textit{reservar} algum exemplar de publicações de seu interesse, clicando no botão ‘Reservar Livro’ na página da publicação. Esta ação só pode ser realizada por usuários que tenham dois empréstimos correntes ou menos, e que não tenham pendências com a biblioteca (ver Seção \ref{sssec:overdue_or_lost} para mais detalhes sobre fluxos alternativos).
+Administradores do sistema podem (a) \textit{criar exemplares} declarando a chegada de novos exemplares à biblioteca, inserindo-os no sistema individualmente ou pela ferramenta de importação em lotes. Usuários autenticados no sistema podem (b) \textit{reservar} algum exemplar de publicações de seu interesse, clicando no botão ‘Reservar Livro’ na página da publicação. Esta ação só pode ser realizada por usuários que tenham dois empréstimos correntes ou menos, e não tenham pendências com a biblioteca (ver Seção \ref{sssec:overdue_or_lost} para mais detalhes sobre fluxos alternativos).
 
-Os administradores devem (c) \textit{confirmar o empréstimo} quando um exemplar é emprestado ao usuário que o reservou previamente e neste momento é calculado o prazo para devolução do exemplar (duas semanas após a data de confirmação). O usuário que solicitou uma reserva pode, sem sofrer penalidades, (d) \textit{cancelá-la}, sendo esta função também disponível para os administradores, quando houver um motivo específico e justificável.
+Administradores devem (c) \textit{confirmar o empréstimo} quando um exemplar é emprestado ao usuário que o reservou previamente. Neste momento é calculado o prazo para devolução do exemplar (duas semanas após a data de confirmação). O usuário que solicitou uma reserva pode, sem sofrer penalidades, (d) \textit{cancelá-la}; administradores também podem realizar esta operação a qualquer momento.
 
 Os administradores e o usuário em posse de um exemplar podem optar pela (e) \textit{renovação do empréstimo}, prolongando o prazo de devolução para uma semana após a data da renovação. Esta ação pode ser realizada no máximo duas vezes por empréstimo corrente e apenas se a data de vencimento do empréstimo estiver dentro do prazo de sete ou menos dias a partir da data da renovação. Quando um exemplar não é devolvido dentro do prazo previsto, o sistema automaticamente (f) \textit{notifica} o usuário envolvido e os administradores sobre o atraso e altera o estado do exemplar para \textit{em atraso}. Isto acarreta a aplicação de uma penalidade ao usuário (ver Seção \ref{sssec:overdue_or_lost}).
 
-Após a devolução de um exemplar, os administradores devem \textit{confirmar o retorno} deste à biblioteca, encerrando o empréstimo. Se o estado que origina esta ação for \textit{emprestado}, a devolução foi (g) no prazo e não haverá nenhuma implicação ao usuário; se for \textit{em atraso}, o usuário será penalizado (h) com multa (vide Seção \ref{sssec:overdue_or_lost}). Os administradores e o usuário que tomou um exemplar emprestado podem (i) \textit{registrar o extravio} deste, o que leva à interrupção do empréstimo e dispara uma notificação aos administradores de que aquela cópia do livro dificilmente retornará à biblioteca. Esta ação acarreta uma penalização mais severa ao usuário (também descrita na Seção \ref{sssec:overdue_or_lost}). No caso de um exemplar previamente declarado como extraviado ser (j) \textit{recuperado}, administradores devem registrar seu retorno ao acervo. É importante ressaltar que esta ação não equivale à reposição de um exemplar extraviado por outra cópia da mesma publicação: para isto, a ação ‘Criar exemplar’ deve ser executada.
+Após a devolução de um exemplar, administradores devem \textit{confirmar o retorno} deste à biblioteca, encerrando o empréstimo. Se o estado que origina esta ação for \textit{emprestado}, a devolução foi (g) no prazo e não haverá nenhuma implicação ao usuário; se for \textit{em atraso}, o usuário será penalizado (h) com multa (vide Seção \ref{sssec:overdue_or_lost}). Os administradores e o usuário que tomou um exemplar emprestado podem (i) \textit{registrar o extravio} deste, o que leva à interrupção do empréstimo e dispara uma notificação aos administradores de que aquela cópia do livro dificilmente retornará à biblioteca. Esta ação acarreta uma penalização mais severa ao usuário (também descrita na Seção \ref{sssec:overdue_or_lost}). No caso de um exemplar previamente declarado como extraviado ser (j) \textit{recuperado}, administradores devem registrar seu retorno ao acervo. É importante ressaltar que esta ação não equivale à reposição de um exemplar extraviado por outra cópia da mesma publicação: para isto, a ação ‘Criar exemplar’ deve ser tomada.
 
 Foi definido também o conceito de transação: uma entidade para registro de cada passo do fluxo de empréstimo, desde a reserva até a devolução - cobrindo também os cenários alternativos. Definiu-se que uma transação envolvendo um exemplar é iniciada (criada no estado \textit{aberta}) no momento da sua reserva e se encerra ao atingir o estado \textit{cancelada} (quando a reserva é cancelada) ou \textit{encerrada} (quando o livro é devolvido ou recuperado após o extravio). O extravio é declarado pela mudança de estado da transação para \textit{exemplar perdido}. A tabela do banco de dados foi planejada para o armazenamento de transações, como na Tabela \ref{transactions-table}.
 
 
-\begin{table}[h]
+\begin{table}[hc]
 \centering
 \caption{Colunas da tabela de transações.\label{transactions-table}}
 \begin{tabular}{ll}
@@ -493,33 +493,41 @@ Com estas decisões, foi desenvolvido um módulo que insere tal tabela na base d
 
 \begin{figure}[pbth!]
 \centering
-\caption{Painel de transações.\label{transactions}}
 \includegraphics[width=140mm, trim={35mm 0 30mm 20mm}, clip]{img/transactions.png}
+\caption{Painel de transações.\label{transactions}}
 \end{figure}
 
 Até o encerramento deste ciclo de desenvolvimento foi implementada boa parte dos passos do fluxo por parte do administrador. Os comportamentos restantes são a validação das datas de algumas ações em comparação com os dias de funcionamento da biblioteca e a exibição das transações envolvendo os usuários em suas páginas pessoais.
 
 \subsubsection{Fluxo alternativo considerando atrasos ou extravio de algum exemplar}\label{sssec:overdue_or_lost}
-Após reuniões com representantes do Curso Exato, foram coletadas algumas possibilidades de penalizações a serem aplicadas aos usuários que não respeitarem prazos de devolução de seus empréstimos ou àquelas que venham a perder algum exemplar emprestado:
+Após reuniões com representantes do Curso Exato, foram coletadas algumas possibilidades de penalizações a serem aplicadas aos usuários que não respeitarem prazos de devolução de seus empréstimos ou venham a perder algum exemplar que tenham tomado emprestado.
 
 \begin{enumerate}
-\item Em caso de não devolução no prazo, o usuário perde o direito de reservar publicações ou de renovar empréstimos até que o usuário entregue a algum professor da área de Português do Exato uma resenha do livro lido, escrito à mão. Este prazo de multa seria similar ao aplicado por outras bibliotecas da Unicamp para alunos com exemplares em atraso, sendo ele proporcional à quantidade de publicações em atraso e à quantidade de dias de atraso.
-\item Em caso de extravio de publicação emprestada, o usuário perde acesso ao sistema até que a cópia perdida seja ressarcida, ou que uma cópia de outra publicação de valor semelhante seja doada à biblioteca.
+\item Em caso de não devolução no prazo, o usuário perde o direito de reservar publicações ou de renovar empréstimos até que:
+\begin{enumerate}
+\item \label{itm:option1} o usuário entregue a algum professor voluntário do Exato uma resenha do livro lido ou
+\item \label{itm:option2} o prazo automático de multa é encerrado.
+\end{enumerate}
+Este prazo de multa seria similar ao aplicado por outras bibliotecas da Unicamp para alunos com exemplares em atraso, sendo ele proporcional à quantidade de publicações em atraso e à quantidade de dias de atraso.
+
+\item \label{itm:option3} Em caso de extravio de publicação emprestada, o usuário perde acesso ao sistema até que a cópia perdida seja ressarcida, ou que uma cópia de outra publicação de valor semelhante seja doada à biblioteca.
 \end{enumerate}
 
-Nas propostas acima, a condição de pendência do usuário seria registrada por duas variáveis binárias: uma para indicar multa por atraso e outra, por extravio. Ambas receberiam o valor $1$ caso as condições da aplicação das penalidades fossem detectadas - na confirmação da devolução no caso do atraso e na confirmação da perda no caso do extravio. Seus valores permaneceriam salvos até que algum administrador registrasse que a pendência foi resolvida.
+Nas propostas \ref{itm:option1} e \ref{itm:option3}, a condição de pendência do usuário seria registrada por duas variáveis binárias: uma para indicar multa por atraso, outra por extravio. Estas receberiam o valor $1$ caso as condições da aplicação das penalidades fossem detectadas - na confirmação da devolução no caso do atraso e na confirmação da perda no caso do extravio. Seus valores permaneceriam salvos até que algum administrador registrasse que a pendência foi resolvida. Já para a proposta de aplicação de multa temporal automaticamente, seria necessária uma ferramenta para agendamento de tarefas (como o \textit{Cron}) que atualizasse, diariamente, quais usuários possuem exemplares em atraso e, com esta informação, prolongasse seus períodos de multa. Neste cenário, a situação de multa seria representada por uma variável capaz de armazenar a data até a qual o usuário estaria penalizado.
+
+Dada a complexidade adicional da integração externa, ainda há um impasse a respeito de qual solução será adotada para a multa por atraso. De todo modo, neste ciclo de desenvolvimento foi codificada a estrutura para conter as variáveis apresentadas para armazenamento destes indicadores de penalidade.
 
 \subsubsection{Envio e moderação de comentários nas páginas das publicações}
 
-Foi habilitada a opção nativa do \textit{Drupal} que permite aos usuários autenticados enviarem comentários sobre as páginas de conteúdos existentes no sistema. Restringiu-se esta funcionalidade apenas a páginas de publicação.
+Foi habilitada a opção nativa do \textit{Drupal} que permite que usuários autenticados enviem comentários sobre as páginas de conteúdos existentes no sistema. Restringiu-se esta funcionalidade apenas a páginas de publicação.
 
 Como solicitado pela coordenadora geral do Curso Exato, foi dada aos administradores a permissão para aprovar comentários antes que sejam publicados. Dessa forma, havendo necessidade de moderação, um administrador poderia advertir o usuário sobre o conteúdo impróprio do comentário enviado e impedir sua exibição aos demais visitantes do sistema.
 
 \subsubsection{Revisão do controle de permissões}
 
-Com o objetivo de garantir a integridade do sistema, buscou-se mitigar as possíveis brechas de segurança por comportamento indevido de usuários. Foram criadas contas de usuário para fins de teste - uma para cada classe de usuário definida na Seção \ref{ssec:tech} - e, acessando o sistema por meio delas, foi avaliado se usuários não autenticados possuíam permissão para acessar funcionalidades relacionadas a transações, e se usuários não administradores possuíam permissão para visualizar páginas de gerenciamento do sistema.
+Com o objetivo de garantir a integridade do sistema, buscou-se mitigar as possíveis brechas de segurança por comportamento indevido de usuários. Foram criadas contas de usuário para fins de teste - uma para cada classe de usuário definida na Seção \ref{ssec:tech} - e, acessando o sistema por meio destas, foi avaliado se usuários não autenticados possuíam permissão para acessar funcionalidades relacionadas a transações, e se usuários não administradores possuíam permissão para visualizar páginas de gerenciamento do sistema.
 
-O núcleo do sistema \textit{Drupal} provê uma página administrativa para a configuração destas permissões. Dentre os testes realizados, verificou-se que os endereços administrativos disponíveis no próprio núcleo já estavam devidamente protegidos. Porém, em testes envolvendo endereços criados pelos módulos personalizados para este sistema, o resultado não foi o mesmo. Algumas ações não foram tratadas e a correção destas omissões foi alocada para o terceiro ciclo de desenvolvimento.
+O núcleo do sistema \textit{Drupal} provê uma página administrativa para a configuração dessas permissões. Dentre os testes realizados, verificou-se que os endereços administrativos disponíveis no próprio núcleo já estavam devidamente protegidos. Porém, em testes envolvendo endereços criados pelos módulos personalizados para este sistema, o resultado não foi o mesmo. Algumas ações não foram tratadas e a correção destas omissões foi alocada para o terceiro ciclo de desenvolvimento.
 
 %%%
 \subsection{Terceiro ciclo de desenvolvimento}
@@ -534,14 +542,14 @@ Certificou-se que o estado de penalidade impede o usuário de realizar novas res
 
 \subsubsection{Finalização do painel de monitoramento de transações e desenvolvimento de mecanismo de proteção às mudanças de estado de transações}
     
-Neste ciclo, foram concluídas as validações referentes às alterações de estado das transações. Porém, como as operações definidas para atualização das transações são ativadas via URLs específicas do sistema, foi percebido um problema, pois um usuário que conhecesse a ordem dos endereços acessados para registrar os passos do fluxo de empréstimo comum (da reserva até a devolução) poderia querer fazê-lo na ordem incorreta. Como solução, buscou-se garantir que os usuários não as ativem na ordem incorreta - acidental ou propositalmente, como mostra o exemplo a seguir: um bibliotecário pode reconhecer que os \textit{links} \textit{Confirmar empréstimo} e \textit{Confirmar devolução} do painel administrativo redirecionam o usuário a endereços do sistema que, ao serem acessados, completam as respectivas alterações de estado da transação. No entanto, caso ele acesse diretamente o endereço para confirmação de empréstimo, enviando como parâmetro um identificador de transação inválida - isto é, cujo exemplar não se encontre no estado \textit{Reservado} - o sistema não completará a ação e emitirá uma mensagem de erro.
+Neste ciclo, foram concluídas as validações referentes às alterações de estado das transações. Um problema levantado foi que, como as operações definidas para atualização das transações são ativadas via URLs específicas do sistema, um usuário que conhecesse a ordem dos endereços acessados para registrar os passos do fluxo de empréstimo comum (da reserva até a devolução) poderia querer fazê-lo na ordem incorreta. Como solução, buscou-se garantir que os usuários não as ativem na ordem incorreta - acidental ou propositalmente. Exemplificando: um bibliotecário pode reconhecer que os \textit{links} \textit{Confirmar empréstimo} e \textit{Confirmar devolução} do painel administrativo redirecionam o usuário a endereços do sistema que, ao serem acessados, completam as respectivas alterações de estado da transação. No entanto, caso ele acesse diretamente o endereço para confirmação de empréstimo, enviando como parâmetro um identificador de transação inválida - isto é, cujo exemplar não se encontre no estado \textit{Reservado} - o sistema não completará a ação e emitirá uma mensagem de erro.
 
 Concluído este painel de monitoramento, foi elaborado um painel secundário para visualização apenas dos empréstimos cuja data de vencimento se encontre a sete dias ou menos a partir da data corrente. Este foi requisitado pelos administradores para facilitar o controle sobre as cobranças a serem feitas aos alunos. Assim, todos já estariam cientes de quais usuários possuem empréstimos com validade em data próxima logo no início da semana letiva do Curso Exato, podendo tomar providências - como notificá-los sobre a proximidade da data de devolução - antes que penalidades sejam aplicadas.
 
 \begin{figure}[pbth!]
 \centering
-\caption{Empréstimos com data de vencimento próxima.\label{expiring-soon}}
 \includegraphics[width=150mm]{img/expiring-soon.png}
+\caption{Empréstimos com data de vencimento próxima.\label{expiring-soon}}
 \end{figure}
 
 \subsubsection{Tela administrativa para controle de usuários}
@@ -550,8 +558,8 @@ Foi criado um terceiro painel administrativo, similar aos anteriores, para o mon
 
 \begin{figure}[pbth!]
 \centering
-\caption{Usuários suspensos.\label{suspended-users}}
 \includegraphics[width=120mm]{img/suspended-users.png}
+\caption{Usuários suspensos.\label{suspended-users}}
 \end{figure}
 
 \subsubsection{Correção de \textit{bugs} referentes ao controle de permissões}
@@ -568,34 +576,34 @@ De forma a não atrasar a implantação, os graduandos realizaram testes de expo
 
 \subsubsection{Tradução da aplicação}
 
-Na interface administrativa do \textit{Drupal}, existe uma seção que estima a quantidade e o percentual de termos traduzidos na aplicação. Por meio dela, verificou-se que aproximadamente vinte e cinco por cento dos termos utilizados na aplicação se encontravam sem tradução disponível para a Língua Portuguesa. Incluem-se no conjunto de termos não traduzidos as expressões e os rótulos definidos pelos graduandos nos módulos desenvolvidos para o funcionamento da biblioteca. A solução adotada foi utilizar o módulo \textit{Locale}, disponível no núcleo do \textit{Drupal}, para importar arquivos de traduções (extensão .po) no sistema. Este módulo busca automaticamente por traduções fornecidas por contribuidores da comunidade \textit{Drupal} disponibilizadas na página localize.drupal.org \cite{localize}; para termos não encontrados neste diretório, decidiu-se criar e importar manualmente um arquivo .po com sugestões de traduções.
+Na interface administrativa do \textit{Drupal}, existe uma seção que estima a quantidade e o percentual de termos traduzidos na aplicação. Por meio dela, verificou-se que aproximadamente 25\% dos termos utilizados na aplicação se encontrava sem tradução disponível para a Língua Portuguesa. Incluem-se no conjunto de termos não traduzidos as expressões e os rótulos definidos pelos graduandos nos módulos desenvolvidos para o funcionamento da biblioteca. A solução adotada foi utilizar o módulo \textit{Locale}, disponível no núcleo do \textit{Drupal}, para importar arquivos de traduções (extensão .po) no sistema. Este módulo busca automaticamente por traduções fornecidas por contribuidores da comunidade \textit{Drupal} disponibilizadas na página localize.drupal.org \cite{localize}; para termos não encontrados neste diretório, decidiu-se criar e importar manualmente um arquivo .po com sugestões de traduções.
 
 Os alunos desenvolvedores se comprometeram a traduzir todas as expressões criadas para uso nos módulos desenvolvidos por eles. Para termos de outros módulos sem tradução fornecida pela comunidade \textit{Drupal}, houve um esforço pela inclusão de traduções para aqueles de maior ocorrência nas páginas do sistema; no entanto, por haver muitos e não haver um jeito direto de encontrar o contexto em que se localizam no sistema, não foi feita a tradução dos termos que não são exibidos diretamente aos usuários finais. Ressalta-se que a decisão por traduzir termos provenientes de módulos da comunidade em um arquivo .po, ao invés da submissão das traduções ao diretório público, foi motivada pelo longo tempo tomado até que haja uma aprovação das traduções enviadas por um moderador da comunidade \textit{Drupal}.
 
 \section{Resultados} \label{sssec:improvements}
 Utilizando a plataforma \textit{Drupal}, criou-se um sistema \textit{web} de gerenciamento de biblioteca com funcionalidades personalizadas para o contexto do Curso Exato. A aplicação não provê apenas requisitos essenciais de uma biblioteca, mas também inclui aspectos sociais, tais como: conversas individuais ou em grupo entre usuários, perfil pessoal, avaliação e resenha de uma publicação. Aprofundando os requisitos necessários para o sistema, os alunos desenvolvedores se depararam com um desafio. Houve certa discordância entre alguns membros do Curso Exato sobre políticas de auditoria de mensagens privadas e sobre a aplicação de penalidades em caso de atraso ou extravio de exemplares. Ainda assim, tais indecisões acarretaram apenas certo atraso até o alinhamento dos pontos questionados, mas não problemas de código durante o desenvolvimento, uma vez que tais questionamentos não fazem parte do fluxo do usuário. Pode-se afirmar, portanto, que o principal objetivo proposto neste trabalho foi concluído. 
 
-Realizou-se uma apresentação do sistema a todos os futuros usuários, tanto alunos quanto professores voluntários do Curso Exato na ocasião do encerramento das atividades do projeto de extensão deste ano. Durante o evento foi possível notar que os presentes se mostraram satisfeitos, com uma reação particularmente positiva quanto às funcionalidades sociais. Considera-se a decisão pela inclusão destas uma escolha apropriada dos responsáveis pela biblioteca, apesar dos conflitos de opiniões que elas causaram.
+Realizou-se uma apresentação do sistema a todos os futuros usuários, tanto alunos quanto professores voluntários do Curso Exato na ocasião do encerramento das atividades do projeto de extensão para este ano. Durante o evento foi possível notar que os presentes se mostraram satisfeitos, com uma reação particularmente positiva quanto às funcionalidades sociais. Considera-se a decisão pela inclusão destas uma escolha apropriada dos responsáveis pela biblioteca, apesar dos conflitos de opiniões que elas causaram.
 
-Ao longo de todo o período de desenvolvimento foram levantadas diversas funcionalidades e melhorias que não foram implementadas devido ao tempo limitado, e por não estarem no escopo inicial do projeto. Uma das mais relevantes seria a alteração do fluxo de empréstimo para permitir a reserva de um exemplar enquanto este se encontra emprestado por outro usuário, tal como é possível nas bibliotecas da Unicamp. Pode-se destacar também processos de deleção lógica\footnote{Armazenamento de uma variável binária para indicar se houve uma requisição de remoção de um conteúdo; isto é, a aplicação não considera o conteúdo existente mas este continua armazenado no banco de dados.} de publicações ou exemplares do sistema, além de reaproveitamento de números de chamada. Reescrever o código para torná-lo mais modular também é uma tarefa necessária a longo prazo, para melhor manutenibilidade do sistema.
+Ao longo de todo o período de desenvolvimento foram levantadas diversas funcionalidades e melhorias que não foram implementadas devido ao tempo limitado, e por não estarem no escopo inicial do projeto. Uma das que teriam maior relevência seria a alteração do fluxo de empréstimo para permitir a reserva de um exemplar enquanto este se encontra emprestado por outro usuário, tal como é possível nas bibliotecas da Unicamp. Pode-se destacar também processos de deleção lógica\footnote{Armazenamento de uma variável binária para indicar se houve uma requisição de remoção de um conteúdo; isto é, a aplicação não considera o conteúdo existente mas este continua armazenado no banco de dados.} de publicações ou exemplares do sistema, além de reaproveitamento de números de chamada. Reescrever o código para torná-lo mais modular também é uma tarefa necessária a longo prazo, para melhor manutenibilidade do sistema.
 
 \section{Conclusão}
-Ao longo deste projeto os alunos desenvolvedores puderam vivenciar o processo de desenvolvimento ágil com um time bastante reduzido. Isto permitiu avaliar vantagens e desvantagens de se adotar o \textit{Scrum} em contextos semelhantes. Considera-se como aspectos positivos de maior importância as entregas periódicas de versões funcionais do sistema e a realização de reuniões frequentes com os responsáveis pela biblioteca e com os supervisores do projeto - ações tomadas para manter o envolvimento dos indivíduos interessados no resultado final e assegurar a aceitação destes pelo o que estava sendo produzido. No entanto, questionou-se a adaptabilidade deste método para times reduzidos. A divisão de papéis não foi seguida durante todo o período de desenvolvimento devido a maior dificuldade de algumas tarefas, que exigiram o esforço de ambos os desenvolvedores. Além disso, as reuniões retrospectivas não foram realizadas com a frequência esperada porque não foram registrados muitos pontos de melhoria no processo de desenvolvimento a serem discutidas; dada a convivência praticamente diária entre os desenvolvedores, quaisquer sugestões de melhoramento foram discutidas e acatadas assim que idealizadas.
+Por meio deste projeto os alunos desenvolvedores puderam vivenciar o processo de desenvolvimento ágil em um time bastante reduzido. Isto permitiu que avaliassem vantagens e desvantagens de se adotar o \textit{Scrum} em contextos semelhantes. Considera-se que os aspectos positivos de maior importância foram as entregas periódicas de versões funcionais do sistema e da realização de reuniões frequentes com os responsáveis pela biblioteca e os supervisores do projeto - ações tomadas para manter o envolvimento dos indivíduos interessados no resultado final e assegurar a aceitação destes sobre o que estava sendo produzido. No entanto, questionou-se a adaptabilidade deste método para times reduzidos. A divisão de papéis não foi seguida durante todo o período de desenvolvimento devido a maior dificuldade de algumas tarefas, que exigiram o esforço de ambos os desenvolvedores. Além disso, as reuniões retrospectivas não foram realizadas com a frequência esperada porque não foram registrados muitos pontos de melhoria no processo de desenvolvimento a serem discutidas; dada a convivência praticamente diária entre os desenvolvedores, quaisquer sugestões de melhoramento foram discutidas e acatadas assim que idealizadas.
 
-Destas observações, argumenta-se que metodologias ágeis diferentes poderiam ter sido mais apropriadas para este projeto. Avalia-se que a adoção do \textit{Kanban} \cite{kanban} ou do \textit{XP} (\textit{eXtreme Programming}) \cite{xp} poderia resultar em uma maior produtividade no processo de desenvolvimento. Ambos oferecem facilidades para a autogestão, são menos restritivas quanto aos papéis dos indivíduos no time desenvolvedor e dão menos ênfase na obrigatoriedade das reuniões - embora ainda valorizando os princípios do desenvolvimento ágil. Ainda assim, os alunos desenvolvedores se encontram satisfeitos com os resultados obtidos, e com a possibilidade dos alunos do Curso Exato terem acesso ao acervo da biblioteca do projeto \textit{on-line}.
+Destas observações, argumenta-se que metodologias ágeis diferentes poderiam ter sido mais apropriadas para este projeto. Avalia-se que a adoção do \textit{Kanban} \cite{kanban} ou do \textit{XP} (\textit{eXtreme Programming}) \cite{xp} poderia resultar em uma maior produtividade no processo de desenvolvimento. Ambos oferecem facilidades para a autogestão, são menos restritivas quanto aos papéis dos indivíduos no time desenvolvedor e dão menos ênfase na obrigatoriedade das reuniões - embora ainda valorizando os princípios do desenvolvimento ágil. Ainda assim, os alunos desenvolvedores se encontram satisfeitos com os resultados obtidos, e com a possibilidade dos alunos do Curso Exato terem acesso ao acervo da biblioteca do projeto \textit{online}.
 
-Considera-se esta experiência gratificante por proporcionar situações reais enfrentadas por times de desenvolvimento, incluindo prazos reduzidos para entrega de funcionalidades, além de conflitos de interesses e níveis de entendimento entre os indivíduos envolvidos. Aprendeu-se muito sobre conceitos da Biblioteconomia e da gestão de projetos, além de haver um aprofundamento dos conhecimentos sobre a plataforma \textit{Drupal}, segurança da informação e usabilidade de interfaces humano-computador.
+Considera-se que esta foi uma experiência gratificante por proporcionar situações reais enfrentadas por times de desenvolvimento, incluindo prazos reduzidos para entrega de funcionalidades e conflitos de interesses e níveis de entendimento entre os indivíduos envolvidos. Aprendeu-se muito sobre conceitos da Biblioteconomia e da gestão de projetos, além de haver um aprofundamento dos conhecimentos sobre a plataforma \textit{Drupal}, segurança da informação e usabilidade de interfaces humano-computador.
 
 \pagebreak
 \section*{Glossário}
-\addcontentsline{toc}{section}{Glossário}
 \begin{description}
 \item[API (\textit{Application Programming Interface})] \hfill \\ Interface de programação de aplicações
 \item[CMS (\textit{Content Management System})] \hfill \\ Sistema de gerenciamento de conteúdo
 \item[Conteúdo \textit{Drupal}] \hfill \\ Página \textit{web} gerada pelo \textit{Drupal}, geralmente visível ao usuário final.
+\item[\textit{Cron}] \hfill \\ Agendador de tarefas baseado no horário do servidor onde o sistema está hospedado.
 \item[CSV (\textit{Comma-separated values})] \hfill \\ Formato de arquivo contendo valores separados por vírgulas (ou delimitadores similares)
-\item[\textit{Feed} RSS] \hfill \\ Agregador de conteúdos de páginas \textit{web} (\textit{Rich Site Summary})
-\item[Tipo de conteúdo] \hfill \\ Conjunto de propriedades que devem ser contidas em páginas de mesmo tipo.
+\item[\textit{Feed} RSS] \hfill \\ Agregador de conteúdos de páginas web (\textit{Rich Site Summary})
+\item[Tipo de conteúdo] \hfill \\ Conjunto de propriedades que páginas de um mesmo tipo deve conter.
 \item[URL (\textit{Unified Resource Locator})] \hfill \\ Endereço de recurso (i.e. arquivo, página, função, etc.) disponível em um sistema \textit{web}.
 \end{description}
 
@@ -612,9 +620,7 @@ Considera-se esta experiência gratificante por proporcionar situações reais e
 \bibitem{acquia} CMS, Commerce, Community | Drupal.\\Disponível em: <https://www.acquia.com/>.\\Acesso em: 5 set. 2015
 \bibitem{localize} Portuguese, Brazil overview | Translations\\Disponível em: <https://localize.drupal.org/translate/languages/pt-br/>.\\Acesso em: 27 nov. 2015
 \bibitem{kanban} A Brief Introduction to Kanban | The Agile Coach\\Disponível em: <https://www.atlassian.com/agile/kanban>.\\Acesso em: 30 nov. 2015
-\bibitem{xp} TANIGUCHI, K.; CORREA, F.E. "Metodologias ágeis e a motivação de pessoas em projetos de desenvolvimento
-de software: Aplicando práticas de SCRUM e XP para promover a motivação de equipes de projetos
-de desenvolvimento de software", in \textit{Revista de Ciências Exatas e Tecnologia}. São Paulo, v. IV, n. 4, 2009.
+\bibitem{xp} TANIGUCHI, K.; CORREA, F.E. Metodologias ágeis e a motivação de pessoas em projetos de desenvolvimento de software: Aplicando práticas de SCRUM e XP para promover a motivação de equipes de projetos de desenvolvimento de software. Revista de Ciências Exatas e Tecnologia. São Paulo, v. IV, n. 4, 2009.
 
 \end{thebibliography}
 \end{document}
