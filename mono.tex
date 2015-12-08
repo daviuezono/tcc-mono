@@ -3,7 +3,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[english,brazilian]{babel} 
 \usepackage[a4paper, left=20mm, right=20mm, top=20mm, bottom=20mm]{geometry}
-\usepackage{indentfirst}
+%\usepackage{indentfirst} %uncomment this for paragraph indentation
 \usepackage{xspace}
 \usepackage{graphicx}
 \usepackage[hyperfootnotes=false,bookmarks]{hyperref}
@@ -13,7 +13,8 @@
 \usepackage[nottoc]{tocbibind}
 \captionsetup[figure]{position=above,labelsep=period}
 \captionsetup[table]{position=above,labelsep=period}
-%\setlength{\parskip}{\baselineskip}
+\setlength{\parskip}{\baselineskip}
+\setlength\parindent{0pt} % comment this for paragraph indentation
 \title{DESENVOLVIMENTO E IMPLANTAÇÃO DE SISTEMA \textit{WEB} PARA GERENCIAMENTO DA BIBLIOTECA DO CURSO EXATO}
 \begin{document}
 
@@ -21,7 +22,7 @@
 %%% Cabeçalho baseado no padrão do Exato %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{minipage}[t|]{14mm}
-\includegraphics[width=2cm]{img/logo-unicamp-eps-converted-to.pdf}
+\includegraphics[width=2cm]{img/logo-unicamp.eps}
 \end{minipage}
 \hfill
 \begin{minipage}[tl]{120mm}
@@ -109,7 +110,7 @@ Como o \textit{Scrum} \cite{scrum} é uma das metodologias ágeis mais utilizada
 
 Cada \textit{sprint} teve duração aproximada de quatro semanas, demarcadas pelos dias de entrega de conteúdo escrito aos supervisores do projeto. A Tabela \ref{cronograma} contém os períodos e as datas originalmente propostos.
 
-\begin{table}[h]
+\begin{table}[hc]
 \centering
 \caption{Cronograma de atividades.\label{cronograma}}
 \begin{tabular}{ll}
@@ -200,21 +201,15 @@ Há ainda os seguintes campos editáveis pelos bibliotecários, inacessíveis ao
 A disposição dos elementos na página pode ser observada nas Figuras \ref{colapsed} e \ref{expanded}.
 
 \begin{figure}
-%\centering
-\caption{Página de uma publicação}
 \begin{subfigure}{.5\textwidth}
-  %\centering
-  \caption{Informações adicionais ocultas.}
   \includegraphics[width=90mm]{img/publication-colapsed.png}
-  \label{colapsed}
+  \caption{Informações adicionais ocultas.\label{colapsed}}
 \end{subfigure}%
 \begin{subfigure}{.4\textwidth}
-  %\centering
-  \caption{Informações adicionais expandidas}
   \includegraphics[width=90mm]{img/publication-expanded.png}
-  \label{expanded}
+  \caption{Informações adicionais expandidas.\label{expanded}}
 \end{subfigure}
-\label{fig:publication}
+\caption{Página de uma publicação.\label{fig:publication}}
 \end{figure}
 
 
@@ -234,8 +229,8 @@ Foi habilitada a funcionalidade do \textit{Drupal} que exige a aprovação do ca
 
 \begin{figure}[pbth!]
 \centering
-\caption{Formulário de cadastro.\label{cadastro}}
 \includegraphics[width=140mm]{img/newuser.png}
+\caption{Formulário de cadastro.\label{cadastro}}
 \end{figure}
 
 \subsubsection{Criação da página de um usuário}
@@ -246,8 +241,8 @@ Posteriormente, foi adicionado o campo “Livro de cabeceira”, no qual o usuá
 
 \begin{figure}[pbth!]
 \centering
-\caption{Página de usuário.\label{userpage}}
 \includegraphics[width=140mm]{img/userpage.png}
+\caption{Página de usuário.\label{userpage}}
 \end{figure}
 
 Ainda com o intuito de tornar a biblioteca uma plataforma mais sociável e interativa para os alunos, adicionou-se uma funcionalidade de envio de mensagens privadas entre os usuários do sistema. Para tanto, foi instalado um módulo da comunidade \textit{Drupal} chamado \textit{Privatemsg}, que já cria e habilita tal mecanismo, aproveitando os recursos de usuário e autenticação que o mesmo já oferece. Para a segurança da comunidade do Curso Exato, as mensagens podem passar por um processo de auditoria quando necessário, sendo este papel conferido apenas a um usuário específico.
@@ -258,14 +253,14 @@ A Figura \ref{privatemsg} ilustra uma conversa entre dois usuários no módulo \
 
 \begin{figure}[pbth!]
 \centering
-\caption{Conversa entre dois usuários utilizando as mensagens privadas.\label{privatemsg}}
 \includegraphics[width=120mm]{img/privatemsg.png}
+\caption{Conversa entre dois usuários utilizando as mensagens privadas.\label{privatemsg}}
 \end{figure}
 
 \begin{figure}[pbth!]
 \centering
-\caption{Opção para o usuário ativar ou não a funcionalidade.\label{pvtmsg-config}}
 \includegraphics[width=120mm]{img/privatemsg-config.png}
+\caption{Opção para o usuário ativar ou não a funcionalidade.\label{pvtmsg-config}}
 \end{figure}
 
 
@@ -276,20 +271,17 @@ Foram criadas páginas de busca por publicações e por usuários, utilizando a 
 No caso da página de busca por publicações, os filtros que aparecem inicialmente são apenas título e autor. O usuário pode clicar em um botão de “Busca Avançada” para exibir campos adicionais, como o ano de publicação, ou para alterar a ordenação por autor ou por título; ou ainda, alterar a ordem de exibição dos resultados - alfabética ou alfabética reversa. As Figuras \ref{simple} e \ref{advanced} ilustram as páginas de busca por publicações utilizando filtros simples ou avançados.
 
 \begin{figure}
-%\centering
-\caption{Página de busca por publicações}
 \begin{subfigure}{.5\textwidth}
-  %\centering
-  \caption{Filtros simples.}
   \includegraphics[width=90mm]{img/browse-simple.png}
+  \caption{Filtros simples.}
   \label{simple}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
-  %\centering
-  \caption{Filtros avançados.}
   \includegraphics[width=90mm]{img/browse-advanced.png}
+  \caption{Filtros avançados.}
   \label{advanced}
 \end{subfigure}
+\caption{Página de busca por publicações}
 \label{fig:publication-search}
 \end{figure}
 
@@ -297,16 +289,16 @@ Além disso, um pequeno formulário foi adicionado à barra lateral direita da p
 
 \begin{figure}[pbth!]
 \centering
-\caption{Formulário de busca por publicações na barra lateral.\label{browse-sidebar}}
 \includegraphics[width=30mm]{img/browse-sidebar.png}
+\caption{Formulário de busca por publicações na barra lateral.\label{browse-sidebar}}
 \end{figure}
 
 Já no caso da página de busca por usuários, os filtros são o nome do usuário, o autor predileto, a categoria preferida e o livro de cabeceira. A Figura \ref{users} ilustra a página de busca por usuários.
 
 \begin{figure}[pbth!]
 \centering
-\caption{Página de busca por usuários.\label{users}}
 \includegraphics[width=120mm]{img/users.png}
+\caption{Página de busca por usuários.\label{users}}
 \end{figure}
 
 
@@ -322,8 +314,8 @@ A Figura \ref{home} ilustra a página inicial para um usuário autenticado. Foi 
 
 \begin{figure}[pbth!]
 \centering
-\caption{Página inicial.\label{home}}
 \includegraphics[width=140mm]{img/home-small.png}
+\caption{Página inicial.\label{home}}
 \end{figure}
 
 
@@ -334,8 +326,8 @@ A Figura \ref{recommended} ilustra a listagem de temas na barra lateral esquerda
 
 \begin{figure}[pbth!]
 \centering
-\caption{Obras recomendadas por tema.\label{recommended}}
 \includegraphics[width=30mm]{img/leftsidebar-close.png}
+\caption{Obras recomendadas por tema.\label{recommended}}
 \end{figure}
 
 \subsubsection{Desenvolvimento do módulo \textit{Drupal} para geração de números de chamada}\label{sssec:chamada}
@@ -346,8 +338,8 @@ Houve uma sobrecarga de tempo considerável nesta tarefa devido a uma falha no f
 
 \begin{figure}[pbth!]
 \centering
-\caption{Ilustração do modelo antigo de cadastro de exemplares da mesma obra.\label{tombo-antigo}}
 \includegraphics[width=120mm]{img/tombo-antigo.png}
+\caption{Ilustração do modelo antigo de cadastro de exemplares da mesma obra.\label{tombo-antigo}}
 \end{figure}
 
 No entanto, percebeu-se durante o desenvolvimento do módulo que esta abordagem seria problemática por não dar ao aluno a escolha de qual edição da obra reservar. Além disso, a abordagem anterior pode complicar a organização das obras na estante. No exemplo da Figura \ref{tombo-antigo}, o bibliotecário teria a falsa impressão de que existe uma relação de ordem entre os exemplares, devido à indexação final do código. Entretanto, é mais útil manter o acervo agrupado por edições ou volume da obra, e não ordenado por este código.
@@ -356,11 +348,11 @@ A fim de se corrigir os problemas encontrados, duas ações foram executadas. A 
 
 \begin{figure}[pbth!]
 \centering
-\caption{Ilustração do modelo novo de cadastro de exemplares da mesma obra.\label{tombo-novo}}
 \includegraphics[width=60mm]{img/tombo-novo.png}
+\caption{Ilustração do modelo novo de cadastro de exemplares da mesma obra.\label{tombo-novo}}
 \end{figure}
 
-\begin{table}[h]
+\begin{table}[hc]
 \centering
 \caption{Conteúdos gerados na plataforma \textit{Drupal} seguindo a Figura \ref{tombo-novo}.\label{tabela-tombo-novo}}
 \begin{tabular}{llll}
@@ -395,7 +387,7 @@ A seguir, são descritas as atividades realizadas durante o segundo ciclo de des
 
 Durante a segunda semana do ciclo foi concluída a ferramenta de importação em lotes. Devido à alta ocorrência de vírgulas nos textos dos campos a serem registrados, definiu-se que o separador padrão dos arquivos CSV de entrada será o ponto e vírgula (;) e que cada linha deve conter as informações descritas na Tabela \ref{csv}, que descreve os atributos do arquivo solicitado na importação.
 
-\begin{table}[h]
+\begin{table}[hc]
 \centering
 \caption{Atributos requeridos no arquivo CSV.\label{csv}}
 \begin{tabular}{ll}
@@ -433,8 +425,8 @@ Na reunião de planejamento deste ciclo foi elaborado um diagrama simplificado d
 
 \begin{figure}[pbth!]
 \centering
-\caption{Diagrama de máquina de estados de um exemplar durante o fluxo de empréstimo.\label{workflow}}
 \includegraphics[width=140mm]{img/workflow.png}
+\caption{Diagrama de máquina de estados de um exemplar durante o fluxo de empréstimo.\label{workflow}}
 \end{figure}
 
 Um exemplar é dito \textit{disponível} quando encontra-se disponível na biblioteca para reserva; \textit{reservado}, quando há uma solicitação de reserva por este exemplar a ser atendida; \textit{emprestado}, se o exemplar está em posse de algum usuário da biblioteca e o prazo de vencimento do empréstimo ainda não expirou; \textit{em atraso}, se o exemplar está em posse de algum usuário da biblioteca e deve ser devolvido, pois o prazo para devolução não foi respeitado; e \textit{extraviado}, se o exemplar foi perdido durante o fluxo de empréstimo.
@@ -450,7 +442,7 @@ Após a devolução de um exemplar, os administradores devem \textit{confirmar o
 Foi definido também o conceito de transação: uma entidade para registro de cada passo do fluxo de empréstimo, desde a reserva até a devolução - cobrindo também os cenários alternativos. Definiu-se que uma transação envolvendo um exemplar é iniciada (criada no estado \textit{aberta}) no momento da sua reserva e se encerra ao atingir o estado \textit{cancelada} (quando a reserva é cancelada) ou \textit{encerrada} (quando o livro é devolvido ou recuperado após o extravio). O extravio é declarado pela mudança de estado da transação para \textit{exemplar perdido}. A tabela do banco de dados foi planejada para o armazenamento de transações, como na Tabela \ref{transactions-table}.
 
 
-\begin{table}[h]
+\begin{table}[hc]
 \centering
 \caption{Colunas da tabela de transações.\label{transactions-table}}
 \begin{tabular}{ll}
@@ -493,8 +485,8 @@ Com estas decisões, foi desenvolvido um módulo que insere tal tabela na base d
 
 \begin{figure}[pbth!]
 \centering
-\caption{Painel de transações.\label{transactions}}
 \includegraphics[width=140mm, trim={35mm 0 30mm 20mm}, clip]{img/transactions.png}
+\caption{Painel de transações.\label{transactions}}
 \end{figure}
 
 Até o encerramento deste ciclo de desenvolvimento foi implementada boa parte dos passos do fluxo por parte do administrador. Os comportamentos restantes são a validação das datas de algumas ações em comparação com os dias de funcionamento da biblioteca e a exibição das transações envolvendo os usuários em suas páginas pessoais.
@@ -540,8 +532,8 @@ Concluído este painel de monitoramento, foi elaborado um painel secundário par
 
 \begin{figure}[pbth!]
 \centering
-\caption{Empréstimos com data de vencimento próxima.\label{expiring-soon}}
 \includegraphics[width=150mm]{img/expiring-soon.png}
+\caption{Empréstimos com data de vencimento próxima.\label{expiring-soon}}
 \end{figure}
 
 \subsubsection{Tela administrativa para controle de usuários}
@@ -550,8 +542,8 @@ Foi criado um terceiro painel administrativo, similar aos anteriores, para o mon
 
 \begin{figure}[pbth!]
 \centering
-\caption{Usuários suspensos.\label{suspended-users}}
 \includegraphics[width=120mm]{img/suspended-users.png}
+\caption{Usuários suspensos.\label{suspended-users}}
 \end{figure}
 
 \subsubsection{Correção de \textit{bugs} referentes ao controle de permissões}
