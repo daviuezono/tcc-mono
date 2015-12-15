@@ -481,15 +481,9 @@ Nome da coluna & Informação armazenada \\
 \end{tabular}
 \end{table}
 
-Com estas decisões, foi desenvolvido um módulo que insere tal tabela na base de dados do sistema (seguindo os padrões da API do \textit{Drupal}) e habilita dois pontos de exibição das transações no sistema: um painel na área administrativa para o monitoramento de todas e um bloco na área de usuário para acompanhamento daquelas com as quais esteve envolvido. Em particular, no bloco da página de usuário, este teria apenas permissão para cancelar suas reservas e renovar suas transações correntes. A Figura \ref{transactions} mostra a página administrativa que os usuários administradores terão acesso para controlar as transações da biblioteca.
+Com estas decisões, foi desenvolvido um módulo que insere tal tabela na base de dados do sistema (seguindo os padrões da API do \textit{Drupal}) e habilita dois pontos de exibição das transações no sistema: um painel na área administrativa para o monitoramento de todas e um bloco na área de usuário para acompanhamento daquelas com as quais esteve envolvido. Em particular, no bloco da página de usuário, este teria apenas permissão para cancelar suas reservas e renovar suas transações correntes. 
 
-\begin{figure}[pbth!]
-\centering
-\includegraphics[width=140mm, trim={35mm 0 30mm 20mm}, clip]{img/transactions.png}
-\caption{Painel de transações.\label{transactions}}
-\end{figure}
-
-Até o encerramento deste ciclo de desenvolvimento foi implementada boa parte dos passos do fluxo por parte do administrador. Os comportamentos restantes são a validação das datas de algumas ações em comparação com os dias de funcionamento da biblioteca e a exibição das transações envolvendo os usuários em suas páginas pessoais.
+Até o encerramento deste ciclo de desenvolvimento foi implementada boa parte dos passos do fluxo por parte do administrador. Os comportamentos restantes são a validação das datas de algumas ações em comparação com os dias de funcionamento da biblioteca e a exibição das transações envolvendo os usuários em suas páginas pessoais, vide Seção \ref{sssec:stransaction2}.
 
 \subsubsection{Fluxo alternativo considerando atrasos ou extravio de algum exemplar}\label{sssec:overdue_or_lost}
 Após reuniões com representantes do Curso Exato, foram coletadas algumas possibilidades de penalizações a serem aplicadas aos usuários que não respeitarem prazos de devolução de seus empréstimos ou àquelas que venham a perder algum exemplar emprestado:
@@ -524,10 +518,15 @@ Após discussão com os responsáveis pela biblioteca, optou-se pela simplifica�
     
 Certificou-se que o estado de penalidade impede o usuário de realizar novas reservas e renovações. Além disso, para que o usuário esteja ciente de sua penalização, uma mensagem de erro será exibida no sistema após a autenticação do usuário. 
 
-\subsubsection{Finalização do painel de monitoramento de transações e desenvolvimento de mecanismo de proteção às mudanças de estado de transações}
+\subsubsection{Finalização do painel de monitoramento de transações e desenvolvimento de mecanismo de proteção às mudanças de estado de transações}\label{sssec:stransaction2}
     
-Neste ciclo, foram concluídas as validações referentes às alterações de estado das transações. Como as operações definidas para atualização das transações são ativadas via URLs específicas do sistema, um usuário que conhecesse a ordem dos endereços acessados para registrar os passos do fluxo regular de empréstimo (da reserva até a devolução) poderia fazê-lo em uma ordem incorreta. Para corrigir este problema, buscou-se garantir que os usuários não consigam acessar em ordem incorreta - acidental ou propositalmente - os endereços para a realização de um empréstimo, como mostra o exemplo a seguir: um bibliotecário pode reconhecer que os \textit{links} \textit{Confirmar empréstimo} e \textit{Confirmar devolução} do painel administrativo redirecionam o usuário a endereços do sistema que, ao serem acessados, completam as respectivas alterações de estado da transação. No entanto, caso ele acesse diretamente o endereço para confirmação de empréstimo, enviando como parâmetro um identificador de transação inválida - isto é, cujo exemplar não se encontre no estado \textit{Reservado} - o sistema não completará a ação e emitirá uma mensagem de erro.
-%%CROSS-REFERENCE
+Neste ciclo, foram concluídas as validações referentes às alterações de estado das transações. Como as operações definidas para atualização das transações são ativadas via URLs específicas do sistema, um usuário que conhecesse a ordem dos endereços acessados para registrar os passos do fluxo regular de empréstimo (da reserva até a devolução) poderia fazê-lo em uma ordem incorreta. Para corrigir este problema, buscou-se garantir que os usuários não consigam acessar em ordem incorreta - acidental ou propositalmente - os endereços para a realização de um empréstimo, como mostra o exemplo a seguir: um bibliotecário pode reconhecer que os \textit{links} \textit{Confirmar empréstimo} e \textit{Confirmar devolução} do painel administrativo redirecionam o usuário a endereços do sistema que, ao serem acessados, completam as respectivas alterações de estado da transação. No entanto, caso ele acesse diretamente o endereço para confirmação de empréstimo, enviando como parâmetro um identificador de transação inválida - isto é, cujo exemplar não se encontre no estado \textit{Reservado} - o sistema não completará a ação e emitirá uma mensagem de erro. A Figura \ref{transactions} mostra a página administrativa que os usuários administradores terão acesso para controlar as transações da biblioteca.
+
+\begin{figure}[pbth!]
+\centering
+\includegraphics[width=140mm, trim={35mm 0 30mm 20mm}, clip]{img/transactions.png}
+\caption{Painel de transações.\label{transactions}}
+\end{figure}
 
 \subsubsection{Criação de painel para monitorar empréstimos com data de vencimento próxima}
 
